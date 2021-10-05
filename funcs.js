@@ -66,7 +66,7 @@ module.exports = (bot) => {
 		} catch (err) { }
 
 		bot.bank = bot.r.db("opbot").table("bank");
-		bot.log("[BANK] Successfully connected to bank database!");
+		bot.log("[BANK] OpBot has successfully connected to bank database!");
 	}
 
 	bot.awaitConsoleInput = function () {

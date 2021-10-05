@@ -8,6 +8,19 @@ bot.blackjackInProgress = new Set();
 bot.work = new Boolean;
 bot.work = false;
 
+readdir('./moderation/', (err, files) => {
+	bot.log(`Loading ${files.length} moderation modules!`);
+	files.forEach(fmoderation => {
+		try {
+			var name = require(`./moderation/${fmoderation}`).name
+			bot.commands.set(name, require(`./moderation/${fmoderation}`));
+		} catch (emoderation) {
+			bot.log(`Unable to load command ${fmoderation}: ${emoderation}`);
+		}
+	});
+	bot.log(`Moderation modules loaded!`);
+});
+
 readdir('./events/', (err, files) => {
 	bot.log(`Loading ${files.length} events!`);
 	files.forEach(file => {

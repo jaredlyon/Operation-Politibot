@@ -48,4 +48,36 @@ setInterval(function () {
 	restart.send("[AUTO RESTART] | OpBot successfully restarted!")
 }, 60 * 1000); // Check every minute
 
+//12 bump reminder
+var restart;
+bot.on('ready', () => {
+	restart = bot.channels.cache.get('399746390793650177'); // Channel to send notification
+});
+
+//9am
+const TARGET_HOUR_B1 = 9;
+const TARGET_MINUTE_B1 = 00;
+
+setInterval(function () {
+	var d2 = new Date();
+	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
+	setTimeout(function () {
+		process.exit();
+	}, 1000);
+	restart.send("[AUTO REMINDER] | Bump server!")
+}, 60 * 1000); // Check every minute
+
+//9pm
+const TARGET_HOUR_B2 = 18;
+const TARGET_MINUTE_B2 = 00;
+
+setInterval(function () {
+	var d2 = new Date();
+	if (d2.getMinutes() !== TARGET_MINUTE_B2 || d2.getHours() !== TARGET_HOUR_B2) return; // Return if current minute is not the notify minute
+	setTimeout(function () {
+		process.exit();
+	}, 1000);
+	restart.send("[AUTO REMINDER] | Bump server!")
+}, 60 * 1000); // Check every minute
+
 bot.login(require("./config.json").token);

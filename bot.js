@@ -55,7 +55,7 @@ bot.on('ready', () => {
 });
 
 //9am
-const TARGET_HOUR_B1 = 9;
+const TARGET_HOUR_B1 = 6;
 const TARGET_MINUTE_B1 = 00;
 
 setInterval(function () {

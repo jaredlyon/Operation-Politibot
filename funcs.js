@@ -69,6 +69,8 @@ module.exports = (bot) => {
 
 		bot.bank = bot.r.db("opbot").table("bank");
 		bot.log("[BANK] OpBot has successfully connected to bank database!");
+		bot.streaks = bot.r.db("opbot").table("streaks");
+		bot.log("[STREAKS] OpBot has successfully connected to streak database!");
 	}
 
 	bot.awaitConsoleInput = function () {

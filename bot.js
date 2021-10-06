@@ -21,6 +21,19 @@ readdir('./moderation/', (err, files) => {
 	bot.log(`Moderation modules loaded!`);
 });
 
+readdir('./economy/', (err, files) => {
+	bot.log(`Loading ${files.length} economy modules!`);
+	files.forEach(fcurr => {
+		try {
+			var name = require(`./economy/${fcurr}`).name
+			bot.commands.set(name, require(`./economy/${fcurr}`));
+		} catch (ecurr) {
+			bot.log(`Unable to load command ${fcurr}: ${ecurr}`);
+		}
+	});
+	bot.log(`economy modules loaded!`);
+});
+
 readdir('./events/', (err, files) => {
 	bot.log(`Loading ${files.length} events!`);
 	files.forEach(file => {
@@ -33,7 +46,7 @@ readdir('./events/', (err, files) => {
 
 var restart;
 bot.on('ready', () => {
-	restart = bot.channels.cache.get('399746390793650177'); // Channel to send notification
+	restart = bot.channels.cache.get('895052490574270484'); // Channel to send notification
 });
 
 const TARGET_HOUR_R = 4;
@@ -51,7 +64,7 @@ setInterval(function () {
 //12 bump reminder
 var restart;
 bot.on('ready', () => {
-	restart = bot.channels.cache.get('399746390793650177'); // Channel to send notification
+	restart = bot.channels.cache.get('895052490574270484'); // Channel to send notification
 });
 
 //9am

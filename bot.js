@@ -74,9 +74,6 @@ const TARGET_MINUTE_B1 = 00;
 setInterval(function () {
 	var d2 = new Date();
 	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	setTimeout(function () {
-		process.exit();
-	}, 1000);
 	restart.send("[AUTO REMINDER] | Bump server!")
 }, 60 * 1000); // Check every minute
 
@@ -87,9 +84,6 @@ const TARGET_MINUTE_B2 = 00;
 setInterval(function () {
 	var d2 = new Date();
 	if (d2.getMinutes() !== TARGET_MINUTE_B2 || d2.getHours() !== TARGET_HOUR_B2) return; // Return if current minute is not the notify minute
-	setTimeout(function () {
-		process.exit();
-	}, 1000);
 	restart.send("[AUTO REMINDER] | Bump server!")
 }, 60 * 1000); // Check every minute
 

@@ -2,7 +2,7 @@
 var Discord = require('discord.js');
 
 module.exports = {
-    name: 'mute',
+    name: 'unmute',
     permission: 2,
     main: async function (bot, msg) {
         var channel = msg.guild.channels.cache.get(bot.config.generalChannel);
@@ -16,7 +16,7 @@ module.exports = {
         if (mutee != null) {
             var mute = new Discord.MessageEmbed()
                 .setAuthor(mutee.username, mutee.avatarURL())
-                .addField('Member muted:', `**:mute: ${mutee} (${mutee.id}).**`)
+                .addField('Member unmuted:', `**:mute: ${mutee} (${mutee.id}).**`)
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
@@ -25,7 +25,7 @@ module.exports = {
                 //await msg.guild.members.ban(mutee);
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();
-                member.roles.add(role);
+                member.roles.remove(role);
                 await channel.send({
                     embed: mute
                 })

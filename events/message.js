@@ -24,123 +24,18 @@ exports.run = async (bot, msg) => {
 		msg.channel.send("output");
 	}
 	
-	//for banned words
-	if (msg1.includes("nigg")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("nigger")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("n1gg")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("chink")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("ch1nk")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("ch1nc")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("chinc")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("sp1c")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("sp1k")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("nigga")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("n1gga")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("negro")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("n3g")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("n3gr0")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("retard")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("r3t4rd")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("re tard")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("re tarded")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("r etard")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("ret ard")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("reta rd")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("retar d")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("spic")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("fag")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("fagot")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("faggot")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("f4g0t")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("f4g")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
-	if (msg1.includes("f4gg0t")) {
-		msg.reply("your message included a banned word!");
-		msg.delete();
-	}
+    //for banned words (mk2)
+    const bannedwords = ["nigg", "nigger", "n1gg", "chink", "ch1nk", "ch1nc", "chinc", "sp1c", "sp1k", "nigga", "negro", "n1gga", "n3g", "n3gr0", "retard", "r3t4rd", "re tard", "re tarded", "r etard", "ret ard", "reta rd", "retar d", "spic", "fag", "faggot", "fagot", "f4g0t", "f4got", "fag0t", "f4g", "f4gg0t"]
+
+    if (msg1.includes(bannedwords)) {
+        msg.channel.send(new MessageEmbed()
+            .setColor('#e5e5e5')
+            .setDescription(`${msg.author.username}, your message included a banned word!`)
+            .setFooter(`Please see Rule 6 in <#775838975755681842>, thank you!`)
+            .setTimestamp();
+        );
+        msg.delete();
+    }
 
 	//bank writes
 	let account = (await bot.bank.get(msg.author.id)) || {};

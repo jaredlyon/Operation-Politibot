@@ -13,7 +13,7 @@ exports.run = async (bot, member) => {
         embed: join
     })
 
-    const joinEmbed = new messageEmbed()
+    var joinEmbed = new Discord.MessageEmbed()
         .setColor('#fafafa')
         .setTitle('Welcome to Operation Politics!')
         .setDescription('We are a public political debate and discussion server designed to help you interact with new perspectives and ideas across the political spectrum. Our goal is to facilitate a friendly, open, and diverse platform to share your thoughts and have productive discussions with people across the United States and the world.')
@@ -27,10 +27,8 @@ exports.run = async (bot, member) => {
             { name: `:microphone2:  Check out our podcast!`, value: `We run a weekly Podcast to discuss major issues facing our society today. Check <#893205436063449118> for more information!`},
         )
         .setFooter(`If you have any questions about our server, do not be afraid to reach out to 𝓻𝓪𝔂#4390 for help, or any Moderator or Server Staff.`);
-
-    client.on('guildMemberAdd', guildMember =>{
-        member.send(joinEmbed)
-    })
+    member.createDM();
+    member.send(joinEmbed);
 
     await bot.bank.insert({
         id: member.user.id,

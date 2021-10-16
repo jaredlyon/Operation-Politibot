@@ -21,6 +21,19 @@ readdir('./moderation/', (err, files) => {
 	bot.log(`Moderation modules loaded!`);
 });
 
+readdir('./misc/', (err, files) => {
+	bot.log(`Loading ${files.length} miscellaneous modules!`);
+	files.forEach(fmisc => {
+		try {
+			var name = require(`./misc/${fmisc}`).name
+			bot.commands.set(name, require(`./misc/${fmisc}`));
+		} catch (emisc) {
+			bot.log(`Unable to load command ${fmisc}: ${emisc}`);
+		}
+	});
+	bot.log(`Miscellaneous modules loaded!`);
+});
+
 readdir('./economy/', (err, files) => {
 	bot.log(`Loading ${files.length} economy modules!`);
 	files.forEach(fcurr => {

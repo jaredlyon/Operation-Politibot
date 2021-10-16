@@ -3,7 +3,7 @@ var Discord = require('discord.js');
 module.exports = {
     name: 'pig',
     permission: 1,
-    main: async function(bot, msg) {
+    main: function(bot, msg) {
         var pigArray = [
             "https://i.natgeofe.com/k/23e409f9-4699-46f0-a645-5cc1f5040363/pig-full-body.jpg?w=636&h=358",
             "https://i.natgeofe.com/k/6d301bfc-ff93-4f6f-9179-b1f66b19b9b3/pig-young-closeup.jpg",

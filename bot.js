@@ -44,6 +44,7 @@ readdir('./events/', (err, files) => {
 	bot.log(`Events loaded!`);
 });
 
+//restart
 var restart;
 bot.on('ready', () => {
 	restart = bot.channels.cache.get('895052490574270484'); // Channel to send notification
@@ -62,12 +63,12 @@ setInterval(function () {
 }, 60 * 1000); // Check every minute
 
 //6h bump reminder
-var restart;
+var bump;
 bot.on('ready', () => {
-	restart = bot.channels.cache.get('886728064086708234'); // Channel to send notification
+	bump = bot.channels.cache.get('886728064086708234'); // Channel to send notification
 });
 
-const bumpReminder = new MessageEmbed()
+var bumpReminder = new Discord.MessageEmbed()
     .setColor('#fafafa')
     .setTitle('<:upvote:877990048438550538>  Bump Reminder!')
     .setDescription('<@&886727925674676264> Its time to bump the server! See the links below:')
@@ -86,34 +87,34 @@ const TARGET_MINUTE_B1 = 00;
 setInterval(function () {
 	var d2 = new Date();
 	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	restart.send(bumpReminder)
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B1 = 12;
-const TARGET_MINUTE_B1 = 00;
+const TARGET_HOUR_B2 = 12;
+const TARGET_MINUTE_B2 = 00;
 
 setInterval(function () {
 	var d2 = new Date();
-	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	restart.send(bumpReminder)
+	if (d2.getMinutes() !== TARGET_MINUTE_B2 || d2.getHours() !== TARGET_HOUR_B2) return; // Return if current minute is not the notify minute
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B1 = 18;
-const TARGET_MINUTE_B1 = 00;
+const TARGET_HOUR_B3 = 18;
+const TARGET_MINUTE_B3 = 00;
 
 setInterval(function () {
 	var d2 = new Date();
-	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	restart.send(bumpReminder)
+	if (d2.getMinutes() !== TARGET_MINUTE_B3 || d2.getHours() !== TARGET_HOUR_B3) return; // Return if current minute is not the notify minute
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B1 = 0;
-const TARGET_MINUTE_B1 = 00;
+const TARGET_HOUR_B4 = 0;
+const TARGET_MINUTE_B4 = 00;
 
 setInterval(function () {
 	var d2 = new Date();
-	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	restart.send(bumpReminder)
+	if (d2.getMinutes() !== TARGET_MINUTE_B4 || d2.getHours() !== TARGET_HOUR_B4) return; // Return if current minute is not the notify minute
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
 

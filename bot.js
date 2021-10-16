@@ -44,6 +44,7 @@ readdir('./events/', (err, files) => {
 	bot.log(`Events loaded!`);
 });
 
+//restart
 var restart;
 bot.on('ready', () => {
 	restart = bot.channels.cache.get('895052490574270484'); // Channel to send notification
@@ -61,31 +62,61 @@ setInterval(function () {
 	restart.send("[AUTO RESTART] | OpBot successfully restarted!")
 }, 60 * 1000); // Check every minute
 
-//12 bump reminder
-var restart;
+//6h bump reminder
+var bump;
 bot.on('ready', () => {
-	restart = bot.channels.cache.get('895052490574270484'); // Channel to send notification
+	bump = bot.channels.cache.get('886728064086708234'); // Channel to send notification
 });
 
-//9am
+var bumpReminder = new Discord.MessageEmbed()
+    .setColor('#fafafa')
+    .setTitle('<:upvote:877990048438550538>  Bump Reminder!')
+    .setDescription('<@&886727925674676264> Its time to bump the server! See the links below:')
+    .addFields(
+        { name: '<:discordme:898675705867546695> Discord.me', value: 'https://discord.me/operationpolitics - Every 6h' },
+        { name: '<:disboard:898675700926644244> Disboard', value: 'https://disboard.org/server/760275642150420520 - use !d bump'},
+        { name: '<:discords:898675687710421093> Discords.com', value: 'https://discords.com/servers/operationpolitics - Every 6h'},
+        { name: '<:topgg:898675677908308008> Top.gg', value: 'https://top.gg/servers/760275642150420520 - every 12h'},
+        { name: '<:discordservers:898675665648381982> DiscordServers', value: 'https://discordservers.com/server/760275642150420520/bump - every 12h'},
+    )
+    .setFooter(`If any site is down or the links don't work, let other bumpers know!`);
+
 const TARGET_HOUR_B1 = 6;
 const TARGET_MINUTE_B1 = 00;
 
 setInterval(function () {
 	var d2 = new Date();
 	if (d2.getMinutes() !== TARGET_MINUTE_B1 || d2.getHours() !== TARGET_HOUR_B1) return; // Return if current minute is not the notify minute
-	restart.send("[AUTO REMINDER] | Bump server!")
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-//9pm
-const TARGET_HOUR_B2 = 18;
+const TARGET_HOUR_B2 = 12;
 const TARGET_MINUTE_B2 = 00;
 
 setInterval(function () {
 	var d2 = new Date();
 	if (d2.getMinutes() !== TARGET_MINUTE_B2 || d2.getHours() !== TARGET_HOUR_B2) return; // Return if current minute is not the notify minute
-	restart.send("[AUTO REMINDER] | Bump server!")
+	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
+
+const TARGET_HOUR_B3 = 18;
+const TARGET_MINUTE_B3 = 00;
+
+setInterval(function () {
+	var d2 = new Date();
+	if (d2.getMinutes() !== TARGET_MINUTE_B3 || d2.getHours() !== TARGET_HOUR_B3) return; // Return if current minute is not the notify minute
+	bump.send(bumpReminder)
+}, 60 * 1000); // Check every minute
+
+const TARGET_HOUR_B4 = 0;
+const TARGET_MINUTE_B4 = 00;
+
+setInterval(function () {
+	var d2 = new Date();
+	if (d2.getMinutes() !== TARGET_MINUTE_B4 || d2.getHours() !== TARGET_HOUR_B4) return; // Return if current minute is not the notify minute
+	bump.send(bumpReminder)
+}, 60 * 1000); // Check every minute
+
 
 //anti spam
 const AntiSpam = require('discord-anti-spam');

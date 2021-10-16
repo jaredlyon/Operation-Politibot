@@ -13,6 +13,7 @@ module.exports = {
             .addFields(
                 { name: `<:sounder:899044462154625024> Sounder.fm`, value: `https://operation-politics.sounder.fm/`},
                 { name: `<:spotify:899043954681597962> Spotify`, value: `https://open.spotify.com/show/2iOwmb5lzsY8xIDXa8Z4Ab`},
+                { name: `<:applepodcasts:899043866332774420> iTunes`, value: `https://podcasts.apple.com/us/podcast/operation-politics/id1588499450`},
                 { name: `<:kofi:893202723938398218> Interested in supporting our efforts?`, value: `If you like what you hear and you want to support this server or the podcast, check us out on Ko-fi and consider donating for special perks! https://ko-fi.com/operationpolitics`},
             );
 

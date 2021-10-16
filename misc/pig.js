@@ -3,9 +3,6 @@ var Discord = require('discord.js');
 module.exports = {
     name: 'pig',
     permission: 1,
-    
-    // not used to how you set up your execute function so i tried my best :woozy_face:
-
     main: async function(bot, msg) {
         var pigArray = [
             "https://i.natgeofe.com/k/23e409f9-4699-46f0-a645-5cc1f5040363/pig-full-body.jpg?w=636&h=358",
@@ -54,13 +51,12 @@ module.exports = {
 
         var randomitem2 = messageArray[Math.floor(Math.random()*messageArray.length)]
 
-        const pigEmbed = new Discord.MessageEmbed()
+        var pigEmbed = new Discord.MessageEmbed()
             .setColor('#fafafa')
             .setTitle(randomitem2)
             .setURL(randomitem1)
             .setImage(randomitem1);
         
-        message.channel.send(pigEmbed);
-
+        msg.channel.send(pigEmbed);
     }
 }

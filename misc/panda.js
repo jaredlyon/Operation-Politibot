@@ -2,11 +2,8 @@ var Discord = require('discord.js');
 
 module.exports = {
     name: 'panda',
-    permission: 1,
-    
-    // not used to how you set up your execute function so i tried my best :woozy_face:
-
-    main: async function(bot, msg) {
+    permission: 1, 
+    main: function(bot, msg) {
         var pandaArray = [
             "https://images-na.ssl-images-amazon.com/images/I/81ZzI%2Bg1bWL._AC_SX466_.jpg",
             "https://filmdaily.co/wp-content/uploads/2020/08/cutepanda-lede-1300x869.jpg",
@@ -47,13 +44,12 @@ module.exports = {
 
         var randomitem2 = messageArray[Math.floor(Math.random()*messageArray.length)]
 
-        const pandaEmbed = new Discord.MessageEmbed()
+        var pandaEmbed = new Discord.MessageEmbed()
             .setColor('#fafafa')
             .setTitle(randomitem2)
             .setURL(randomitem1)
             .setImage(randomitem1);
         
-        message.channel.send(pandaEmbed);
-
+        msg.channel.send(pandaEmbed);
     }
 }

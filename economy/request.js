@@ -11,16 +11,19 @@ module.exports = {
             let donor = await bot.bank.get(target.id);
             if (donor.bank >= amt) {
                 msg.channel.send(":dollar: | Request processed! " + target.toString() + " must enter **Approve** or **Reject** to finalize the transaction:").then(() => {
-                    const filter = m => target.id === m.target.id;
+                    const filter = m => target.id === m.author.id;
 
                     msg.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ["time"] }).then(messages => {
-                        msg.channel.send(`You've entered: ${messages.first().content}`);
                         if (messages.first().content == 'Approve' || messages.first().content == 'approve') {
                             donor.bank -= amt;
                             account.bank += amt;
                             msg.channel.send(`:bank: | Transfer approved!`);
+                            await bot.bank.update(account);
+                            await bot.bank.update(donor);
                         } else if (messages.first().content == 'Reject' || messages.first().content == 'reject') {
                             msg.channel.send(':bank: | Transfer rejected!');
+                        } else {
+                            msg.channel.send(`You've entered: **${messages.first().content}**\nTransfer failed; please try again.`);
                         }
                     }).catch(() => {
                         msg.channel.send(':bank: | ' + msg.author.username + "'s transfer request expired.");

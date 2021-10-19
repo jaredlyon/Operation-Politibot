@@ -15,11 +15,7 @@ module.exports = {
 
                     msg.channel.awaitMessages(filter, { time: 60000, max: 1, errors: ["time"] }).then(messages => {
                         if (messages.first().content == 'Approve' || messages.first().content == 'approve') {
-                            donor.bank -= amt;
-                            account.bank += amt;
-                            msg.channel.send(`:bank: | Transfer approved!`);
-                            await bot.bank.update(account);
-                            await bot.bank.update(donor);
+                            transfer(amt);
                         } else if (messages.first().content == 'Reject' || messages.first().content == 'reject') {
                             msg.channel.send(':bank: | Transfer rejected!');
                         } else {
@@ -32,6 +28,16 @@ module.exports = {
             } else {
                 msg.reply(":exlamation: | " + target.toString() + " does not have sufficient bank account funds to donate!");
             }
+        }
+
+        async function transfer(input) {
+            let account = await bot.bank.get(msg.author.id);
+            let donor = await bot.bank.get(target.id);
+            donor.bank -= input;
+            account.bank += input;
+            msg.channel.send(`:bank: | Transfer approved!`);
+            await bot.bank.update(account);
+            await bot.bank.update(donor);
         }
     }
 };

@@ -4,7 +4,6 @@ module.exports = {
     name: 'warn',
     permission: 2,
     main: async function (bot, msg) {
-        var channel = msg.guild.channels.cache.get(bot.config.generalChannel);
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const warnee = msg.mentions.users.first();
         var reason = msg.content.split(' ').splice(1).join(' ');
@@ -21,7 +20,7 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-                await channel.send({
+                await msg.channel.send({
                     embed: warn
                 })
                 await log.send({

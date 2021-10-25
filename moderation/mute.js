@@ -5,7 +5,6 @@ module.exports = {
     name: 'mute',
     permission: 2,
     main: async function (bot, msg) {
-        var channel = msg.guild.channels.cache.get(bot.config.generalChannel);
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const mutee = msg.mentions.users.first();
         var reason = msg.content.split(' ').splice(1).join(' ');
@@ -26,7 +25,7 @@ module.exports = {
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();
                 member.roles.add(role);
-                await channel.send({
+                await msg.channel.send({
                     embed: mute
                 })
                 await log.send({

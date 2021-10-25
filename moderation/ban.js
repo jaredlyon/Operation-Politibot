@@ -4,7 +4,6 @@ module.exports = {
     name: 'ban',
     permission: 2,
     main: async function (bot, msg) {
-        var channel = msg.guild.channels.cache.get(bot.config.generalChannel);
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const banee = msg.mentions.users.first();
         var reason = msg.content.split(' ').splice(1).join(' ');
@@ -22,7 +21,7 @@ module.exports = {
                 .setColor(3447003);
 
                 await msg.guild.members.ban(banee);
-                await channel.send({
+                await msg.channel.send({
                     embed: ban
                 })
                 await log.send({

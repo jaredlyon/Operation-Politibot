@@ -20,13 +20,25 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-                await msg.guild.members.kick(kickee);
-                await msg.channel.send({
-                    embed: kick
-                })
-                await log.send({
-                    embed: kick
-                })
+            var dm = new Discord.MessageEmbed()
+                .setAuthor(msg.guild.name, msg.guild.iconURL())
+                .setTitle(`**A moderator has kicked you.**`)
+                .addField('Reason:', reason)
+                .setFooter(bot.user.username, bot.user.avatarURL())
+                .setTimestamp()
+                .setColor(3447003);
+
+            await kickee.createDM();
+            await kickee.send({
+                embed: dm
+            })
+            await msg.guild.members.kick(kickee);
+            await msg.channel.send({
+                embed: kick
+            })
+            await log.send({
+                embed: kick
+            })
         } else {
             msg.reply("mention someone!")
         }

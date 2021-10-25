@@ -20,12 +20,24 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-                await msg.channel.send({
-                    embed: warn
-                })
-                await log.send({
-                    embed: warn
-                })
+            var dm = new Discord.MessageEmbed()
+                .setAuthor(msg.guild.name, msg.guild.iconURL())
+                .setTitle(`**A moderator has issued you a warning.**`)
+                .addField('Reason:', reason)
+                .setFooter(bot.user.username, bot.user.avatarURL())
+                .setTimestamp()
+                .setColor(3447003);
+
+            await warnee.createDM();
+            await warnee.send({
+                embed: dm
+            })
+            await msg.channel.send({
+                embed: warn
+            })
+            await log.send({
+                embed: warn
+            })
         } else {
             msg.reply("mention someone!")
         }

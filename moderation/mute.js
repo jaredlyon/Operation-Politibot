@@ -21,16 +21,28 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-                //await msg.guild.members.ban(mutee);
-                let role = msg.guild.roles.cache.get("849498583102914581");
-                let member = msg.mentions.members.first();
-                member.roles.add(role);
-                await msg.channel.send({
-                    embed: mute
-                })
-                await log.send({
-                    embed: mute
-                })
+            //await msg.guild.members.ban(mutee);
+            var dm = new Discord.MessageEmbed()
+                .setAuthor(msg.guild.name, msg.guild.iconURL())
+                .setTitle(`**A moderator has muted you.**`)
+                .addField('Reason:', reason)
+                .setFooter(bot.user.username, bot.user.avatarURL())
+                .setTimestamp()
+                .setColor(3447003);
+
+            await mutee.createDM();
+            await mutee.send({
+                embed: dm
+            })
+            let role = msg.guild.roles.cache.get("849498583102914581");
+            let member = msg.mentions.members.first();
+            member.roles.add(role);
+            await msg.channel.send({
+                embed: mute
+            })
+            await log.send({
+                embed: mute
+            })
         } else {
             msg.reply("mention someone!")
         }

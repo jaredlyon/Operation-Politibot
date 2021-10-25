@@ -32,7 +32,8 @@ module.exports = {
             await kickee.send({
                 embed: dm
             })
-            await msg.guild.members.kick(kickee);
+            const user = msg.guild.member(kickee);
+            await user.kick();
             await msg.channel.send({
                 embed: kick
             })

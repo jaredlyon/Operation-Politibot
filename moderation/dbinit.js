@@ -27,8 +27,22 @@ module.exports = {
             })
         }
         funcSt()
+        
+        //cooldowns
+        let funcCd = async() => {
+            bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await bot.cooldowns.insert({
+                    id: member.user.id,
+                    lastBeg: null,
+                    lastCrime: null,
+                    lastSlut: null,
+                    lastWork: null
+                })
+            })
+        }
+        funcCd()
 
-        console.log("[BANK] | Database initialized!")
+        console.log("[RETHINK] | Databases initialized!");
         await msg.reply("Database initialized! Godspeed, Mr. Chairman.")
     }
 }

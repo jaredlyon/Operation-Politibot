@@ -66,12 +66,12 @@ module.exports = {
             // console.log(d2);
             var t1 = d1.getTime();
             var t2 = d2.getTime();
-            var duration = 3600000 - (t1 - t2);
+            var duration = 7200000 - (t1 - t2);
         
-            var milliseconds = parseInt((duration % 500) / 50),
-                seconds = parseInt((duration / 500) % 60),
-                minutes = parseInt((duration / (500 * 60)) % 60),
-                hours = parseInt((duration / (500 * 60 * 60)) % 24);
+            var milliseconds = parseInt((duration % 1000) / 50),
+                seconds = parseInt((duration / 1000) % 60),
+                minutes = parseInt((duration / (1000 * 60)) % 60),
+                hours = parseInt((duration / (1000 * 60 * 60)) % 24);
         
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;

@@ -3,8 +3,8 @@ var Discord = require('discord.js');
 const { off } = require('process');
 
 module.exports = {
-    name: 'lockdown',
-    aliases: ['lock', 'ld'],
+    name: 'unlockdown',
+    aliases: ['unlock', 'uld'],
     permission: 2,
     main: function (bot, msg) {
         let channels = message.guild.channels;

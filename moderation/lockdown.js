@@ -10,7 +10,9 @@ module.exports = {
         let channels = message.guild.channels;
         let roles = message.guild.roles; // these are collections! remember this you fucking idiot. don't try to call roles or channels
 
-        let mainrole = roles.cache.find(r => r.id === `<@&775838439538425866>`);
+        let trustedrole = roles.cache.find(r => r.id === `<@&775838439538425866>`);
+        let memberrole = roles.cache.find(r => r.id === `<@&909989200378601472>`);
+        let unverrole = roles.cache.find(r => r.id === `<@&909988798308433920>`);
 
         //channels to lock down
         let generalchannel = channels.cache.find(r => r.id === '<#760275642150420523>')
@@ -24,42 +26,58 @@ module.exports = {
 
         //general channel lockdown
         generalchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //#off-topic-and-shitposting channel lockdown
         offtopicchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //botcomchannel lockdown
         botcomchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //voice chat channel lockdown
         voicechatchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //podcast channel lockdown
         podcastchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //answers channel lockdown
         answerschannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //memes channel lockdown
         memeschannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
         //gamenight channel lockdown
         gamenightchannel.overwritePermissions(
-            mainrole,
+            trustedrole,
+            { 'SEND_MESSAGES': false },
+            memberrole,
             { 'SEND_MESSAGES': false },
         )
     }

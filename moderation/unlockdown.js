@@ -27,7 +27,7 @@ module.exports = {
         //general channel lockdown
         memeschannel.updateOverwrite(
             trustedrole,
-            { 'SEND_MESSAGES': false },
+            { 'SEND_MESSAGES': true },
             'test!'
         )
         .then(console.log)

@@ -25,60 +25,12 @@ module.exports = {
         let gamenightchannel = channels.cache.find(r => r.id === '854824056238112809')
 
         //general channel lockdown
-        generalchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //#off-topic-and-shitposting channel lockdown
-        offtopicchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //botcomchannel lockdown
-        botcomchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //voice chat channel lockdown
-        voicechatchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //podcast channel lockdown
-        podcastchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //answers channel lockdown
-        answerschannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
-        //memes channel lockdown
         memeschannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
+            'test!'
         )
-        //gamenight channel lockdown
-        gamenightchannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': false },
-            memberrole,
-            { 'SEND_MESSAGES': false },
-        )
+        .then(console.log)
+        .catch(console.log);
     }
 }

@@ -5,8 +5,6 @@ const readdir = require("fs").readdir;
 
 bot.commands = new Discord.Collection();
 bot.blackjackInProgress = new Set();
-bot.work = new Boolean;
-bot.work = false;
 
 readdir('./moderation/', (err, files) => {
 	bot.log(`Loading ${files.length} moderation modules!`);

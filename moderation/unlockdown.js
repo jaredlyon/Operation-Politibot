@@ -25,56 +25,56 @@ module.exports = {
         let gamenightchannel = channels.cache.find(r => r.id === '854824056238112809')
 
         //general channel lockdown
-        generalchannel.PermissionOverwrites(
+        generalchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //#off-topic-and-shitposting channel lockdown
-        offtopicchannel.PermissionOverwrites(
+        offtopicchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //botcomchannel lockdown
-        botcomchannel.PermissionOverwrites(
+        botcomchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //voice chat channel lockdown
-        voicechatchannel.PermissionOverwrites(
+        voicechatchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //podcast channel lockdown
-        podcastchannel.PermissionOverwrites(
+        podcastchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //answers channel lockdown
-        answerschannel.PermissionOverwrites(
+        answerschannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //memes channel lockdown
-        memeschannel.PermissionOverwrites(
+        memeschannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,
             { 'SEND_MESSAGES': true },
         )
         //gamenight channel lockdown
-        gamenightchannel.PermissionOverwrites(
+        gamenightchannel.updateOverwrite(
             trustedrole,
             { 'SEND_MESSAGES': true },
             memberrole,

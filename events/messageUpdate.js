@@ -2,6 +2,7 @@ var Discord = require('discord.js');
 
 exports.run = (bot, oldMessage, newMessage) => {
     if (oldMessage === newMessage) return;
+    if (new Date() - oldMessage.createdAt <= 1000) return;
 
     var msgUpdate = new Discord.MessageEmbed()
         .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())

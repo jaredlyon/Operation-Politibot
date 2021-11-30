@@ -71,8 +71,6 @@ module.exports = (bot) => {
 		bot.log("[BANK] OpBot has successfully connected to bank database!");
 		bot.streaks = bot.r.db("opbot").table("streaks");
 		bot.log("[STREAKS] OpBot has successfully connected to streak database!");
-		bot.mutes = bot.r.db("opbot").table("mutes");
-		bot.log("[MUTES] OpBot has successfully connected to mutes database!");
 		bot.logs = bot.r.db("opbot").table("logs");
 		bot.log("[LOGS] OpBot has successfully connected to logs database!");
 		bot.cooldowns = bot.r.db("opbot").table("cooldowns");

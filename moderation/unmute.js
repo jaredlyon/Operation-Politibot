@@ -23,7 +23,7 @@ module.exports = {
             
             var dm = new Discord.MessageEmbed()
                 .setAuthor(msg.guild.name, msg.guild.iconURL())
-                .setTitle(`**A moderator has issued you a warning.**`)
+                .setTitle(`**A moderator has unmuted you.**`)
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()

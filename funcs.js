@@ -62,6 +62,7 @@ module.exports = (bot) => {
 		await bot.syncDatabase();
 	}
 
+	//rethinkdb 
 	bot.syncDatabase = async function () {
 		try {
 			bot.r.dbCreate("opbot");
@@ -75,6 +76,29 @@ module.exports = (bot) => {
 		bot.log("[LOGS] OpBot has successfully connected to logs database!");
 		bot.cooldowns = bot.r.db("opbot").table("cooldowns");
 		bot.log("[COOLDOWNS] OpBot has successfully connected to cooldown database!");
+	}
+
+	//list db
+	bot.setupList = function () {
+		bot.mutes = require('./mutes.json');
+		console.log("[MUTES] | Mute database found!")
+
+		writeList();
+
+		setInterval(function () {
+			writeList();
+		}, 5000);
+
+		function writeList() {
+			var listJson = fs.readFileSync("./mutes.json"),
+				listParsed = JSON.parse(listJson)
+			if (JSON.stringify(listParsed) == JSON.stringify(bot.mutes)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./mutes.json", JSON.stringify(bot.mutes, null, 3));
+			console.log("[MUTES] | Mute database successfully saved to file!")
+			return "Mute database successfully saved to file!";
+		}
+		console.log("[LIST] | List database initialized!")
 	}
 
 	bot.awaitConsoleInput = function () {

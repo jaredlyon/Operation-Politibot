@@ -55,6 +55,7 @@ readdir('./events/', (err, files) => {
 	bot.log(`Events loaded!`);
 });
 
+/**
 //restart
 var restart;
 bot.on('ready', () => {
@@ -72,6 +73,7 @@ setInterval(function () {
 	}, 1000);
 	restart.send("[AUTO RESTART] | OpBot successfully restarted!")
 }, 60 * 1000); // Check every minute
+*/
 
 //6h bump reminder
 var bump;

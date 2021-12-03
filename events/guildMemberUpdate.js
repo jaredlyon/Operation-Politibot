@@ -1,7 +1,7 @@
 var Discord = require('discord.js');
 
 exports.run = (bot, oldMember, newMember) => {
-    if (oldMember.roles.cache != newMember.roles.cache) {
+    if (oldMember.roles.cache.size != newMember.roles.cache.size) {
         //role change
         const roleUpdate = new Discord.MessageEmbed()
             .setAuthor(newMember.user.tag, newMember.user.avatarURL())

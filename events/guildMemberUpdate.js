@@ -35,8 +35,10 @@ exports.run = (bot, oldMember, newMember) => {
             .setAuthor(newMember.user.tag, newMember.user.avatarURL())
             .setTimestamp()
             .setColor(3447003)
-            .setFooter(`id: ` + newMember.id)
-            .setTimestamp();
+            .setFooter(`id: ` + newMember.user.id)
+            .setTimestamp()
+            .addField("Old nickname:", oldMember.nickname)
+            .addField("New nickname:", newMember.nickname);
 
         newMember.guild.channels.cache.get(bot.config.logChannel).send({
             embed: nicknameUpdate

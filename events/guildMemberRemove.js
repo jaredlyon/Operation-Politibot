@@ -4,7 +4,7 @@ exports.run = (bot, member) => {
     var channel = member.guild.channels.cache.get(bot.config.logChannel);
     var leave = new Discord.MessageEmbed()
         .setAuthor(member.user.username, member.user.avatarURL())
-        .setFooter(`id: ` + member.id)
+        .setFooter(`id: ` + member.user.id)
         .setTimestamp()
         .setTitle('Member left!')
         .setColor(3447003);

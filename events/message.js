@@ -11,21 +11,39 @@ exports.run = async (bot, msg) => {
 
 	//reply array shenanigans
 	const responseObject = {
-		"input": "output"
+		"go bells": "go bells!"
 	};
 	if (responseObject[msg.content.toLowerCase()]) {
 		msg.channel.send(responseObject[msg.content.toLowerCase()]);
 	}
 
+	/** 
 	const msg1 = msg.content.toLowerCase();
 	if (msg1.includes("input")) {
 		msg.channel.send("output");
 	}
+	*/
+	
 	
 	//for banned words
-	if (msg1.includes("word")) {
-		msg.reply("your message included a banned word!");
+	const msg1 = msg.content.toLowerCase();
+	if (msg1.includes("nigg") || msg1.includes("nigger") || msg1.includes("n1gg") || msg1.includes("chink") || msg1.includes("ch1nk") || msg1.includes("ch1nc") || msg1.includes("chinc") || msg1.includes("sp1c") || msg1.includes("sp1k") || msg1.includes("nigga") || msg1.includes("n1gga") || msg1.includes("negro") || msg1.includes("n3g") || msg1.includes("n3gr0") || msg1.includes("retard") || msg1.includes("r3t4rd") || msg1.includes("re tard") || msg1.includes("re tarded") || msg1.includes("r etard") || msg1.includes("ret ard") || msg1.includes("reta rd") || msg1.includes("retar d") || msg1.includes("spic ") || msg1 == "spic" || msg1.includes("fag") || msg1.includes("fagot") ||msg1.includes("faggot") || msg1.includes("f4g0t") || msg1.includes("f4g") || msg1.includes("f4gg0t")) {
+		msg.reply("word filter triggered!");
 		msg.delete();
+	}
+
+	//reply array
+	if (msg1.includes("lets go brandon")) {
+		msg.channel.send(":clown:");
+	}
+	if (msg1.includes("lets go, brandon")) {
+		msg.channel.send(":clown:");
+	}
+	if (msg1.includes("let's go brandon")) {
+		msg.channel.send(":clown:");
+	}
+	if (msg1.includes("let's go, brandon")) {
+		msg.channel.send(":clown:");
 	}
 
 	//bank writes

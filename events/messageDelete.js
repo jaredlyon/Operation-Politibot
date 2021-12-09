@@ -4,6 +4,7 @@ exports.run = (bot, messageDelete) => {
     if (!messageDelete.author.bot) {
         var msgDelete = new Discord.MessageEmbed()
             .setAuthor(messageDelete.author.tag, messageDelete.author.avatarURL())
+            .setFooter(`id: ` + messageDelete.author.id)
             .setTimestamp()
             .addField('Message deleted:', `${messageDelete.content || "(no content)"}`)
             .addField(`Channel:`, `${messageDelete.channel}`)

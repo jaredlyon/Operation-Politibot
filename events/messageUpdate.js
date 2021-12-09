@@ -6,6 +6,7 @@ exports.run = (bot, oldMessage, newMessage) => {
 
     var msgUpdate = new Discord.MessageEmbed()
         .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
+        .setFooter(`id: ` + newMessage.author.id)
         .setTimestamp()
         .addField('Old message:', `${oldMessage}`)
         .addField('New message:', `${newMessage}`)

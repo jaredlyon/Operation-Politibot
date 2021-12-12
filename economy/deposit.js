@@ -1,6 +1,6 @@
 module.exports = {
     name: "deposit",
-    aliases: ['d', 'dep'],
+    aliases: ['dep'],
     permission: 1,
     main: async function (bot, msg) {
         let account = (await bot.bank.get(msg.author.id)) || {};

@@ -8,6 +8,6 @@ module.exports = {
         Date1 += date.getUTCHours() + ' hours, ';
         Date1 += date.getUTCMinutes() + ' minutes, ';
         Date1 += date.getUTCSeconds() + ' seconds**';
-        msg.channel.send(`JareBot's uptime is:\n` + Date1);
+        msg.channel.send(`Uptime is:\n` + Date1);
     },
 };

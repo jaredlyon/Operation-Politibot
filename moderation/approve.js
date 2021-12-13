@@ -11,9 +11,7 @@ module.exports = {
         var userID = msg.content.split(' ').splice(0)[0];
 
         //get user by id
-        console.log(userID);
         const target = msg.guild.members.cache.get(userID);
-        console.log(target.toString())
         //const target = msg.mentions.members.first(); <-- by mention
         
         //member id: 909989200378601472

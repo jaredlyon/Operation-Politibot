@@ -8,7 +8,7 @@ module.exports = {
         amt = parseInt(input);
 
         //if amt is a number
-        if (!isNaN(amt)) {
+        if (!isNaN(amt) && amt > 0) {
             if (amt > account.bank) {
                 msg.channel.send(":exclamation: | Insufficient bank account funds.");
             } else {

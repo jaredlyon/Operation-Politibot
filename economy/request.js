@@ -7,7 +7,7 @@ module.exports = {
         var amt = Number(msg.content.split(' ').splice(1)[0]);
         let account = await bot.bank.get(msg.author.id);
         
-        if (target != null && amt != null && Number.isInteger(amt) && target.id != msg.author.id && target.id != bot.user.id) {
+        if (target != null && amt != null && amt > 0 && Number.isInteger(amt) && target.id != msg.author.id && target.id != bot.user.id) {
             let donor = await bot.bank.get(target.id);
             if (donor.bank >= amt) {
                 msg.channel.send(":dollar: | Request processed! " + target.toString() + " must enter **Approve** or **Reject** to finalize the transaction:").then(() => {
@@ -28,6 +28,8 @@ module.exports = {
             } else {
                 msg.reply(":exlamation: | " + target.toString() + " does not have sufficient bank account funds to donate!");
             }
+        } else {
+            msg.reply("something went wrong! Make sure you have the right usage: `!pay [@user] [amount]` and that you have sufficient funds to give away!");
         }
 
         async function transfer(input) {

@@ -7,7 +7,7 @@ module.exports = {
         var amt = Number(msg.content.split(' ').splice(1)[0]);
         let account = await bot.bank.get(msg.author.id);
 
-        if (recipient != null && amt != null && account.bank >= amt && Number.isInteger(amt) && recipient.id != msg.author.id && recipient.id != bot.user.id) {
+        if (recipient != null && amt != null && amt > 0 && account.bank >= amt && Number.isInteger(amt) && recipient.id != msg.author.id && recipient.id != bot.user.id) {
             account.bank -= amt;
             var recB = (await bot.bank.get(recipient.id));
             recB.bank += amt;

@@ -41,5 +41,13 @@ exports.run = async (bot, member) => {
         streak: 0,
     })
 
+    await bot.cooldowns.insert({
+        id: member.user.id,
+        lastBeg: null,
+        lastCrime: null,
+        lastSlut: null,
+        lastWork: null
+    })
+
     console.log("[BANK] | Created new account for " + member.user.username + "!")
 }

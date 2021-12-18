@@ -78,10 +78,10 @@ module.exports = (bot) => {
 		bot.log("[COOLDOWNS] OpBot has successfully connected to cooldown database!");
 	}
 
-	//list db
+	//mutes db
 	bot.setupList = function () {
 		bot.mutes = require('./mutes.json');
-		console.log("[MUTES] | Mute database found!")
+		console.log("[MUTES] | Mute database found!");
 
 		writeList();
 
@@ -98,7 +98,28 @@ module.exports = (bot) => {
 			console.log("[MUTES] | Mute database successfully saved to file!")
 			return "Mute database successfully saved to file!";
 		}
-		console.log("[LIST] | List database initialized!")
+	}
+
+	//case count db
+	bot.setupCases = function () {
+		bot.caseCount = require('./caseCount.json');
+		console.log("[CASE COUNT] | Case count found!");
+
+		writeCases();
+
+		setInterval(function () {
+			writeCases();
+		}, 3000);
+
+		function writeCases() {
+			var listJson = fs.readFileSync("./caseCount.json"),
+				listParsed = JSON.parse(listJson)
+			if (JSON.stringify(listParsed) == JSON.stringify(bot.caseCount)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./caseCount.json", JSON.stringify(bot.caseCount, null, 3));
+			console.log("[CASE COUNT] | Case count successfully saved to file!")
+			return "Case count successfully saved to file!";
+		}
 	}
 
 	bot.awaitConsoleInput = function () {

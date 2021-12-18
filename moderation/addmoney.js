@@ -5,7 +5,7 @@ module.exports = {
         const Discord = require('discord.js');
         var recipient = msg.mentions.users.array()[0];
         var amt = Number(msg.content.split(' ').splice(1)[0]);
-        let account = await bot.bank.get(msg.author.id);
+        let account = await bot.bank.get(recipient.id);
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
 
         if (!recipient || !amt || isNaN(amt) || amt < 0) {

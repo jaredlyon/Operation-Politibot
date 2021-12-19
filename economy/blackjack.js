@@ -1,5 +1,6 @@
 module.exports = {
   name: "blackjack",
+  aliases: ["bj", "black", "jack"],
   permission: 1,
   //functions
   restart(player_hand, cpu_hand, cards) {

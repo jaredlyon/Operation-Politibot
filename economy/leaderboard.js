@@ -1,6 +1,6 @@
 module.exports = {
     name: 'leaderboard',
-    aliases: ['lb'],
+    aliases: ['lb', 'board', 'list'],
     permission: 1,
     main: async function (bot, msg) {
 

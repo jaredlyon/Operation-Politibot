@@ -1,5 +1,6 @@
 module.exports = {
     name: 'pay',
+    aliases: ['p'],
     permission: 1,
     main: async function (bot, msg) {
         const Discord = require('discord.js');

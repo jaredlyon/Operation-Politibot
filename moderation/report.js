@@ -34,5 +34,8 @@ module.exports = {
         modChannel.send({
             embed: logEmbed
         })
+
+        //reply
+        msg.reply("your complaint has been sent! A staff member will be with you shortly.")
     }
 }

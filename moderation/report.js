@@ -36,6 +36,6 @@ module.exports = {
         })
 
         //reply
-        msg.reply("your complaint has been sent! A staff member will be with you shortly.")
+        msg.reply("your complaint has been sent! A staff member will be with you shortly.");
     }
 }

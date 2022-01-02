@@ -78,50 +78,6 @@ module.exports = (bot) => {
 		bot.log("[COOLDOWNS] OpBot has successfully connected to cooldown database!");
 	}
 
-	//mutes db
-	bot.setupList = function () {
-		bot.mutes = require('./mutes.json');
-		console.log("[MUTES] | Mute database found!");
-
-		writeList();
-
-		setInterval(function () {
-			writeList();
-		}, 5000);
-
-		function writeList() {
-			var listJson = fs.readFileSync("./mutes.json"),
-				listParsed = JSON.parse(listJson)
-			if (JSON.stringify(listParsed) == JSON.stringify(bot.mutes)) return; // Only writes if there's a difference
-
-			fs.writeFileSync("./mutes.json", JSON.stringify(bot.mutes, null, 3));
-			console.log("[MUTES] | Mute database successfully saved to file!")
-			return "Mute database successfully saved to file!";
-		}
-	}
-
-	//case count db
-	bot.setupCases = function () {
-		bot.caseCount = require('./caseCount.json');
-		console.log("[CASE COUNT] | Case count found!");
-
-		writeCases();
-
-		setInterval(function () {
-			writeCases();
-		}, 3000);
-
-		function writeCases() {
-			var listJson = fs.readFileSync("./caseCount.json"),
-				listParsed = JSON.parse(listJson)
-			if (JSON.stringify(listParsed) == JSON.stringify(bot.caseCount)) return; // Only writes if there's a difference
-
-			fs.writeFileSync("./caseCount.json", JSON.stringify(bot.caseCount, null, 3));
-			console.log("[CASE COUNT] | Case count successfully saved to file!")
-			return "Case count successfully saved to file!";
-		}
-	}
-
 	bot.awaitConsoleInput = function () {
 		stdin.addListener("data", function (d) {
 			d = d.toString().trim()

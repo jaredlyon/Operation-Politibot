@@ -46,6 +46,16 @@ exports.run = async (bot, msg) => {
 		msg.channel.send(":clown:");
 	}
 
+	//staff voting
+	const upvote = bot.emojis.cache.find(emoji => emoji.name == "upvote");
+	const neutralvote = bot.emojis.cache.find(emoji => emoji.name == "neutralvote");
+	const downvote = bot.emojis.cache.find(emoji => emoji.name == "downvote");
+	if (msg.channel.id == '927365081371652137') {
+		await msg.react(upvote);
+		await msg.react(neutralvote);
+		await msg.react(downvote);
+	}
+
 	//bank writes
 	let account = (await bot.bank.get(msg.author.id)) || {};
 	if (!account) {

@@ -27,7 +27,7 @@ exports.run = (bot, oldMember, newMember) => {
             //welcome message
             if (newMember.roles.cache.some(role => role.name === 'Unverified Member') && !oldMember.roles.cache.some(role => role.name === 'Unverified Member')) {
                 //unv role: 909988798308433920
-                newMember.guild.channels.cache.get('910017492590686329').send('Welcome in, ' + newMember.toString() + '! Check out <#909995632293449799> and send a DM to <@909999117168676954> in order to access to the rest of the server!');
+                newMember.guild.channels.cache.get('910017492590686329').send('Welcome in, ' + newMember.toString() + '! Check out <#909995632293449799> and send a DM to <@909999117168676954> in order to access the rest of the server!');
             }
 
         newMember.guild.channels.cache.get(bot.config.logChannel).send({

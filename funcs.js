@@ -72,8 +72,6 @@ module.exports = (bot) => {
 		bot.log("[BANK] OpBot has successfully connected to bank database!");
 		bot.streaks = bot.r.db("opbot").table("streaks");
 		bot.log("[STREAKS] OpBot has successfully connected to streak database!");
-		bot.logs = bot.r.db("opbot").table("logs");
-		bot.log("[LOGS] OpBot has successfully connected to logs database!");
 		bot.cooldowns = bot.r.db("opbot").table("cooldowns");
 		bot.log("[COOLDOWNS] OpBot has successfully connected to cooldown database!");
 	}
@@ -105,6 +103,33 @@ module.exports = (bot) => {
 				}
 			}
 		});
+	}
+
+	//logs
+	bot.syncLogs = function () {
+		bot.logs = require('./logs.json');
+
+		bot.users.cache.forEach(user => {
+			if (!bot.logs[user.id] && !user.bot) {
+				bot.logs[user.id] = {}
+			}
+		})
+
+		writeLogs();
+
+		setInterval(function () {
+			writeLogs();
+		}, 10000);
+
+		function writeLogs() {
+			var logsJson = fs.readFileSync("./logs.json"),
+				logsParsed = JSON.parse(logsJson)
+			if (JSON.stringify(logsParsed) == JSON.stringify(bot.logs)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./logs.json", JSON.stringify(bot.logs, null, 3));
+			console.log("[LOGS] | Moderation logs successfully saved to file!")
+			return "Moderation logs successfully saved to file!";
+		}
 	}
 
 	/**

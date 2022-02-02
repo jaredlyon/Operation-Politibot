@@ -38,6 +38,17 @@ module.exports = {
             await log.send({
                 embed: warn
             })
+
+            var caseCount = bot.logs.count();
+        
+            bot.logs[warnee.id].add(
+                caseCount: {
+                    type: "warn",
+                    date: new Date(),
+                    moderator: msg.author.id,
+                    reason: reason
+                }
+            );
         } else {
             msg.reply("mention someone!")
         }

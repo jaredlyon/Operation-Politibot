@@ -142,6 +142,7 @@ bot.on('message', async(msg) => {
 				log.send({
 					embed: mute
 				});
+				log.send("<@&893189360105689139> <@&854841000480079882> **Auto-Mute triggered!!**");
 			}
 			
 			} else {

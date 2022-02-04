@@ -16,7 +16,7 @@ module.exports = {
             .setColor(3447003);
 
         for (let i = 0; i < caseCount; i++) {
-            if (bot.logs[i].userid == userID) {
+            if (bot.logs[i] && bot.logs[i].userid == userID) {
                 var moderator = msg.guild.members.cache.get(bot.logs[i].moderatorid);
                 log.addField(bot.logs[i].type + ' issued by ' + moderator.user.username, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
             }

@@ -10,8 +10,8 @@ module.exports = (bot) => {
 
 	bot.permLevel = function (msg) {
 		if (msg.author.id == bot.config.owner)
-			return 2;
-		if (msg.author.id == 178689418415177729)
+			return 3;
+		if (msg.author.id == 178689418415177729 || msg.author.roles.cache.some(role => role.id === '854841000480079882'))
 			return 2;
 		else
 			return 1;

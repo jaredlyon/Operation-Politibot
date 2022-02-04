@@ -29,10 +29,6 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-            await banee.createDM();
-            await banee.send({
-                emded: dm
-            })
             await msg.guild.members.ban(banee);
             await msg.channel.send({
                 embed: ban
@@ -42,6 +38,7 @@ module.exports = {
             })
 
             bot.logs[caseCount] = {
+                caseNum: caseCount,
                 userid: banee.id,
                 moderatorid: msg.author.id,
                 date: new Date(),
@@ -50,6 +47,11 @@ module.exports = {
             }
 
             bot.caseNum.count++;
+
+            await banee.createDM()
+            await banee.send({
+                emded: dm
+            })
         } else {
             msg.reply("mention someone!")
         }

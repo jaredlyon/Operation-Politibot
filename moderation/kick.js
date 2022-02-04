@@ -28,11 +28,7 @@ module.exports = {
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
                 .setColor(3447003);
-
-            await kickee.createDM();
-            await kickee.send({
-                embed: dm
-            })
+    
             const user = msg.guild.member(kickee);
             await user.kick();
             await msg.channel.send({
@@ -43,6 +39,7 @@ module.exports = {
             })
 
             bot.logs[caseCount] = {
+                caseNum: caseCount,
                 userid: kickee.id,
                 moderatorid: msg.author.id,
                 date: new Date(),
@@ -51,6 +48,11 @@ module.exports = {
             }
 
             bot.caseNum.count++;
+
+            await kickee.createDM()
+            await kickee.send({
+                emded: dm
+            })
         } else {
             msg.reply("mention someone!")
         }

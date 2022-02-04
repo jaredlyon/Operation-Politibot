@@ -29,10 +29,6 @@ module.exports = {
                 .setTimestamp()
                 .setColor(3447003);
 
-            await warnee.createDM();
-            await warnee.send({
-                embed: dm
-            })
             await msg.channel.send({
                 embed: warn
             })
@@ -41,6 +37,7 @@ module.exports = {
             })
         
             bot.logs[caseCount] = {
+                caseNum: caseCount,
                 userid: warnee.id,
                 moderatorid: msg.author.id,
                 date: new Date(),
@@ -49,6 +46,11 @@ module.exports = {
             }
 
             bot.caseNum.count++;
+
+            await warnee.createDM()
+            await warnee.send({
+                emded: dm
+            })
         } else {
             msg.reply("mention someone!")
         }

@@ -25,8 +25,6 @@ module.exports = {
                 { name: `!request <@user> <amount>`, value: `Requests a bank transfer of an amount of money from another user's account into your own.`},
             );
         
-        msg.author.createDM();
-        msg.author.send(help);
-        msg.reply("check your DMs!")
+        msg.channel.send(help);
     }
 }

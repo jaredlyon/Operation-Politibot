@@ -8,6 +8,7 @@ module.exports = {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const mutee = msg.mentions.users.first();
         var reason = msg.content.split(' ').splice(1).join(' ');
+        var caseCount = bot.caseNum.count;
         if (reason === '') {
             reason = 'No reason was specified.'
         };
@@ -43,6 +44,16 @@ module.exports = {
             await log.send({
                 embed: mute
             })
+
+            bot.logs[caseCount] = {
+                userid: mutee.id,
+                moderatorid: msg.author.id,
+                date: new Date(),
+                type: "Mute",
+                reason: reason
+            }
+
+            bot.caseNum.count++;
         } else {
             msg.reply("mention someone!")
         }

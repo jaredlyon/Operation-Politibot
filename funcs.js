@@ -109,12 +109,6 @@ module.exports = (bot) => {
 	bot.syncLogs = function () {
 		bot.logs = require('./logs.json');
 
-		bot.users.cache.forEach(user => {
-			if (!bot.logs[user.id] && !user.bot) {
-				bot.logs[user.id] = {}
-			}
-		})
-
 		writeLogs();
 
 		setInterval(function () {
@@ -129,6 +123,27 @@ module.exports = (bot) => {
 			fs.writeFileSync("./logs.json", JSON.stringify(bot.logs, null, 3));
 			console.log("[LOGS] | Moderation logs successfully saved to file!")
 			return "Moderation logs successfully saved to file!";
+		}
+	}
+
+	//case count
+	bot.syncCaseNum = function () {
+		bot.caseNum = require('./caseNum.json');
+
+		writeCaseNum();
+
+		setInterval(function () {
+			writeCaseNum();
+		}, 10000);
+
+		function writeCaseNum() {
+			var caseNumJson = fs.readFileSync("./caseNum.json"),
+				caseNumParsed = JSON.parse(caseNumJson)
+			if (JSON.stringify(caseNumParsed) == JSON.stringify(bot.caseNum)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./caseNum.json", JSON.stringify(bot.caseNum, null, 3));
+			console.log("[CASE COUNT] | Case count successfully saved to file!")
+			return "Case count successfully saved to file!";
 		}
 	}
 

@@ -7,6 +7,7 @@ module.exports = {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const warnee = msg.mentions.users.first();
         var reason = msg.content.split(' ').splice(1).join(' ');
+        var caseCount = bot.caseNum.count;
         if (reason === '') {
             reason = 'No reason was specified.'
         };
@@ -38,17 +39,16 @@ module.exports = {
             await log.send({
                 embed: warn
             })
-
-            var caseCount = bot.logs.count();
         
-            bot.logs[warnee.id].add(
-                caseCount: {
-                    type: "warn",
-                    date: new Date(),
-                    moderator: msg.author.id,
-                    reason: reason
-                }
-            );
+            bot.logs[caseCount] = {
+                userid: warnee.id,
+                moderatorid: msg.author.id,
+                date: new Date(),
+                type: "Warning",
+                reason: reason
+            }
+
+            bot.caseNum.count++;
         } else {
             msg.reply("mention someone!")
         }

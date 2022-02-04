@@ -48,10 +48,10 @@ module.exports = {
 
             bot.caseNum.count++;
 
-            await banee.createDM()
+            await banee.createDM();
             await banee.send({
                 emded: dm
-            })
+            });
         } else {
             msg.reply("mention someone!")
         }

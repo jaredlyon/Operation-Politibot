@@ -49,10 +49,10 @@ module.exports = {
 
             bot.caseNum.count++;
 
-            await kickee.createDM()
+            await kickee.createDM();
             await kickee.send({
                 emded: dm
-            })
+            });
         } else {
             msg.reply("mention someone!")
         }

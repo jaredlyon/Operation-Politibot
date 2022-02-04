@@ -6,8 +6,8 @@ module.exports = {
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const warnee = msg.mentions.users.first();
-        var reason = msg.content.split(' ').splice(1).join(' ');
         var caseCount = bot.caseNum.count;
+        var reason = msg.content.split(' ').splice(1).join(' ');
         if (reason === '') {
             reason = 'No reason was specified.'
         };
@@ -35,7 +35,7 @@ module.exports = {
             await log.send({
                 embed: warn
             })
-        
+
             bot.logs[caseCount] = {
                 caseNum: caseCount,
                 userid: warnee.id,
@@ -43,16 +43,16 @@ module.exports = {
                 date: new Date(),
                 type: "Warning",
                 reason: reason
-            }
+            };
 
             bot.caseNum.count++;
 
-            await warnee.createDM()
+            await warnee.createDM();
             await warnee.send({
-                emded: dm
-            })
+                embed: dm
+            });
         } else {
-            msg.reply("mention someone!")
+            msg.reply("mention someone!");
         }
     }
 };

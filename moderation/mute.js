@@ -101,10 +101,10 @@ module.exports = {
 
                 bot.caseNum.count++;
 
-                await mutee.createDM()
+                await mutee.createDM();
                 await mutee.send({
                     emded: dm
-                })
+                });
             }
         } else {
             msg.reply("mention someone!")

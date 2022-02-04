@@ -134,7 +134,7 @@ bot.on('message', async(msg) => {
 					.addField('Reason:', 'Triggered spam filter excessively.')
 					.setFooter(bot.user.username, bot.user.avatarURL())
 					.setTimestamp()
-					.setColor(3447003);
+					.setColor("#992D22");
 				
 				msg.channel.send({
 					embed: mute

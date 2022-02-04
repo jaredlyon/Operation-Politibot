@@ -8,7 +8,7 @@ exports.run = (bot, messageDelete) => {
             .setTimestamp()
             .addField('Message deleted:', `${messageDelete.content || "(no content)"}`)
             .addField(`Channel:`, `${messageDelete.channel}`)
-            .setColor(3447003);
+            .setColor("#206694");
 
             messageDelete.guild.channels.cache.get(bot.config.messageDeleteLog).send({
             embed: msgDelete

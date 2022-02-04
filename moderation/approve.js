@@ -25,7 +25,7 @@ module.exports = {
                         .addField('Member approved:', rules + ` **${target} (${target.id}) was approved.**`)
                         .setFooter(bot.user.username, bot.user.avatarURL())
                         .setTimestamp()
-                        .setColor(3447003);
+                        .setColor("#FFFFFF");
 
                     await target.roles.add('909989200378601472');
                     await target.roles.remove('909988798308433920')

@@ -21,7 +21,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
@@ -30,7 +30,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();
@@ -64,7 +64,7 @@ module.exports = {
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
-                .setColor(3447003);
+                .setColor("#E74C3C");
 
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
@@ -73,7 +73,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();

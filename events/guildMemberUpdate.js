@@ -6,7 +6,7 @@ exports.run = (bot, oldMember, newMember) => {
         const roleUpdate = new Discord.MessageEmbed()
             .setAuthor(newMember.user.tag, newMember.user.avatarURL())
             .setTimestamp()
-            .setColor(3447003)
+            .setColor("#FFFF00")
             .setFooter(`id: ` + newMember.id)
             .setTimestamp();
 
@@ -40,7 +40,7 @@ exports.run = (bot, oldMember, newMember) => {
         var nicknameUpdate = new Discord.MessageEmbed()
             .setAuthor(newMember.user.tag, newMember.user.avatarURL())
             .setTimestamp()
-            .setColor(3447003)
+            .setColor("#FFFF00")
             .setFooter(`id: ` + newMember.user.id)
             .setTimestamp()
             .addField("Old nickname:", oldMember.nickname)

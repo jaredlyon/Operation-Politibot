@@ -7,14 +7,14 @@ exports.run = async (bot, member) => {
         .setFooter(`id: ` + member.user.id)
         .setTimestamp()
         .setTitle('Member joined!')
-        .setColor(`#fafafa`);
+        .setColor(`"#FFFFFF"`);
 
     channel.send({
         embed: join
     })
 
     var joinEmbed = new Discord.MessageEmbed()
-        .setColor('#e5e5e5')
+        .setColor('"#FFFFFF"')
         .setTitle('Welcome to Operation Politics!')
         .setDescription('We are a growing political discussion and debate server designed to accommodate and welcome all points of view and perspectives. Our goal is to facilitate a friendly, open, and diverse platform to share your thoughts and have productive discussions with people across the United States and the world. **We are very glad you decided to show interest in Operation Politics!**')
         .addFields(

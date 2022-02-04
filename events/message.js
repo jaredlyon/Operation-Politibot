@@ -46,6 +46,17 @@ exports.run = async (bot, msg) => {
 		msg.channel.send(":clown:");
 	}
 
+	//member to trusted member
+	var userID = msg.author.id;
+    let member = msg.guild.members.cache.get(userID);
+	if (member.roles.cache.some(role => role.id === '909989200378601472') && member.joinedAt - msg.createdAt >= 1209600000) {
+		let memberRole = msg.guild.roles.cache.get("909989200378601472");
+		let trustedRole = msg.guild.roles.cache.get("775838439538425866");
+		member.roles.add(trustedRole);
+		member.roles.remove(memberRole);
+		msg.reply(", you have become a trusted member! You can now send message embeds and files to the server.");
+	}
+
 	//staff voting
 	const upvote = bot.emojis.cache.find(emoji => emoji.name == "upvote");
 	const neutralvote = bot.emojis.cache.find(emoji => emoji.name == "neutralvote");

@@ -37,10 +37,10 @@ module.exports = {
                 member.roles.add(role);
                 await msg.channel.send({
                     embed: mute
-                })
+                });
                 await log.send({
                     embed: mute
-                })
+                });
 
                 bot.logs[caseCount] = {
                     caseNum: caseCount,
@@ -53,10 +53,10 @@ module.exports = {
 
                 bot.caseNum.count++;
 
-                await mutee.createDM()
+                await mutee.createDM();
                 await mutee.send({
                     emded: dm
-                })
+                });
             } else if (length) {
                 var mute = new Discord.MessageEmbed()
                 .setAuthor(mutee.username, mutee.avatarURL())
@@ -85,10 +85,10 @@ module.exports = {
 
                 await msg.channel.send({
                     embed: mute
-                })
+                });
                 await log.send({
                     embed: mute
-                })
+                });
 
                 bot.logs[caseCount] = {
                     caseNum: caseCount,
@@ -107,7 +107,7 @@ module.exports = {
                 });
             }
         } else {
-            msg.reply("mention someone!")
+            msg.reply("mention someone!");
         }
     }
 };

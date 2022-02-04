@@ -26,6 +26,13 @@ exports.run = async (bot, msg) => {
 	}
 	*/
 	
+	//mass ping
+	var massPingUserID = msg.author.id;
+	let massPingMember = msg.guild.members.cache.get(massPingUserID);
+	if (msg.mentions.users.size >= 4 && !massPingMember.roles.cache.some(role => role.id === '854841000480079882')) {
+		msg.delete();
+		msg.reply("do not mass ping!")
+	}
 	
 	//for banned words
 	const msg1 = msg.content.toLowerCase();

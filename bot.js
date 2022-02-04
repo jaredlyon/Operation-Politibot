@@ -81,6 +81,87 @@ bot.on('ready', () => {
 	bump = bot.channels.cache.get('886728064086708234'); // Channel to send notification
 });
 
+//anti spam
+const usersMap = new Map();
+const LIMIT = 5;
+const DIFF = 5000;
+
+bot.on('message', async(msg) => {
+	if (msg.author.bot) return;
+	
+	if (usersMap.has(msg.author.id)) {
+		const userData = usersMap.get(msg.author.id);
+		const { lastMessage, timer } = userData;
+		const difference = msg.createdTimestamp - lastMessage.createdTimestamp;
+		let msgCount = userData.msgCount;
+		console.log(difference);
+
+		if (difference > DIFF) {
+			clearTimeout(timer);
+			console.log('[SPAM] | Reset Spam Timer');
+			userData.msgCount = 1;
+			userData.lastMessage = msg;
+			userData.timer = setTimeout(() => {
+				usersMap.delete(msg.author.id);
+				console.log('[SPAM] | User removed from map!')
+			}, DIFF);
+			usersMap.set(msg.author.id, userData)
+		} else {
+			++msgCount;
+			if(parseInt(msgCount) === LIMIT) {
+
+			msg.reply("Warning: Spam filter triggered!");
+			msg.channel.bulkDelete(LIMIT);
+
+			bot.autoMute[msg.author.id].spamCount++;
+
+			if (bot.autoMute[msg.author.id].spamCount == 3) {
+				bot.autoMute[msg.author.id].spamCount = 0;
+
+				var log = msg.guild.channels.cache.get(bot.config.logChannel);
+				let role = msg.guild.roles.cache.get("849498583102914581");
+				var userID = msg.author.id;
+				let member = msg.guild.members.cache.get(userID);
+				member.roles.add(role);
+
+				setTimeout(function() {
+                    member.roles.remove(role);
+                }, 10 * 60000);
+	
+				var mute = new Discord.MessageEmbed()
+					.setAuthor(member.user.username, member.user.avatarURL())
+					.addField('Member auto-muted (10 mins):', `**:mute: ${member} (${member.id}).**`)
+					.addField('Reason:', 'Triggered spam filter excessively.')
+					.setFooter(bot.user.username, bot.user.avatarURL())
+					.setTimestamp()
+					.setColor(3447003);
+				
+				msg.channel.send({
+					embed: mute
+				});
+				log.send({
+					embed: mute
+				});
+			}
+			
+			} else {
+				userData.msgCount = msgCount;
+				usersMap.set(msg.author.id, userData);
+			}
+		}
+	} else {
+		let fn = setTimeout(() => {
+			usersMap.delete(msg.author.id);
+			console.log('[SPAM] | User removed from map!')
+		}, DIFF);
+		usersMap.set(msg.author.id, {
+			msgCount: 1,
+			lastMessage : msg,
+			timer : fn
+		});
+	}
+})
+
 var bumpReminder = new Discord.MessageEmbed()
     .setColor('#fafafa')
     .setTitle('<:upvote:877990048438550538>  Bump Reminder!')
@@ -133,32 +214,5 @@ setInterval(function () {
 	bump.send('<@&886727925674676264>')
 	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
-
-
-//anti spam
-const AntiSpam = require('discord-anti-spam');
-const antiSpam = new AntiSpam({
-	warnThreshold: 3, // Amount of messages sent in a row that will cause a warning.
-	muteThreshold: 10, // Amount of messages sent in a row that will cause a mute
-	kickThreshold: 100, // Amount of messages sent in a row that will cause a kick.
-	banThreshold: 110, // Amount of messages sent in a row that will cause a ban.
-	maxInterval: 2000, // Amount of time (in milliseconds) in which messages are considered spam.
-	warnMessage: '{@user}, stop spamming!', // Message that will be sent in chat upon warning a user.
-	kickMessage: '**{user_tag}** has been kicked for spamming.', // Message that will be sent in chat upon kicking a user.
-	muteMessage: '**{user_tag}** has been muted for spamming!',// Message that will be sent in chat upon muting a user.
-	banMessage: '**{user_tag}** has been banned for spamming.', // Message that will be sent in chat upon banning a user.
-	maxDuplicatesWarning: 6, // Amount of duplicate messages that trigger a warning.
-	maxDuplicatesKick: 100, // Amount of duplicate messages that trigger a warning.
-	maxDuplicatesBan: 110, // Amount of duplicate messages that trigger a warning.
-	maxDuplicatesMute: 19, // Ammount of duplicate message that trigger a mute.
-	ignoredPermissions: [ 'ADMINISTRATOR'], // Bypass users with any of these permissions.
-	ignoreBots: true, // Ignore bot messages.
-	verbose: true, // Extended Logs from module.
-	ignoredMembers: [], // Array of User IDs that get ignored.
-	muteRoleName: "Muted", // Name of the role that will be given to muted users!
-	removeMessages: true // If the bot should remove all the spam messages when taking action on a user!
-	// And many more options... See the documentation.
-});
-bot.on('message', (message) => antiSpam.message(message)); 
 
 bot.login(require("./config.json").token);

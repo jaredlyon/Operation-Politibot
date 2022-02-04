@@ -147,6 +147,36 @@ module.exports = (bot) => {
 		}
 	}
 
+	//automute
+	bot.syncAutoMute = function () {
+		bot.autoMute = require('./automute.json');
+
+		bot.users.cache.forEach(user => {
+			if (!bot.autoMute[user.id] && !user.bot) {
+				bot.autoMute[user.id] = {
+					spamCount: 0,
+					filterCount: 0
+				}
+			}
+		})
+
+		writeAutoMute();
+
+		setInterval(function () {
+			writeAutoMute();
+		}, 10000);
+
+		function writeAutoMute() {
+			var autoMuteJson = fs.readFileSync("./automute.json"),
+				autoMuteParsed = JSON.parse(autoMuteJson)
+			if (JSON.stringify(autoMuteParsed) == JSON.stringify(bot.autoMute)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./automute.json", JSON.stringify(bot.autoMute, null, 3));
+			console.log("[AUTO MUTE] | AutoMute successfully saved to file!")
+			return "AutoMute successfully saved to file!";
+		}
+	}
+
 	/**
 	 * Logging functions
 	 */

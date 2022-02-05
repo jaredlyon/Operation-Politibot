@@ -39,7 +39,7 @@ module.exports = {
                     msg.reply('this user has already been approved!');
                 }
             } else {
-                msg.reply("target not found! Usage: `!approve [user ID]\n*Be sure you've correctly copied the user's ID and you're not mentioning them!*`");
+                msg.reply("target not found! Usage: `!approve [user ID]`\n*Be sure you've correctly copied the user's ID and you're not mentioning them!*");
             }
         } else {
             msg.reply("wrong channel!");

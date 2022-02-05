@@ -19,7 +19,7 @@ module.exports = {
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
-                .setColor(3447003);
+                .setColor("#992D22");
             
             var dm = new Discord.MessageEmbed()
                 .setAuthor(msg.guild.name, msg.guild.iconURL())
@@ -27,7 +27,7 @@ module.exports = {
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
-                .setColor(3447003);
+                .setColor("#992D22");
 
             await mutee.createDM();
             await mutee.send({

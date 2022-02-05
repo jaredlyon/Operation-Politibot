@@ -6,31 +6,38 @@ module.exports = {
     name: 'unlockdown',
     aliases: ['unlock', 'uld'],
     permission: 2,
-    main: function (bot, msg) {
+    main: async function (bot, msg) {
         let channels = msg.guild.channels;
         let roles = msg.guild.roles; // these are collections! remember this you fucking idiot. don't try to call roles or channels
 
-        let trustedrole = roles.cache.find(r => r.id === `775838439538425866`);
-        let memberrole = roles.cache.find(r => r.id === `909989200378601472`);
-        let unverrole = roles.cache.find(r => r.id === `909988798308433920`);
+        let trustedRole = roles.cache.find(r => r.id === `775838439538425866`);
+        let memberRole = roles.cache.find(r => r.id === `909989200378601472`);
+        let unverRole = roles.cache.find(r => r.id === `909988798308433920`);
 
         //channels to lock down
-        let generalchannel = channels.cache.find(r => r.id === '760275642150420523')
-        let offtopicchannel = channels.cache.find(r => r.id === '775867278016118794')
-        let botcomchannel = channels.cache.find(r => r.id === '776539403819417634')
-        let voicechatchannel = channels.cache.find(r => r.id === '890376793201180692')
-        let podcastchannel = channels.cache.find(r => r.id === '893228922441965638')
-        let answerschannel = channels.cache.find(r => r.id === '760548440173314110')
-        let memeschannel = channels.cache.find(r => r.id === '774763814889062442')
-        let gamenightchannel = channels.cache.find(r => r.id === '854824056238112809')
+        let generalChannel = channels.cache.find(r => r.id === '760275642150420523');
+        let offTopicChannel = channels.cache.find(r => r.id === '775867278016118794');
+        let botComChannel = channels.cache.find(r => r.id === '776539403819417634');
+        let voiceChatChannel = channels.cache.find(r => r.id === '890376793201180692');
+        let podcastChannel = channels.cache.find(r => r.id === '893228922441965638');
+        let answersChannel = channels.cache.find(r => r.id === '760548440173314110');
+        let memesChannel = channels.cache.find(r => r.id === '774763814889062442');
+        let gameNightChannel = channels.cache.find(r => r.id === '854824056238112809');
+        let debatesChannel = channels.cache.find(r => r.id === '775839512914952212');
+        let internationalChannel = channels.cache.find(r => r.id === '928407503690149939');
 
-        //general channel lockdown
-        memeschannel.updateOverwrite(
-            trustedrole,
-            { 'SEND_MESSAGES': true },
-            'test!'
-        )
-        .then(console.log)
-        .catch(console.log);
+        //channel lockdown
+        await botComChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await generalChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await offTopicChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await voiceChatChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await podcastChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await answersChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await memesChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await gameNightChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await debatesChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await internationalChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+
+        msg.channel.send(`**Channels Unlocked:**\nGeneral\nOff-Topic\nDebates\nInternational-Politics\nBot-Commands\nVoice-Chat\nPodcast\nAnswers\nMemes\nGameNight`);
     }
 }

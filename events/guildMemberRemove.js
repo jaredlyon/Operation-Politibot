@@ -7,7 +7,7 @@ exports.run = (bot, member) => {
         .setFooter(`id: ` + member.user.id)
         .setTimestamp()
         .setTitle('Member left!')
-        .setColor(3447003);
+        .setColor("#FFFFFF");
 
     channel.send({
         embed: leave

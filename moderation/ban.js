@@ -4,7 +4,7 @@ module.exports = {
     name: 'ban',
     permission: 2,
     main: async function (bot, msg) {
-        if (!msg.author.roles.cache.some(role => role.id === '893189360105689139')) {
+        if (!msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
             var log = msg.guild.channels.cache.get(bot.config.logChannel);
             const banee = msg.mentions.users.first();
             var reason = msg.content.split(' ').splice(1).join(' ');
@@ -20,7 +20,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#992D22");
                 
                 var dm = new Discord.MessageEmbed()
                     .setAuthor(msg.guild.name, msg.guild.iconURL())
@@ -28,7 +28,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#992D22");
 
                 await msg.guild.members.ban(banee);
                 await msg.channel.send({
@@ -56,7 +56,7 @@ module.exports = {
             } else {
                 msg.reply("mention someone!")
             }
-        } else if (msg.author.roles.cache.some(role => role.id === '893189360105689139')) {
+        } else if (msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
             msg.reply("Permission denied; go get another mod!");
         }
     }

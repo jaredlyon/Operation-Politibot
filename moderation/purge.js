@@ -20,7 +20,7 @@ module.exports = {
                         .addField('Purge executed:', rules + ` **${msg.author} purged ` + num + ` messages!**`)
                         .setFooter(bot.user.username, bot.user.avatarURL())
                         .setTimestamp()
-                        .setColor(3447003);
+                        .setColor("#E67E22");
                     log.send({
                         embed: logEmbed
                     })

@@ -22,7 +22,7 @@ module.exports = {
             .addField('Message Link:', msg.url)
             .setFooter(bot.user.username, bot.user.avatarURL())
             .setTimestamp()
-            .setColor(3447003);
+            .setColor("#992D22");
 
         log.send({
             embed: logEmbed

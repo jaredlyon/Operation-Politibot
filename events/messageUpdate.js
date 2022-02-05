@@ -11,7 +11,7 @@ exports.run = (bot, oldMessage, newMessage) => {
         .addField('Old message:', `${oldMessage}`)
         .addField('New message:', `${newMessage}`)
         .addField(`Channel:`, `${oldMessage.channel}`)
-        .setColor(3447003);
+        .setColor("#206694");
 
     newMessage.guild.channels.cache.get(bot.config.logChannel).send({
         embed: msgUpdate

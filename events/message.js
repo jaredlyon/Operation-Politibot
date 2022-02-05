@@ -61,7 +61,7 @@ exports.run = async (bot, msg) => {
 				.addField('Reason:', 'Triggered word filter excessively.')
 				.setFooter(bot.user.username, bot.user.avatarURL())
 				.setTimestamp()
-				.setColor(3447003);
+				.setColor("#992D22");
 			
 			msg.channel.send({
 				embed: mute

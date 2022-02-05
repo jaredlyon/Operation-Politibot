@@ -6,22 +6,23 @@ module.exports = {
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
         const mutee = msg.mentions.users.first();
-        var reason = msg.content.split(' ').splice(2).join(' ');
         var length = Number(msg.content.split(' ').splice(1)[0]);
         var caseCount = bot.caseNum.count;
-        if (reason === '') {
-            reason = 'No reason was specified.'
-        };
 
         if (mutee != null) {
             if (!length) {
+                var reason = msg.content.split(' ').splice(1).join(' ');
+                if (reason === '') {
+                    reason = 'No reason was specified.'
+                };
+
                 var mute = new Discord.MessageEmbed()
                     .setAuthor(mutee.username, mutee.avatarURL())
                     .addField('Member muted:', `**:mute: ${mutee} (${mutee.id}).**`)
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
@@ -30,7 +31,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();
@@ -58,13 +59,18 @@ module.exports = {
                     emded: dm
                 });
             } else if (length) {
+                var reason = msg.content.split(' ').splice(2).join(' ');
+                if (reason === '') {
+                    reason = 'No reason was specified.'
+                };
+
                 var mute = new Discord.MessageEmbed()
                 .setAuthor(mutee.username, mutee.avatarURL())
                 .addField(`Member muted for ${length}m:`, `**:mute: ${mutee} (${mutee.id}).**`)
                 .addField('Reason:', reason)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
-                .setColor(3447003);
+                .setColor("#E74C3C");
 
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
@@ -73,7 +79,7 @@ module.exports = {
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
-                    .setColor(3447003);
+                    .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
                 let member = msg.mentions.members.first();

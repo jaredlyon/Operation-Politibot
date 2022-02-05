@@ -17,7 +17,7 @@ module.exports = {
                 { name: `!ping`, value: `Pings the bot and reports response time.`},
                 { name: `!balance <@user>`, value: `Check the wallet and bank balance of yourself or another user.`},
                 { name: `!daily`, value: `Collects your daily allowance.`},
-                { name: `!desposit <amount/all>`, value: `Deposits some or all of your money into your bank account.`},
+                { name: `!deposit <amount/all>`, value: `Deposits some or all of your money into your bank account.`},
                 { name: `!withdraw <amount/all>`, value: `Withdraws some or all of your money from your bank account.`},
                 { name: `!blackjack <amount>`, value: `Bet some money and play blackjack against the bot.`},
                 { name: `!leaderboard`, value: `Embeds the banking leaderboard in the chat.`},

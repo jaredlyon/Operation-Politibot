@@ -75,6 +75,35 @@ setInterval(function () {
 }, 60 * 1000); // Check every minute
 */
 
+
+//spam resets
+var filterReset;
+bot.on('ready', () => {
+	filterReset = bot.channels.cache.get('895052490574270484'); // Channel to send notification
+});
+
+const TARGET_HOUR = 0;
+const TARGET_MINUTE = 1;
+
+setInterval(function () {
+	var d2 = new Date();
+	if (d2.getMinutes() !== TARGET_MINUTE || d2.getHours() !== TARGET_HOUR) return; // Return if current minute is not the notify minute
+	bot.users.cache.forEach(user => {
+		if (!bot.autoMute[user.id] && !user.bot) {
+			bot.autoMute[user.id] = {
+				spamCount: 0,
+				filterCount: 0
+			}
+		}
+		if (bot.autoMute[user.id]) {
+			bot.autoMute[user.id].spamCount = 0;
+			bot.autoMute[user.id].filterCount = 0;
+		}
+	})
+	filterReset.send("[SPAM FILTERS] | Cache cleared!")
+}, 60 * 1000); // Check every minute
+
+
 //6h bump reminder
 var bump;
 bot.on('ready', () => {

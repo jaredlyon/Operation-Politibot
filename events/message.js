@@ -127,4 +127,12 @@ exports.run = async (bot, msg) => {
 			await bot.bank.update(account);
 		}
 	}
+
+	//spam table update writes
+	if (!bot.logs[msg.author.id]) {
+		bot.autoMute[msg.author.id] = {
+			spamCount: 0,
+			filterCount: 0
+		}
+	}
 }

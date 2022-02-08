@@ -6,7 +6,15 @@ module.exports = {
     main: async function (bot, msg) {
         if (!msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
             var log = msg.guild.channels.cache.get(bot.config.logChannel);
-            const banee = msg.mentions.users.first();
+
+            if (msg.mentions.users.first()) {
+                var banee = msg.mentions.users.first();
+            } else if (!msg.mentions.users.first()) {
+                var userID = msg.content.split(' ').splice(0)[0];
+                var member = msg.guild.members.cache.get(userID);
+                var banee = member.user;
+            }
+
             var reason = msg.content.split(' ').splice(1).join(' ');
             var caseCount = bot.caseNum.count;
             if (reason === '') {
@@ -30,6 +38,13 @@ module.exports = {
                     .setTimestamp()
                     .setColor("#992D22");
 
+                await banee.createDM();
+                await banee.send({
+                    embed: dm
+                }).catch(async err => {
+                    console.log(err);
+                    msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
+                });
                 await msg.guild.members.ban(banee);
                 await msg.channel.send({
                     embed: ban
@@ -48,11 +63,6 @@ module.exports = {
                 }
 
                 bot.caseNum.count++;
-
-                await banee.createDM();
-                await banee.send({
-                    emded: dm
-                });
             } else {
                 msg.reply("mention someone!")
             }

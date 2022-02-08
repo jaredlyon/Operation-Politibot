@@ -5,7 +5,15 @@ module.exports = {
     permission: 2,
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
-        const warnee = msg.mentions.users.first();
+
+        if (msg.mentions.users.first()) {
+            var warnee = msg.mentions.users.first();
+        } else if (!msg.mentions.users.first()) {
+            var userID = msg.content.split(' ').splice(0)[0];
+            var member = msg.guild.members.cache.get(userID);
+            var warnee = member.user;
+        }
+
         var caseCount = bot.caseNum.count;
         var reason = msg.content.split(' ').splice(1).join(' ');
         if (reason === '') {
@@ -50,9 +58,13 @@ module.exports = {
             await warnee.createDM();
             await warnee.send({
                 embed: dm
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
             });
+
         } else {
-            msg.reply("mention someone!");
+            msg.reply("no target found!");
         }
     }
 };

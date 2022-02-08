@@ -6,7 +6,15 @@ module.exports = {
     permission: 2,
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
-        const mutee = msg.mentions.users.first();
+
+        if (msg.mentions.users.first()) {
+            var mutee = msg.mentions.users.first();
+        } else if (!msg.mentions.users.first()) {
+            var userID = msg.content.split(' ').splice(0)[0];
+            var member = msg.guild.members.cache.get(userID);
+            var mutee = member.user;
+        }
+
         var reason = msg.content.split(' ').splice(1).join(' ');
         if (reason === '') {
             reason = 'No reason was specified.'

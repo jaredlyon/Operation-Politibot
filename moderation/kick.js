@@ -5,7 +5,15 @@ module.exports = {
     permission: 2,
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
-        const kickee = msg.mentions.users.first();
+
+        if (msg.mentions.users.first()) {
+            var kickee = msg.mentions.users.first();
+        } else if (!msg.mentions.users.first()) {
+            var userID = msg.content.split(' ').splice(0)[0];
+            var member = msg.guild.members.cache.get(userID);
+            var kickee = member.user;
+        }
+
         var reason = msg.content.split(' ').splice(1).join(' ');
         var caseCount = bot.caseNum.count;
         if (reason === '') {

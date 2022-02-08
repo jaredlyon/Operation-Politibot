@@ -6,7 +6,15 @@ module.exports = {
     permission: 2,
     main: async function (bot, msg) {
         var log = msg.guild.channels.cache.get(bot.config.logChannel);
-        const mutee = msg.mentions.users.first();
+
+        if (msg.mentions.users.first()) {
+            var mutee = msg.mentions.users.first();
+        } else if (!msg.mentions.users.first()) {
+            var userID = msg.content.split(' ').splice(0)[0];
+            var member = msg.guild.members.cache.get(userID);
+            var mutee = member.user;
+        }
+
         var reason = msg.content.split(' ').splice(1).join(' ');
         if (reason === '') {
             reason = 'No reason was specified.'
@@ -32,7 +40,11 @@ module.exports = {
             await mutee.createDM();
             await mutee.send({
                 embed: dm
-            })
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
+            });
+            
             //await msg.guild.members.ban(mutee);
             let role = msg.guild.roles.cache.get("849498583102914581");
             let member = msg.mentions.members.first();

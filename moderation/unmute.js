@@ -40,7 +40,11 @@ module.exports = {
             await mutee.createDM();
             await mutee.send({
                 embed: dm
-            })
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
+            });
+            
             //await msg.guild.members.ban(mutee);
             let role = msg.guild.roles.cache.get("849498583102914581");
             let member = msg.mentions.members.first();

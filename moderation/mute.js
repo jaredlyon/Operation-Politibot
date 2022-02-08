@@ -64,7 +64,10 @@ module.exports = {
 
                 await mutee.createDM();
                 await mutee.send({
-                    emded: dm
+                    embed: dm
+                }).catch(async err => {
+                    console.log(err);
+                    msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
                 });
             } else if (length) {
                 var reason = msg.content.split(' ').splice(2).join(' ');
@@ -117,7 +120,10 @@ module.exports = {
 
                 await mutee.createDM();
                 await mutee.send({
-                    emded: dm
+                    embed: dm
+                }).catch(async err => {
+                    console.log(err);
+                    msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
                 });
             }
         } else {

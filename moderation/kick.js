@@ -37,6 +37,13 @@ module.exports = {
                 .setTimestamp()
                 .setColor("#992D22");
     
+            await kickee.createDM();
+            await kickee.send({
+                embed: dm
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
+            });
             const user = msg.guild.member(kickee);
             await user.kick();
             await msg.channel.send({
@@ -56,11 +63,6 @@ module.exports = {
             }
 
             bot.caseNum.count++;
-
-            await kickee.createDM();
-            await kickee.send({
-                emded: dm
-            });
         } else {
             msg.reply("mention someone!")
         }

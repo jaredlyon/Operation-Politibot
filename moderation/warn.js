@@ -58,7 +58,11 @@ module.exports = {
             await warnee.createDM();
             await warnee.send({
                 embed: dm
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
             });
+
         } else {
             msg.reply("no target found!");
         }

@@ -38,6 +38,13 @@ module.exports = {
                     .setTimestamp()
                     .setColor("#992D22");
 
+                await banee.createDM();
+                await banee.send({
+                    embed: dm
+                }).catch(async err => {
+                    console.log(err);
+                    msg.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
+                });
                 await msg.guild.members.ban(banee);
                 await msg.channel.send({
                     embed: ban
@@ -56,11 +63,6 @@ module.exports = {
                 }
 
                 bot.caseNum.count++;
-
-                await banee.createDM();
-                await banee.send({
-                    emded: dm
-                });
             } else {
                 msg.reply("mention someone!")
             }

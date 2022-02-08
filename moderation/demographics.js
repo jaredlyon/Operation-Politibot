@@ -36,7 +36,7 @@ module.exports = {
             })
         }
 
-        //ideology counts
+        //ideology counts by priority
         var leftWings = 0;
         var socialists = 0;
         var demSocs = 0;
@@ -51,9 +51,25 @@ module.exports = {
         var natPops = 0;
         var classicalRights = 0;
 
+        //total ideology counts
+        var leftWingsTot = 0;
+        var socialistsTot = 0;
+        var demSocsTot = 0;
+        var progressivesTot = 0;
+        var liberalsTot = 0;
+        var moderateLiberalsTot = 0;
+        var moderatesTot = 0;
+        var moderateConservativesTot = 0;
+        var conservativesTot = 0;
+        var paleoconservativesTot = 0;
+        var iLibertariansTot = 0;
+        var natPopsTot = 0;
+        var classicalRightsTot = 0;
+
         //count ideologies
         let ideologyCount = async() => {
             await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                //by priority
                 if (member.roles.cache.some(role => role.name === 'Moderate') && !member.roles.cache.some(role => role.name === 'Moderate Conservative') && !member.roles.cache.some(role => role.name === 'Conservative') && !member.roles.cache.some(role => role.name === 'Paleoconservative') && !member.roles.cache.some(role => role.name === 'Libertarian') && !member.roles.cache.some(role => role.name === 'Nationalist-Populist') && !member.roles.cache.some(role => role.name === 'Classical Right') && !member.roles.cache.some(role => role.name === 'Moderate Liberal') && !member.roles.cache.some(role => role.name === 'Liberal') && !member.roles.cache.some(role => role.name === 'Progressive') && !member.roles.cache.some(role => role.name === 'Democratic-Socialist') && !member.roles.cache.some(role => role.name === 'Socialist') && !member.roles.cache.some(role => role.name === 'Left Wing')) {
                     moderates++;
                 }
@@ -96,6 +112,51 @@ module.exports = {
                 }
                 if (member.roles.cache.some(role => role.name === 'Left Wing')) {
                     leftWings++;
+                }
+
+                //by total
+                if (member.roles.cache.some(role => role.name === 'Moderate')) {
+                    moderatesTot++;
+                }
+
+                //right wing
+                if (member.roles.cache.some(role => role.name === 'Moderate Conservative')) {
+                    moderateConservativesTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Conservative')) {
+                    conservativesTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Paleoconservative')) {
+                    paleoconservativesTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Libertarian')) {
+                    iLibertariansTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Nationalist-Populist')) {
+                    natPopsTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Classical Right')) {
+                    classicalRightsTot++;
+                }
+
+                //left wing
+                if (member.roles.cache.some(role => role.name === 'Moderate Liberal')) {
+                    moderateLiberalsTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Liberal')) {
+                    liberalsTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Progressive')) {
+                    progressivesTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Democratic-Socialist')) {
+                    demSocsTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Socialist')) {
+                    socialistsTot++;
+                }
+                if (member.roles.cache.some(role => role.name === 'Left Wing')) {
+                    leftWingsTot++;
                 }
             })
         }
@@ -238,6 +299,6 @@ module.exports = {
         //party
         msg.channel.send("**Party Demographics:**\nDemocrats: " + democrats + "\nRepublicans: " + republicans + "\nGreens: " + greens + "\nLibertarians: " + pLibertarians + "\nOther: " + others + "\nIndependents: " + independents);
         //ideology
-        msg.channel.send("**Ideology Demographics:**\nLeft Wing: " + leftWings + "\nSocialists: " + socialists + "\nDemocratic-Socialists: " + demSocs + "\nProgressives: " + progressives + "\nLiberals: " + liberals + "\nModerate Liberals: " + moderateLiberals + "\nModerates: " + moderates + "\nModerate Conservatives: " + moderateConservatives + "\nConservatives: " + conservatives + "\nPaleoconservatives: " + paleoconservatives + "\nLibertarians: " + iLibertarians + "\nNational-Populists: " + natPops + "\nClassical Right: " + classicalRights);
+        msg.channel.send("**Ideology Demographics by Priority (Total):**\nLeft Wing: " + leftWings + " (" + leftWingsTot + ")\nSocialists: " + socialists + " (" + socialistsTot + ")\nDemocratic-Socialists: " + demSocs + " (" + demSocsTot + ")\nProgressives: " + progressives + " (" + progressivesTot + ")\nLiberals: " + liberals + " (" + liberalsTot + ")\nModerate Liberals: " + moderateLiberals + " (" + moderateLiberalsTot + ")\nModerates: " + moderates + " (" + moderatesTot + ")\nModerate Conservatives: " + moderateConservatives + " (" + moderateConservativesTot + ")\nConservatives: " + conservatives + " (" + conservativesTot + ")\nPaleoconservatives: " + paleoconservatives + " (" + paleoconservativesTot + ")\nLibertarians: " + iLibertarians + " (" + iLibertariansTot + ")\nNational-Populists: " + natPops + " (" + natPopsTot + ")\nClassical Right: " + classicalRights + " (" + classicalRightsTot + ")");
     }
 }

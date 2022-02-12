@@ -258,6 +258,7 @@ module.exports = {
             }
           });
 
+          account.balance += bet;
           await bot.bank.update(account);
           bot.blackjackInProgress.delete(msg.author.id);
         }

@@ -1,6 +1,6 @@
 module.exports = {
     name: "addmoney",
-    permission: 2,
+    permission: 3,
     main: async function(bot, msg) {
         const Discord = require('discord.js');
         var recipient = msg.mentions.users.array()[0];

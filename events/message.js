@@ -129,7 +129,7 @@ exports.run = async (bot, msg) => {
 	}
 
 	//spam table update writes
-	if (!bot.logs[msg.author.id]) {
+	if (!bot.autoMute[msg.author.id]) {
 		bot.autoMute[msg.author.id] = {
 			spamCount: 0,
 			filterCount: 0

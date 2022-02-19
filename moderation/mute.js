@@ -86,7 +86,7 @@ module.exports = {
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
                     .setAuthor(msg.guild.name, msg.guild.iconURL())
-                    .setTitle(`**A moderator has muted you.**`)
+                    .setTitle(`**A moderator has muted you. You may appeal the decision through Modmail.**`)
                     .addField('Reason:', reason)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()

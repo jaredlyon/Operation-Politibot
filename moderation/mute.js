@@ -42,7 +42,7 @@ module.exports = {
                     .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
-                let member = msg.mentions.members.first();
+                //let member = msg.mentions.members.first();
                 member.roles.add(role);
                 await msg.channel.send({
                     embed: mute
@@ -93,7 +93,7 @@ module.exports = {
                     .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
-                let member = msg.mentions.members.first();
+                //let member = msg.mentions.members.first();
                 member.roles.add(role);
 
                 setTimeout(function() {

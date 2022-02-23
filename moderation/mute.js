@@ -8,6 +8,7 @@ module.exports = {
 
         if (msg.mentions.users.first()) {
             var mutee = msg.mentions.users.first();
+            var member = msg.mentions.members.first();
         } else if (!msg.mentions.users.first()) {
             var userID = msg.content.split(' ').splice(0)[0];
             var member = msg.guild.members.cache.get(userID);
@@ -42,7 +43,6 @@ module.exports = {
                     .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
-                //let member = msg.mentions.members.first();
                 member.roles.add(role);
                 await msg.channel.send({
                     embed: mute
@@ -93,7 +93,6 @@ module.exports = {
                     .setColor("#E74C3C");
 
                 let role = msg.guild.roles.cache.get("849498583102914581");
-                //let member = msg.mentions.members.first();
                 member.roles.add(role);
 
                 setTimeout(function() {

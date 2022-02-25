@@ -18,6 +18,7 @@ module.exports = {
 
                 var logEmbed = new Discord.MessageEmbed()
                         .addField('Purge executed:', rules + ` **${msg.author} purged ` + num + ` messages!**`)
+						.addField(`Channel:`, `${msg.channel}`)
                         .setFooter(bot.user.username, bot.user.avatarURL())
                         .setTimestamp()
                         .setColor("#E67E22");

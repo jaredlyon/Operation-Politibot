@@ -1,4 +1,3 @@
-//849498583102914581
 var Discord = require('discord.js');
 
 module.exports = {

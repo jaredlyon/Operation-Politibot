@@ -19,14 +19,21 @@ module.exports = {
 
             for (let i = 0; i < caseCount; i++) {
                 if (bot.logs[i] && userID == bot.logs[i].moderatorid) {
-                    var targetedMember = msg.guild.members.cache.get(bot.logs[i].userid);
-                    log.addField(bot.logs[i].type + ' issued to ' + targetedMember.user.username, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
+                    if (msg.guild.members.cache.get(bot.logs[i].userid)) {
+                        var targetUsername = msg.guild.members.cache.get(bot.logs[i].userid).user.username;
+                    } else{
+                        var targetUsername = bot.logs[i].userid;
+                    }
+                    log.addField(bot.logs[i].type + ' issued to ' + targetUsername, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum);
                 }
             }
 
             msg.channel.send({
                 embed: log
-            })
+            }).catch(async err => {
+                console.log(err);
+                msg.reply("Discord restricts the length of embeds I can put in here; because of that, the moderator you're probably looking at has a command history too long to put in here. Jared's working on a fix right now though!");
+            });
         }
     }
 }

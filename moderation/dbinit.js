@@ -42,6 +42,17 @@ module.exports = {
         }
         funcCd()
 
+        //trusted member counts
+        let funcTd = async() => {
+            bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await bot.trusted.insert({
+                    id: member.user.id,
+                    joinDate: new Date()
+                })
+            })
+        }
+        funcTd()
+
         console.log("[RETHINK] | Databases initialized!");
         await msg.reply("Database initialized! Godspeed, Mr. Chairman.")
     }

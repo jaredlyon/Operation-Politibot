@@ -27,8 +27,12 @@ module.exports = {
                         .setTimestamp()
                         .setColor("#FFFFFF");
 
+                    let trusted = (await bot.trusted.get(userID)) || {};
+
                     await target.roles.add('909989200378601472');
-                    await target.roles.remove('909988798308433920')
+                    await target.roles.remove('909988798308433920');
+                    trusted.joinDate = new Date();
+                    await bot.trusted.update(trusted);
                     await channel.send({
                         embed: logEmbed
                     })

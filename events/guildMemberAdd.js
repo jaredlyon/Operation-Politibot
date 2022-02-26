@@ -49,5 +49,10 @@ exports.run = async (bot, member) => {
         lastWork: null
     })
 
-    console.log("[BANK] | Created new account for " + member.user.username + "!")
+    await bot.trusted.insert({
+        id: member.user.id,
+        joinDate: new Date()
+    })
+
+    console.log("[LOGGING] | Created new accounts for " + member.user.username + "!")
 }

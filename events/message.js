@@ -93,8 +93,7 @@ exports.run = async (bot, msg) => {
 	//member to trusted member
 	var userID = msg.author.id;
 	let member = msg.guild.members.cache.get(userID);
-	let trusted = (await bot.trusted.get(msg.author.id)) || {};
-	if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000) {
+	if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - new Date(member.joinedAt) >= 1209600000) {
 		let memberRole = msg.guild.roles.cache.get("909989200378601472");
 		let trustedRole = msg.guild.roles.cache.get("775838439538425866");
 		member.roles.add(trustedRole);

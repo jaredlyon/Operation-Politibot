@@ -25,11 +25,11 @@ module.exports = {
         for (let i = 0; i < caseCount; i++) {
             if (bot.logs[i] && bot.logs[i].userid == userid) {
                 if (msg.guild.members.cache.get(bot.logs[i].userid)) {
-                    var targetUsername = msg.guild.members.cache.get(bot.logs[i].userid).user.username;
+                    var modUsername = msg.guild.members.cache.get(bot.logs[i].moderatorid).user.username;
                 } else{
-                    var targetUsername = bot.logs[i].userid;
+                    var modUsername = bot.logs[i].moderatorid;
                 }
-                log.addField(bot.logs[i].type + ' issued by ' + targetUsername, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
+                log.addField(bot.logs[i].type + ' issued by ' + modUsername, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
             }
         }
 

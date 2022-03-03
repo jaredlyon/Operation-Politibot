@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'eval',
-	permission: 3,
+	permission: 4,
 	main: function (bot, msg) {
 		var Discord = require('discord.js');
 		const util = require('util');

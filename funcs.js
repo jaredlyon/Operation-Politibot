@@ -10,7 +10,7 @@ module.exports = (bot) => {
 
 	bot.permLevel = function (msg) {
 		if (msg.author.id == bot.config.owner)
-			return 3;
+			return 4;
 		if (msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '854841000480079882') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '927318500614225920') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '775501181212295239') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139'))
 			return 2;
 		else

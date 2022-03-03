@@ -30,7 +30,7 @@ module.exports = {
 
         //trial mod role: 893189360105689139
         //mod role: 854841000480079882
-        modChannel.send("<@&893189360105689139> <@&854841000480079882> **See below complaint:**");
+        modChannel.send("<@&893189360105689139> <@&854841000480079882> <@&927318500614225920> <@&895051017828311100> **See below complaint:**");
         modChannel.send({
             embed: logEmbed
         })

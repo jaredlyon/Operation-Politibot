@@ -58,6 +58,29 @@ module.exports = {
                         embed: log
                     });
                 }
+            } else if (input == "rewrite") {
+                if (!reason) {
+                    msg.reply("Usage: \n`!case <number> <edit/delete> <input>` to edit\n`!case <number>` to view\nError: 2");
+                } else {
+                    bot.logs[caseNumber].reason = "Edited on `" + new Date() + "`\n" + reason
+                    msg.reply("case updated! New case:");
+                    var userID = bot.logs[caseNumber].userid;
+                    const target = msg.guild.members.cache.get(userID);
+                    var moderator = msg.guild.members.cache.get(bot.logs[caseNumber].moderatorid);
+    
+                    var log = new Discord.MessageEmbed()
+                        .setTitle('Case ' + bot.logs[caseNumber].caseNum)
+                        .setAuthor(target.user.username + "#" + target.user.discriminator, target.user.avatarURL())
+                        .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date + '\n' + bot.logs[caseNumber].reason)
+                        .setFooter('User ID: ' + target.id)
+                        .setTimestamp()
+                        .setColor(3447003);
+        
+        
+                    msg.channel.send({
+                        embed: log
+                    });
+                }
             } else if (input == "delete") {
                     delete bot.logs[caseNumber]
                     msg.reply("case deleted!")

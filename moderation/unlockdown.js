@@ -4,7 +4,7 @@ const { off } = require('process');
 
 module.exports = {
     name: 'unlockdown',
-    aliases: ['unlock', 'uld'],
+    aliases: ['uld'],
     permission: 2,
     main: async function (bot, msg) {
         let channels = msg.guild.channels;

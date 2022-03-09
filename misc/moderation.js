@@ -25,6 +25,8 @@ module.exports = {
                 { name: `!purge <amount>`, value: `Bulk deletes the specified amount of messages; I *think* the limit is 100, but Discord might have changed it.`},
                 { name: `!lockdown`, value: `Locks most public channels by blocking all members from sending messages.`},
                 { name: `!unlockdown`, value: `Unlocks all channels.`},
+                { name: `!lock`, value: `Locks the channel that the command is used in.`},
+                { name: `!unlock`, value: `Unlocks the channel that the command is used in.`},
             );
         
         msg.channel.send(help);

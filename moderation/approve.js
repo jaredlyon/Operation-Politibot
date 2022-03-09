@@ -2,7 +2,7 @@ var Discord = require('discord.js');
 
 module.exports = {
     name: 'approve',
-    permission: 1,
+    permission: 2,
     main: async function (bot, msg) {
         const rules = bot.emojis.cache.find(emoji => emoji.name == "rules").toString();
         var channel = msg.guild.channels.cache.get(bot.config.welcomeChannel); //mod channel

@@ -26,7 +26,9 @@ exports.run = async (bot, member) => {
         )
         .setFooter(`If you have any questions about our server, do not be afraid to reach out to 𝓻𝓪𝔂#4390 for help, or any Moderator or Server Staff.`);
     member.createDM();
-    member.send(joinEmbed);
+    member.send(joinEmbed).catch(async err => {
+        console.log(member.user.username + " joined but I could not send them a welcome embed.")
+    });
 
     await bot.bank.insert({
         id: member.user.id,

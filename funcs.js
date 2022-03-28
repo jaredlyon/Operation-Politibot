@@ -179,6 +179,36 @@ module.exports = (bot) => {
 		}
 	}
 
+	//msgcounts
+	bot.syncMsgCount = function () {
+		bot.msgCount = require('./msgCount.json');
+
+		bot.users.cache.forEach(user => {
+			if (!bot.msgCount[user.id] && !user.bot) {
+				bot.msgCount[user.id] = {
+					count: 0,
+					lastMessage: null
+				}
+			}
+		})
+
+		writeMsgCount();
+
+		setInterval(function () {
+			writeMsgCount();
+		}, 60000);
+
+		function writeMsgCount() {
+			var msgCountJson = fs.readFileSync("./msgCount.json"),
+				msgCountParsed = JSON.parse(msgCountJson)
+			if (JSON.stringify(msgCountParsed) == JSON.stringify(bot.msgCount)) return; // Only writes if there's a difference
+
+			fs.writeFileSync("./msgCount.json", JSON.stringify(bot.msgCount, null, 3));
+			console.log("[COUNTS] | Message counts successfully saved to file!")
+			return "Message counts successfully saved to file!";
+		}
+	}
+
 	/**
 	 * Logging functions
 	 */

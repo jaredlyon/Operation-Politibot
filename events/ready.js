@@ -4,6 +4,7 @@ exports.run = async (bot, msg) => {
 	bot.syncLogs();
 	bot.syncCaseNum();
 	bot.syncAutoMute();
+	bot.syncMsgCount();
 	await bot.startDatabase();
 
 	bot.user.setPresence({ status: 'online', activity: { name: 'politics | !help', type: 0 } });

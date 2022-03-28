@@ -26,6 +26,7 @@ module.exports = {
                     .setAuthor(banee.username, banee.avatarURL())
                     .addField('Member banned:', `**:hammer: ${banee} (${banee.id}) was banned from the server.**`)
                     .addField('Reason:', reason)
+                    .addField('Case ID: ', caseCount)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
                     .setColor("#992D22");

@@ -25,6 +25,7 @@ module.exports = {
                 .setAuthor(kickee.username, kickee.avatarURL())
                 .addField('Member kicked:', `**:hiking_boot: ${kickee} (${kickee.id}) was kicked from the server.**`)
                 .addField('Reason:', reason)
+                .addField('Case ID: ', caseCount)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
                 .setColor("#992D22");

@@ -29,6 +29,7 @@ module.exports = {
                     .setAuthor(mutee.username, mutee.avatarURL())
                     .addField('Member muted:', `**:mute: ${mutee} (${mutee.id}).**`)
                     .addField('Reason:', reason)
+                    .addField('Case ID: ', caseCount)
                     .setFooter(bot.user.username, bot.user.avatarURL())
                     .setTimestamp()
                     .setColor("#E74C3C");

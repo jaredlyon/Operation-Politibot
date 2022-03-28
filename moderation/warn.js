@@ -25,6 +25,7 @@ module.exports = {
                 .setAuthor(warnee.username, warnee.avatarURL())
                 .addField('Member warned:', `**:exclamation: ${warnee} (${warnee.id}) was warned.**`)
                 .addField('Reason:', reason)
+                .addField('Case ID: ', caseCount)
                 .setFooter(bot.user.username, bot.user.avatarURL())
                 .setTimestamp()
                 .setColor("#992D22");

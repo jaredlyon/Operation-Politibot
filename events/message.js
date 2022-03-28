@@ -90,6 +90,56 @@ exports.run = async (bot, msg) => {
 		msg.channel.send("https://www.youtube.com/watch?v=rgiC8YfytDw");
 	}
 
+	//staff voting
+	const upvote = bot.emojis.cache.find(emoji => emoji.name == "upvote");
+	const neutralvote = bot.emojis.cache.find(emoji => emoji.name == "neutralvote");
+	const downvote = bot.emojis.cache.find(emoji => emoji.name == "downvote");
+	if (msg.channel.id == '927365081371652137') {
+		await msg.react(upvote);
+		await msg.react(neutralvote);
+		await msg.react(downvote);
+	}
+
+	//bank writes
+	let account = (await bot.bank.get(msg.author.id)) || {};
+	if (!account) {
+		account.id = msg.author.id;
+		account.balance = 5.00;
+		account.lastMessage = new Date();
+		console.log("[BANK] Created new account for " + msg.author.username + "!");
+		await bot.bank.insert(account);
+	} else {
+		if (new Date() - new Date(account.lastMessage) >= 600*1000) {
+			account.balance += 5.00;
+			account.lastMessage = new Date();
+			console.log("[BANK] Logged passive income for " + msg.author.username + "!");
+			await bot.bank.update(account);
+		}
+	}
+
+	//spam table update writes
+	if (!bot.autoMute[msg.author.id]) {
+		bot.autoMute[msg.author.id] = {
+			spamCount: 0,
+			filterCount: 0
+		}
+	}
+
+	//score writes
+	if (!bot.msgCount[msg.author.id]) {
+		bot.msgCount[msg.author.id] = {
+			count: 0,
+			lastMessage: new Date()
+		}
+		console.log("[COUNTS] New message count logged for " + msg.author.username + ".");
+	} else {
+		if (new Date() - new Date(bot.msgCount[msg.author.id].lastMessage) >= 5000) {
+			bot.msgCount[msg.author.id].count++;
+			bot.msgCount[msg.author.id].lastMessage = new Date();
+			console.log("[COUNTS] Message count logged for " + msg.author.username + ".");
+		}
+	}
+
 	//role changes
 	var userID = msg.author.id;
 	let member = msg.guild.members.cache.get(userID);
@@ -149,53 +199,5 @@ exports.run = async (bot, msg) => {
 		member.roles.remove(presidentialRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became a constituional author!");
 		msg.reply("you have leveled up to the **Constitutional Author** activity tier!");		
-	}
-
-	//staff voting
-	const upvote = bot.emojis.cache.find(emoji => emoji.name == "upvote");
-	const neutralvote = bot.emojis.cache.find(emoji => emoji.name == "neutralvote");
-	const downvote = bot.emojis.cache.find(emoji => emoji.name == "downvote");
-	if (msg.channel.id == '927365081371652137') {
-		await msg.react(upvote);
-		await msg.react(neutralvote);
-		await msg.react(downvote);
-	}
-
-	//bank writes
-	let account = (await bot.bank.get(msg.author.id)) || {};
-	if (!account) {
-		account.id = msg.author.id;
-		account.balance = 5.00;
-		account.lastMessage = new Date();
-		console.log("[BANK] Created new account for " + msg.author.username + "!");
-		await bot.bank.insert(account);
-	} else {
-		if (new Date() - new Date(account.lastMessage) >= 600*1000) {
-			account.balance += 5.00;
-			account.lastMessage = new Date();
-			console.log("[BANK] Logged passive income for " + msg.author.username + "!");
-			await bot.bank.update(account);
-		}
-	}
-
-	//spam table update writes
-	if (!bot.autoMute[msg.author.id]) {
-		bot.autoMute[msg.author.id] = {
-			spamCount: 0,
-			filterCount: 0
-		}
-	}
-
-	//score writes
-	if (!bot.msgCount[msg.author.id]) {
-		bot.msgCount[msg.author.id].count++;
-		bot.msgCount[msg.author.id].lastMessage = new Date();
-		console.log("[COUNTS] Message count logged for " + msg.author.username + ".");
-	} else {
-		if (new Date() - new Date(bot.msgCount[msg.author.id].lastMessage) >= 5000) {
-			bot.msgCount[msg.author.id].count++;
-			bot.msgCount[msg.author.id].lastMessage = new Date();
-			console.log("[COUNTS] Message count logged for " + msg.author.username + ".");
-		}
 	}
 }

@@ -94,14 +94,7 @@ exports.run = async (bot, msg) => {
 	var userID = msg.author.id;
 	let member = msg.guild.members.cache.get(userID);
 	let trusted = (await bot.trusted.get(msg.author.id)) || {};
-	//grab activity roles
-	let internRole = msg.guild.roles.cache.get("950846711209816094");
-	let activistRole = msg.guild.roles.cache.get("950846744562905108");
-	let punditRole = msg.guild.roles.cache.get("950846792315068416");
-	let statesmanRole = msg.guild.roles.cache.get("950846854545965076");
-	let ambassadorRole = msg.guild.roles.cache.get("950846886653337641");
-	let presidentialRole = msg.guild.roles.cache.get("950846892827377694");
-	let constitutionalRole = msg.guild.roles.cache.get("950846899106238505");
+	
 	if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000) {
 		let memberRole = msg.guild.roles.cache.get("909989200378601472");
 		let trustedRole = msg.guild.roles.cache.get("775838439538425866");
@@ -111,7 +104,17 @@ exports.run = async (bot, msg) => {
 		msg.reply("you have become a trusted member! You can now send message embeds and files to the server.");
 	} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
 		console.log("[MEMBER TRACKING] " + msg.author + " sent a message but was ineligible for trusted status.");
-	} else if (member.roles.cache.some(role => role.id === '775838439538425866') && !member.roles.cache.some(role => role.id === '950846711209816094') && (500 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1250)) {
+	}
+	
+	//grab activity roles
+	let internRole = msg.guild.roles.cache.get("950846711209816094");
+	let activistRole = msg.guild.roles.cache.get("950846744562905108");
+	let punditRole = msg.guild.roles.cache.get("950846792315068416");
+	let statesmanRole = msg.guild.roles.cache.get("950846854545965076");
+	let ambassadorRole = msg.guild.roles.cache.get("950846886653337641");
+	let presidentialRole = msg.guild.roles.cache.get("950846892827377694");
+	let constitutionalRole = msg.guild.roles.cache.get("950846899106238505");
+	if (member.roles.cache.some(role => role.id === '775838439538425866') && !member.roles.cache.some(role => role.id === '950846711209816094') && (500 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1250)) {
 		member.roles.add(internRole);
 		//member.roles.remove(memberRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became an intern!");

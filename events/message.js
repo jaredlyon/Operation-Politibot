@@ -167,13 +167,13 @@ exports.run = async (bot, msg) => {
 		account.id = msg.author.id;
 		account.balance = 5.00;
 		account.lastMessage = new Date();
-		console.log("Created new account for " + msg.author.username + "!");
+		console.log("[BANK] Created new account for " + msg.author.username + "!");
 		await bot.bank.insert(account);
 	} else {
 		if (new Date() - new Date(account.lastMessage) >= 600*1000) {
 			account.balance += 5.00;
 			account.lastMessage = new Date();
-			console.log("Logged passive income for " + msg.author.username + "!");
+			console.log("[BANK] Logged passive income for " + msg.author.username + "!");
 			await bot.bank.update(account);
 		}
 	}
@@ -190,12 +190,12 @@ exports.run = async (bot, msg) => {
 	if (!bot.msgCount[msg.author.id]) {
 		bot.msgCount[msg.author.id].count++;
 		bot.msgCount[msg.author.id].lastMessage = new Date();
-		console.log("Message count logged for " + msg.author.username + ".");
+		console.log("[COUNTS] Message count logged for " + msg.author.username + ".");
 	} else {
-		if (new Date() - new Date(bot.msgCount[msg.author.id].lastMessage) >= 10000) {
+		if (new Date() - new Date(bot.msgCount[msg.author.id].lastMessage) >= 5000) {
 			bot.msgCount[msg.author.id].count++;
 			bot.msgCount[msg.author.id].lastMessage = new Date();
-			console.log("Message count logged for " + msg.author.username + ".");
+			console.log("[COUNTS] Message count logged for " + msg.author.username + ".");
 		}
 	}
 }

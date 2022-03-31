@@ -3,7 +3,7 @@ var Discord = require('discord.js');
 module.exports = {
     name: "userinfo",
     permission: 1,
-    main: function (bot, msg) {
+    main: async function (bot, msg) {
         var input = msg.content.split(' ').splice(0)[0];
 
         if (msg.mentions.users.first()) {
@@ -25,6 +25,12 @@ module.exports = {
             .setFooter("User ID: " + target.id)
             .setTimestamp()
             .setColor(3447003);
+        
+        let trusted = (await bot.trusted.get(target.id)) || {};
+        if (target.roles.cache.some(role => role.id === '909989200378601472')) {
+            var trustedDate = new Date(trusted.joinDate.getTime() + 1209600000);
+            info.addField('User Will Be Trusted On:', trustedDate)
+        }
 
         msg.channel.send({
             embed: info

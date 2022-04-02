@@ -57,7 +57,7 @@ module.exports = {
                     userid: mutee.id,
                     moderatorid: msg.author.id,
                     date: new Date(),
-                    type: "Mute",
+                    type: "Mute (Indefinite)",
                     reason: reason
                 }
 
@@ -77,12 +77,13 @@ module.exports = {
                 };
 
                 var mute = new Discord.MessageEmbed()
-                .setAuthor(mutee.username, mutee.avatarURL())
-                .addField(`Member muted for ${length}m:`, `**:mute: ${mutee} (${mutee.id}).**`)
-                .addField('Reason:', reason)
-                .setFooter(bot.user.username, bot.user.avatarURL())
-                .setTimestamp()
-                .setColor("#E74C3C");
+                    .setAuthor(mutee.username, mutee.avatarURL())
+                    .addField(`Member muted for ${length}m:`, `**:mute: ${mutee} (${mutee.id}).**`)
+                    .addField('Reason:', reason)
+                    .addField('Case ID: ', caseCount)
+                    .setFooter(bot.user.username, bot.user.avatarURL())
+                    .setTimestamp()
+                    .setColor("#E74C3C");
 
                 //await msg.guild.members.ban(mutee);
                 var dm = new Discord.MessageEmbed()
@@ -112,7 +113,7 @@ module.exports = {
                     userid: mutee.id,
                     moderatorid: msg.author.id,
                     date: new Date(),
-                    type: "Mute",
+                    type: "Mute (" + length + "m)",
                     reason: reason
                 }
 

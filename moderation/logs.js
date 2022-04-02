@@ -5,7 +5,13 @@ module.exports = {
     permission: 1,
     main: function(bot, msg) {
         var caseCount = bot.caseNum.count;
-        var userid = msg.content.split(' ').splice(0)[0];
+        
+        if (msg.mentions.users.first()) {
+            var target = msg.mentions.users.first();
+            var userid = target.id;
+        } else if (!msg.mentions.users.first()) {
+            var userid = msg.content.split(' ').splice(0)[0];
+        }
 
         var log = new Discord.MessageEmbed()
             .setTitle('Moderation Log History')

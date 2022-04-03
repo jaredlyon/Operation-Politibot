@@ -17,6 +17,8 @@ module.exports = {
         //channels to lock down
         let generalChannel = channels.cache.find(r => r.id === '760275642150420523');
         let offTopicChannel = channels.cache.find(r => r.id === '775867278016118794');
+        let philosophyChannel = channels.cache.find(r => r.id === '951322929898061905');
+        let foodChannel = channels.cache.find(r => r.id === '949832728625422366');
         let botComChannel = channels.cache.find(r => r.id === '776539403819417634');
         let voiceChatChannel = channels.cache.find(r => r.id === '890376793201180692');
         let podcastChannel = channels.cache.find(r => r.id === '893228922441965638');
@@ -30,6 +32,8 @@ module.exports = {
         await botComChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await generalChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await offTopicChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await philosophyChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
+        await foodChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await voiceChatChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await podcastChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await answersChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
@@ -38,6 +42,6 @@ module.exports = {
         await debatesChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
         await internationalChannel.updateOverwrite(msg.guild.id, { SEND_MESSAGES: true });
 
-        msg.channel.send(`**Channels Unlocked:**\nGeneral\nOff-Topic\nDebates\nInternational-Politics\nBot-Commands\nVoice-Chat\nPodcast\nAnswers\nMemes\nGameNight`);
+        msg.channel.send(`**Channels Unlocked:**\nGeneral\nOff-Topic\nDebates\nPhilosophy\nInternational-Politics\nBot-Commands\nVoice-Chat\nPodcast\nAnswers\nFood\nMemes\nGame Night`);
     }
 }

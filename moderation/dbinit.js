@@ -47,7 +47,7 @@ module.exports = {
             bot.guilds.cache.get(target).members.cache.forEach(async member => {
                 await bot.trusted.insert({
                     id: member.user.id,
-                    joinDate: new Date()
+                    joinDate: member.joinedAt
                 })
             })
         }

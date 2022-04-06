@@ -140,21 +140,21 @@ exports.run = async (bot, msg) => {
 		}
 	}
 
-	//role changes
-	var userID = msg.author.id;
-	let member = msg.guild.members.cache.get(userID);
-	let trusted = (await bot.trusted.get(msg.author.id)) || {};
-	
-	if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000) {
-		let memberRole = msg.guild.roles.cache.get("909989200378601472");
-		let trustedRole = msg.guild.roles.cache.get("775838439538425866");
-		member.roles.add(trustedRole);
-		member.roles.remove(memberRole);
-		console.log("[MEMBER TRACKING] " + msg.author + " became a trusted member!");
-		msg.reply("you have become a trusted member! You can now send message embeds and files to the server.");
-	} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
-		console.log("[MEMBER TRACKING] " + msg.author + " sent a message but was ineligible for trusted status.");
-	}
+    //role changes
+    var userID = msg.author.id;
+    let member = msg.guild.members.cache.get(userID);
+    let trusted = (await bot.trusted.get(msg.author.id)) || {};
+
+    if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && bot.msgCount[userID].count > 300) {
+        let memberRole = msg.guild.roles.cache.get("909989200378601472");
+        let trustedRole = msg.guild.roles.cache.get("775838439538425866");
+        member.roles.add(trustedRole);
+        member.roles.remove(memberRole);
+        console.log("[MEMBER TRACKING] " + msg.author + " became a trusted member!");
+        msg.reply("you have become a trusted member! You can now send message embeds and files to the server.");
+    } else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
+        console.log("[MEMBER TRACKING] " + msg.author + " sent a message but was ineligible for trusted status.");
+    }
 	
 	//grab activity roles
 	let internRole = msg.guild.roles.cache.get("950846711209816094");
@@ -164,37 +164,37 @@ exports.run = async (bot, msg) => {
 	let ambassadorRole = msg.guild.roles.cache.get("950846886653337641");
 	let presidentialRole = msg.guild.roles.cache.get("950846892827377694");
 	let constitutionalRole = msg.guild.roles.cache.get("950846899106238505");
-	if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1250)) {
+	if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 750)) {
 		member.roles.add(internRole);
 		//member.roles.remove(memberRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became an intern!");
 		msg.reply("you have leveled up to the **Intern** activity tier!");
-	} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (1250 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 3000)) {
+	} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (750 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1875)) {
 		member.roles.add(activistRole);
 		member.roles.remove(internRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became an activist!");
 		msg.reply("you have leveled up to the **Activist** activity tier!");		
-	} else if (!member.roles.cache.some(role => role.id === '950846792315068416') && (3000 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 7500)) {
+	} else if (!member.roles.cache.some(role => role.id === '950846792315068416') && (1875 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 3750)) {
 		member.roles.add(punditRole);
 		member.roles.remove(activistRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became a pundit!");
 		msg.reply("you have leveled up to the **Pundit** activity tier!");		
-	} else if (!member.roles.cache.some(role => role.id === '950846854545965076') && (7500 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 14000)) {
+	} else if (!member.roles.cache.some(role => role.id === '950846854545965076') && (3750 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 7500)) {
 		member.roles.add(statesmanRole);
 		member.roles.remove(punditRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became a statesman!");
 		msg.reply("you have leveled up to the **Statesman** activity tier!");		
-	} else if (!member.roles.cache.some(role => role.id === '950846886653337641') && (14000 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 20000)) {
+	} else if (!member.roles.cache.some(role => role.id === '950846886653337641') && (7500 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 15000)) {
 		member.roles.add(ambassadorRole);
 		member.roles.remove(statesmanRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became an ambassador!");
 		msg.reply("you have leveled up to the **Ambassador** activity tier!");		
-	} else if (!member.roles.cache.some(role => role.id === '950846892827377694') && (20000 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 40000)) {
+	} else if (!member.roles.cache.some(role => role.id === '950846892827377694') && (15000 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 30000)) {
 		member.roles.add(presidentialRole);
 		member.roles.remove(ambassadorRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became a president!");
 		msg.reply("you have leveled up to the **Presidential** activity tier!");		
-	} else if (!member.roles.cache.some(role => role.id === '950846899106238505') && bot.msgCount[msg.author.id].count > 40000) {
+	} else if (!member.roles.cache.some(role => role.id === '950846899106238505') && bot.msgCount[msg.author.id].count > 30000) {
 		member.roles.add(constitutionalRole);
 		member.roles.remove(presidentialRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became a constituional author!");

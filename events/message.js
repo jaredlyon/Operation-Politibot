@@ -140,21 +140,21 @@ exports.run = async (bot, msg) => {
 		}
 	}
 
-	//role changes
-	var userID = msg.author.id;
-	let member = msg.guild.members.cache.get(userID);
-	let trusted = (await bot.trusted.get(msg.author.id)) || {};
-	
-	if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000) {
-		let memberRole = msg.guild.roles.cache.get("909989200378601472");
-		let trustedRole = msg.guild.roles.cache.get("775838439538425866");
-		member.roles.add(trustedRole);
-		member.roles.remove(memberRole);
-		console.log("[MEMBER TRACKING] " + msg.author + " became a trusted member!");
-		msg.reply("you have become a trusted member! You can now send message embeds and files to the server.");
-	} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
-		console.log("[MEMBER TRACKING] " + msg.author + " sent a message but was ineligible for trusted status.");
-	}
+    //role changes
+    var userID = msg.author.id;
+    let member = msg.guild.members.cache.get(userID);
+    let trusted = (await bot.trusted.get(msg.author.id)) || {};
+
+    if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && bot.msgCount[msg.author.id].count > 300) {
+        let memberRole = msg.guild.roles.cache.get("909989200378601472");
+        let trustedRole = msg.guild.roles.cache.get("775838439538425866");
+        member.roles.add(trustedRole);
+        member.roles.remove(memberRole);
+        console.log("[MEMBER TRACKING] " + msg.author + " became a trusted member!");
+        msg.reply("you have become a trusted member! You can now send message embeds and files to the server.");
+    } else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
+        console.log("[MEMBER TRACKING] " + msg.author + " sent a message but was ineligible for trusted status.");
+    }
 	
 	//grab activity roles
 	let internRole = msg.guild.roles.cache.get("950846711209816094");

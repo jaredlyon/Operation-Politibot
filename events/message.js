@@ -164,7 +164,7 @@ exports.run = async (bot, msg) => {
 	let ambassadorRole = msg.guild.roles.cache.get("950846886653337641");
 	let presidentialRole = msg.guild.roles.cache.get("950846892827377694");
 	let constitutionalRole = msg.guild.roles.cache.get("950846899106238505");
-	if (!member.roles.cache.some(role => role.id === '950846711209816094') && (500 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1250)) {
+	if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < bot.msgCount[msg.author.id].count && bot.msgCount[msg.author.id].count < 1250)) {
 		member.roles.add(internRole);
 		//member.roles.remove(memberRole);
 		console.log("[MEMBER TRACKING] " + msg.author + " became an intern!");

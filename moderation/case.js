@@ -17,7 +17,7 @@ module.exports = {
 
                 var log = new Discord.MessageEmbed()
                     .setTitle('Case ' + bot.logs[caseNumber].caseNum)
-                    .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date + '\n' + bot.logs[caseNumber].reason)
+                    .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date.substring(0, 10) + '\n' + bot.logs[caseNumber].reason)
                     .setTimestamp()
                     .setColor(3447003);
 
@@ -48,7 +48,7 @@ module.exports = {
                     var log = new Discord.MessageEmbed()
                         .setTitle('Case ' + bot.logs[caseNumber].caseNum)
                         .setAuthor(target.user.username + "#" + target.user.discriminator, target.user.avatarURL())
-                        .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date + '\n' + bot.logs[caseNumber].reason)
+                        .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date.substring(0, 10) + '\n' + bot.logs[caseNumber].reason)
                         .setFooter('User ID: ' + target.id)
                         .setTimestamp()
                         .setColor(3447003);
@@ -71,7 +71,7 @@ module.exports = {
                     var log = new Discord.MessageEmbed()
                         .setTitle('Case ' + bot.logs[caseNumber].caseNum)
                         .setAuthor(target.user.username + "#" + target.user.discriminator, target.user.avatarURL())
-                        .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date + '\n' + bot.logs[caseNumber].reason)
+                        .addField(bot.logs[caseNumber].type + ' issued by ' + moderator.user.username, bot.logs[caseNumber].date.substring(0, 10) + '\n' + bot.logs[caseNumber].reason)
                         .setFooter('User ID: ' + target.id)
                         .setTimestamp()
                         .setColor(3447003);

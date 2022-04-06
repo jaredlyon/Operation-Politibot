@@ -35,7 +35,7 @@ module.exports = {
                 } else {
                     var modUsername = bot.logs[i].moderatorid;
                 }
-                log.addField(bot.logs[i].type + ' issued by ' + modUsername, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
+                log.addField(bot.logs[i].type + ' issued by ' + modUsername, bot.logs[i].date.substring(0, 10) + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
             }
         }
 

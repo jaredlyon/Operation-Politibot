@@ -317,7 +317,7 @@ module.exports = {
             var catholic = 0;
             var hindu = 0;
             var buddhist = 0;
-            var Atheist = 0;
+            var atheist = 0;
             var agnostic = 0;
 
             let religionCount = async() => {
@@ -326,7 +326,7 @@ module.exports = {
                         agnostic++;
                     }
                     if (member.roles.cache.some(role => role.name === 'Atheist')) {
-                        Atheist++;
+                        atheist++;
                     }
                     if (member.roles.cache.some(role => role.name === 'Buddhist')) {
                         buddhist++;
@@ -378,12 +378,214 @@ module.exports = {
             religionCount();
 
             //member count
-            msg.channel.send("**Religious Role Count:**\nAgnostics: " + agnostic + "\nAtheists: " + Atheist + "\nBuddhists: " + buddhist + "\nHindus: " + hindu + "\nCatholics: " + catholic + "\nJewish: " + jewish + "\nChristians: " + christian + "\nMuslims: " + muslim + "\nMormons: " + mormon + "\nNon-religious: " + nonreligious + "\nOrthodox: " + orthodox + "\nPagans: " + pagan + "\nProtestants: " + protestant + "\nSikhs: " + sikh + "\nSyncretists: " + syncretism + "\nOther Religious: " + other);
+            msg.channel.send("**Religious Role Count:**\nAgnostics: " + agnostic + "\nAtheists: " + atheist + "\nBuddhists: " + buddhist + "\nHindus: " + hindu + "\nCatholics: " + catholic + "\nJewish: " + jewish + "\nChristians: " + christian + "\nMuslims: " + muslim + "\nMormons: " + mormon + "\nNon-religious: " + nonreligious + "\nOrthodox: " + orthodox + "\nPagans: " + pagan + "\nProtestants: " + protestant + "\nSikhs: " + sikh + "\nSyncretists: " + syncretism + "\nOther Religious: " + other);
             
+        } else if (input === "foreign" || input === "foreign policy") {
+            var regionalists = 0;
+            var isolationists = 0;
+            var imperialists = 0
+            var marxists = 0;
+            var constructivists = 0;
+            var liberalists = 0;
+            var realists = 0;
+
+            let foreignCount = async() => {
+                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                    if (member.roles.cache.some(role => role.name === 'Realism')) {
+                        realists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Liberalism')) {
+                        liberalists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Constructivism')) {
+                        constructivists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Marxist Foreign Policy')) {
+                        marxists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Imperialism')) {
+                        imperialists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Isolationism')) {
+                        isolationists++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Regionalism')) {
+                        regionalists++;
+                    }
+                })
+            }
+
+            foreignCount();
+
+            msg.channel.send("**Foreign Policy Role Count:**\nRegionalists: " + regionalists + "\nIsolationists: " + isolationists + "\nImperialists: " + imperialists + "\nMarxists: " + marxists + "\nConstructivists: " + constructivists + "\nLiberalists: " + liberalists + "\nRealists: " + realists);
+        
         } else if (input === "economic" || input === "economic policy") {
+            var mixed = 0;
+            var lazyFair = 0;
+            var keynesian = 0;
+            var corporatist = 0;
+            var socialist = 0;
+            var marxist = 0;
+            var capitalist = 0;
+
+            let economicCount = async() => {
+                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                    if (member.roles.cache.some(role => role.name === 'Mixed Economics')) {
+                        mixed++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Laissez-Faire Economics')) {
+                        lazyFair++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Keynesian Economics')) {
+                        keynesian++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Corporatist Economics')) {
+                        corporatist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Socialist Economics')) {
+                        socialist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Marxist Economics')) {
+                        marxist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Capitalist Economics')) {
+                        capitalist++;
+                    }
+                })
+            }
+
+            economicCount();
+
+            msg.channel.send("**Economic Policy Role Count:**\nMixed Economics: " + mixed + "\nLaissez-Faire Economics: " + lazyFair + "\nKeynesian Economics: " + keynesian + "\nCorporatist Economics: " + corporatist + "\nSocialist Economics: " + socialist + "\nMarxist Economics: " + marxist + "\nCapitalist Economics: " + capitalist); 
+        
+        } else if (input === "other" || input === "other ideology roles") {
+            var utilitarianism = 0;
+            var collectivism = 0;
+            var individualism = 0;
+            var skepticism = 0;
+            var traditionalist = 0;
+            var reactionary = 0;
+            var environmentalist = 0;
+            var monarchist = 0;
+            var anarchist = 0;
+            var patriotism = 0;
+            var nationalist = 0;
+            var populist = 0;
+            var apolitical = 0;
+
+            let otherCount = async() => {
+                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                    if (member.roles.cache.some(role => role.name === 'Utilitarianism')) {
+                        utilitarianism++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Collectivism')) {
+                        collectivism++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Individualism')) {
+                        individualism++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Skepticism')) {
+                        skepticism++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Traditionalist')) {
+                        traditionalist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Reactionary')) {
+                        reactionary++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Environmentalist')) {
+                        environmentalist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Monarchist')) {
+                        monarchist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Anarchist')) {
+                        anarchist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Patriotism')) {
+                        patriotism++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Nationalist')) {
+                        nationalist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Populist')) {
+                        populist++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Apolitical')) {
+                        apolitical++;
+                    }
+                })
+            }
+
+            otherCount();
+
+            msg.channel.send("**Other Ideological Role Count:**\nUtilitarianism: " + utilitarianism + "\nCollectivism: " + collectivism + "\nIndividualism: " + individualism + "\nSkepticism: " + skepticism + "\nTraditionalist: " + traditionalist + "\nReactionariy " + reactionary + "\nEnvironmentalist: " + environmentalist + "\nMonarchist: " + monarchist + "\nAnarchist: " + anarchist + "\nPatriotism: " + patriotism + "\nNationalist: " + nationalist + "\nPopulist: " + populist + "\nApolitical: " + apolitical);
             
-        } else if (input === "religion" || input === "religion roles") {
-            
+        } else if (input === "political" || input === "political stance roles") {
+            var antiMilitary = 0;
+            var proMilitary = 0;
+            var proHealth = 0;
+            var lgbtq = 0;
+            var police = 0;
+            var proImmigrationReform = 0;
+            var proImmigration = 0;
+            var antiImmigration = 0;
+            var proGunReform = 0;
+            var proGun = 0;
+            var antiGun = 0;
+            var proChoice = 0;
+            var proLife = 0;
+
+            let poliCount = async() => {
+                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                    if (member.roles.cache.some(role => role.name === 'Anti-Military')) {
+                        antiMilitary++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro-Military')) {
+                        proMilitary++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro Healthcare Reform')) {
+                        proHealth++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'LGBTQ Rights')) {
+                        lgbtq++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Police Reform')) {
+                        police++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro Immigration Reform')) {
+                        proImmigrationReform++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro-Immigration')) {
+                        proImmigration++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Anti-Immigration')) {
+                        antiImmigration++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro Gun Reform')) {
+                        proGunReform++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro-Gun')) {
+                        proGun++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Anti-Gun')) {
+                        antiGun++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro-Choice')) {
+                        proChoice++;
+                    }
+                    if (member.roles.cache.some(role => role.name === 'Pro-Life')) {
+                        proLife++;
+                    }
+                })
+            }
+
+            poliCount();
+
+            msg.channel.send(`**__Political Stance Roles:__**\n**Military:**\n${proMilitary} Pro / ${antiMilitary} Anti\n**Healthcare:**\n${proHealth} Pro Healthcare Reform\n**LGBTQ Rights:**\n${lgbtq} Pro LGBTQ Rights\n**Police:**\n${police} Pro Police Reform\n**Immigration:**\n${proImmigrationReform} Pro Immigration Reform\n${proImmigration} Pro / ${antiImmigration} Anti\n**Guns:**\n${proGunReform} Pro Gun Reform\n${proGun} Pro / ${antiGun} Anti\n**Abortion:**\n${proChoice} Pro-Choice / ${proLife} Pro-Life`);
+
+        } else if (input === "help") {
+            msg.channel.send("Categories:\n!demographics\n!demographics religion\n!demographics foreign\n!demographics economic\!demographics other\n!demographics political")
         }
     }
 }

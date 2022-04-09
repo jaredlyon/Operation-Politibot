@@ -585,7 +585,7 @@ module.exports = {
             msg.channel.send(`**__Political Stance Roles:__**\n**Military:**\n${proMilitary} Pro / ${antiMilitary} Anti\n**Healthcare:**\n${proHealth} Pro Healthcare Reform\n**LGBTQ Rights:**\n${lgbtq} Pro LGBTQ Rights\n**Police:**\n${police} Pro Police Reform\n**Immigration:**\n${proImmigrationReform} Pro Immigration Reform\n${proImmigration} Pro / ${antiImmigration} Anti\n**Guns:**\n${proGunReform} Pro Gun Reform\n${proGun} Pro / ${antiGun} Anti\n**Abortion:**\n${proChoice} Pro-Choice / ${proLife} Pro-Life`);
 
         } else if (input === "help") {
-            msg.channel.send("Categories:\n!demographics\n!demographics religion\n!demographics foreign\n!demographics economic\!demographics other\n!demographics political")
+            msg.channel.send("Categories:\n!demographics\n!demographics religion\n!demographics foreign\n!demographics economic\n!demographics other\n!demographics political")
         }
     }
 }

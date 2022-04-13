@@ -205,7 +205,7 @@ var bumpReminder = new Discord.MessageEmbed()
     )
     .setFooter(`If any site is down or the links don't work, let other bumpers know!`);
 
-const TARGET_HOUR_B1 = 1;
+const TARGET_HOUR_B1 = 2;
 const TARGET_MINUTE_B1 = 00;
 
 setInterval(function () {
@@ -215,7 +215,7 @@ setInterval(function () {
 	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B2 = 7;
+const TARGET_HOUR_B2 = 8;
 const TARGET_MINUTE_B2 = 00;
 
 setInterval(function () {
@@ -225,7 +225,7 @@ setInterval(function () {
 	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B3 = 13;
+const TARGET_HOUR_B3 = 14;
 const TARGET_MINUTE_B3 = 00;
 
 setInterval(function () {
@@ -235,7 +235,7 @@ setInterval(function () {
 	bump.send(bumpReminder)
 }, 60 * 1000); // Check every minute
 
-const TARGET_HOUR_B4 = 19;
+const TARGET_HOUR_B4 = 20;
 const TARGET_MINUTE_B4 = 00;
 
 setInterval(function () {

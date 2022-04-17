@@ -40,7 +40,7 @@ module.exports = {
                         embed: logEmbed
                     })
                 } else {
-                    msg.reply('this user has already been approved!');
+                    msg.reply('this user has either already been approved or has not accepted our rules prompt.');
                 }
             } else {
                 msg.reply("target not found! Usage: `!approve [user ID]`\n*Be sure you've correctly copied the user's ID and you're not mentioning them!*");

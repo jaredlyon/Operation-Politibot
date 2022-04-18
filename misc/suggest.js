@@ -28,7 +28,7 @@ module.exports = {
                     name: 'Suggestion from ' + msg.author.username,
                     icon_url: msg.author.avatarURL(),
                 },
-                description: "**Suggestion:** \n*" + reason + "*\n" + yup + " to submit / " + nope + " to delete",
+                description: "*" + reason + "*\n" + yup + " to submit / " + nope + " to delete",
                 timestamp: new Date()
             }
         }).then(async function (message) {
@@ -58,7 +58,7 @@ module.exports = {
                             name: 'Suggestion from ' + msg.author.username,
                             icon_url: msg.author.avatarURL(),
                         },
-                        description: "**Suggestion:** \n*" + reason + "*\n\n" + yup + " to approve / " + nope + " to deny",
+                        description: "*" + reason + "*\n\n" + yup + " to approve / " + nope + " to deny",
                         timestamp: new Date()
                     }
                 }).then(async function (message) {
@@ -87,7 +87,7 @@ module.exports = {
                                     name: 'Suggestion from ' + msg.author.username,
                                     icon_url: msg.author.avatarURL(),
                                 },
-                                description: "**Suggestion:** \n*" + reason + "*\n\n" + up + " to upvote / " + neut + " to abstain / " + down + " to downvote",
+                                description: "*" + reason + "*\n\n" + up + " to upvote / " + neut + " to abstain / " + down + " to downvote",
                                 timestamp: new Date()
                             }
                         }).then(async function (message) {

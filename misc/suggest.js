@@ -42,12 +42,14 @@ module.exports = {
         user.id === msg.author.id;
   
         let initCollector = initEmbed.createReactionCollector(initFilter, {
-            time: 1000 * 3 * 60
+            time: 1000 * 60 * 3
         });
+
+        var initTimeout = true;
     
         initCollector.on("collect", async messageReaction => {
             if (messageReaction.emoji.name === 'tickmark') {
-                msg.reply('your  suggestion has been submitted for review.')
+                msg.reply('your suggestion has been submitted for review.')
                 await rayChannel.send("<@178689418415177729>")
                 let rayEmbed = await rayChannel.send({
                     embed: {
@@ -73,6 +75,8 @@ module.exports = {
                     time: 1000 * 24 * 60 * 60
                 });
 
+                var nextTimeout = true;
+
                 nextCollector.on("collect", async messageReaction => {
                     if (messageReaction.emoji.name === 'tickmark') {
                         msg.reply('your earlier suggestion was approved and will be shown in #suggestions.')
@@ -92,30 +96,34 @@ module.exports = {
                             await message.react(down)
                             return message;
                         });
+
+                        nextTimeout = false;
                     } else if (messageReaction.emoji.name === 'crossmark') {
                         msg.reply('your earlier suggestion was rejected and will not be shown in #suggestions.')
 
-                        timeout = false;
+                        nextTimeout = false;
                         nextCollector.stop();
                     }
                 });
 
                 nextCollector.on("end", async collected => {
-                    if (timeout) {
+                    if (nextTimeout) {
                         rayChannel.send('Above suggestion timed out.')
                     }
                 });
+
+                initTimeout = false;
             } else if (messageReaction.emoji.name === 'crossmark') {
                 msg.reply("suggestion deleted!")
 
-                timeout = false;
+                initTimeout = false;
                 initCollector.stop();
             }
         });
 
         initCollector.on("end", async collected => {
-            if (timeout) {
-                msg.reply('suggestion timed out.')
+            if (initTimeout) {
+                msg.reply('your suggestion timed out.')
             }
         });
     }

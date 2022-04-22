@@ -40,7 +40,7 @@ module.exports = {
 
                     collector.on("collect", async messageReaction => {
                         if (topic.reactions.cache.get('👍').count >= 6) {
-                            msg.channel.setTopic("Current topic: **" + input + "**");
+                            //msg.channel.setTopic("Current topic: **" + input + "**");
                             msg.channel.send("<@&956223433564385333> **A Hot Topic has been approved for discussion!**");
                             msg.channel.send({
                                 embed: {
@@ -77,7 +77,7 @@ module.exports = {
                     msg.reply("you must wait until `" + new Date(bot.hotTopic) + "` before this command can be used again.");
                 }
             } else if (msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '854841000480079882') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '927318500614225920') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '775501181212295239') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
-                msg.channel.setTopic("Current topic: **" + input + "**");
+                //msg.channel.setTopic("Current topic: **" + input + "**");
                 msg.channel.send("<@&956223433564385333> **A Hot Topic has been approved for discussion!**");
                 msg.channel.send({
                     embed: {

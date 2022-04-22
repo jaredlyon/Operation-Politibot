@@ -5,7 +5,12 @@ module.exports = {
         const args = msg.content.slice(0).trim().split(/ +/g);
         var input = args.splice(0).join(' ');
 
-        if (msg.channel.id == "965272694264311899") {
+        // politics 964239900620759070
+        // global politics 928407503690149939
+        // srs 775839512914952212
+        // phil 951322929898061905
+        // hot takes 965272694264311899
+        if (msg.channel.id == "965272694264311899" || msg.channel.id == "951322929898061905" || msg.channel.id == "775839512914952212" || msg.channel.id == "928407503690149939" || msg.channel.id == "964239900620759070") {
             if (!(msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '854841000480079882') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '927318500614225920') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '775501181212295239') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '893189360105689139'))) {
                 if (new Date() > bot.hotTopic) {
                     const topic = await msg.channel.send({
@@ -92,7 +97,7 @@ module.exports = {
                 msg.reply("something went wrong with the permissions architecture...someone @ jared!!");
             }
         } else {
-            msg.reply("this command can only be used in the <#965272694264311899> channel.")
+            msg.reply("this command can only be used in the <#965272694264311899>, <#964239900620759070>, <#928407503690149939>, <#775839512914952212>, or <#951322929898061905> channels.")
         }
     }
 }

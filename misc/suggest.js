@@ -71,7 +71,7 @@ module.exports = {
 
                 let nextFilter = (reaction, user) =>
                 (reaction.emoji.name === 'crossmark' || reaction.emoji.name === 'tickmark') &&
-                user.id === '178689418415177729' && user.id === '233325738013491200' && user.id === '133350262420013056' && user.id === '202165686607282176' && user.id === '213534403459022848';
+                (user.id === '178689418415177729' || user.id === '233325738013491200' || user.id === '133350262420013056' || user.id === '202165686607282176' || user.id === '213534403459022848');
           
                 let nextCollector = rayEmbed.createReactionCollector(nextFilter, {
                     time: 1000 * 24 * 60 * 60

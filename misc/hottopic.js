@@ -1,6 +1,6 @@
 module.exports = {
     name: "hottopic",
-    permission: 2,
+    permission: 1,
     main: async function (bot, msg) {
         const args = msg.content.slice(0).trim().split(/ +/g);
         var input = args.splice(0).join(' ');
@@ -39,7 +39,7 @@ module.exports = {
                     var timeout = true;
 
                     collector.on("collect", async messageReaction => {
-                        if (topic.reactions.cache.get('👍').count >= 6) {
+                        if (topic.reactions.cache.get('👍').count == 6) {
                             //msg.channel.setTopic("Current topic: **" + input + "**");
                             msg.channel.send("<@&956223433564385333> **A Hot Topic has been approved for discussion!**");
                             msg.channel.send({
@@ -58,7 +58,7 @@ module.exports = {
                             bot.hotTopic = temp.setHours(temp.getHours() + 4);
 
                             timeout = false;
-                        } else if (topic.reactions.cache.get('👎').count >= 4) {
+                        } else if (topic.reactions.cache.get('👎').count == 4) {
                             msg.reply("your topic was voted down.");
 
                             var temp = new Date();

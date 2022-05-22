@@ -27,7 +27,7 @@ exports.run = (bot, oldMember, newMember) => {
             //welcome message
             if (newMember.roles.cache.some(role => role.name === 'Unverified Member') && !oldMember.roles.cache.some(role => role.name === 'Unverified Member')) {
                 //unv role: 909988798308433920
-                newMember.guild.channels.cache.get('910017492590686329').send('Welcome in, ' + newMember.toString() + '! Check out <#909995632293449799> and send a DM to <@909999117168676954> in order to access the rest of the server!');
+                newMember.guild.channels.cache.get('910017492590686329').send('Welcome in, ' + newMember.toString() + '! Check out <#909995632293449799> and <#775838975755681842>, then use /verify to gain access to the server! This bot is in early alpha, so if you encounter bugs, such as "Interaction has failed", please try again! If you cannot find any success, reach out to us by DMing <@909999117168676954> in order to be manually verified by a staff member.');
             }
 
         newMember.guild.channels.cache.get(bot.config.logChannel).send({

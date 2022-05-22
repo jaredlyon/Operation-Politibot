@@ -4,7 +4,7 @@ module.exports = {
     name: 'approve',
     permission: 2,
     main: async function (bot, msg) {
-        const rules = bot.emojis.cache.find(emoji => emoji.name == "rules").toString();
+        const tick = bot.emojis.cache.find(emoji => emoji.name == "tickmark").toString();
         var channel = msg.guild.channels.cache.get(bot.config.welcomeChannel); //mod channel
         var log = msg.guild.channels.cache.get(bot.config.logChannel);  //logs the stuff
 
@@ -22,7 +22,7 @@ module.exports = {
                 if (!target.roles.cache.some(role => role.id === '909989200378601472') && target.roles.cache.some(role => role.id === '909988798308433920')) {
                     var logEmbed = new Discord.MessageEmbed()
                         .setAuthor(msg.author.username, msg.author.avatarURL())
-                        .addField('Member approved:', rules + ` **${target} (${target.id}) was approved.**`)
+                        .addField('Member approved:', tick + ` **${target} (${target.id}) was approved.**`)
                         .setFooter(bot.user.username, bot.user.avatarURL())
                         .setTimestamp()
                         .setColor("#FFFFFF");

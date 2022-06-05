@@ -98,11 +98,11 @@ module.exports = {
                     });
                 }
             } else if (input == "delete") {
-                if (msg.author.id == bot.config.owner || msg.author.id == '178689418415177729') {
+                if (msg.author.id == bot.config.owner || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '775501181212295239') || msg.guild.members.cache.get(msg.author.id).roles.cache.some(role => role.id === '927318500614225920')) {
                     delete bot.logs[caseNumber]
                     msg.reply("case deleted!")
                 } else {
-                    msg.reply('due to database & logging security, data can no longer be deleted by all users. This command must be executed by <@133350262420013056> or <@178689418415177729>.')
+                    msg.reply('due to database & logging security, data can only be deleted by Senior Moderation Staff.')
                 }
             } else {
                 msg.reply("Usage: \n`!case <number> <edit/delete> <input>` to edit\n`!case <number>` to view\nError: 3");

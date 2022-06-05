@@ -200,4 +200,9 @@ exports.run = async (bot, msg) => {
 		console.log("[MEMBER TRACKING] " + msg.author + " became a constituional author!");
 		msg.reply("you have leveled up to the **Constitutional Author** activity tier!");		
 	}
+
+	//muted filter
+	if (member.roles.cache.some(role => role.id === '849498583102914581')) {
+		msg.delete();
+	}
 }

@@ -202,7 +202,7 @@ exports.run = async (bot, msg) => {
 	}
 
 	//muted filter
-	if (member.roles.cache.some(role => role.id === '849498583102914581')) {
+	if (member.roles.cache.some(role => role.id === '849498583102914581') && msg.channel.parentID != 975542186491912202) {
 		msg.delete();
 	}
 }

@@ -4,7 +4,7 @@ module.exports = {
 	name: 'purge',
 	permission: 1,
 	main: function (bot, msg) {
-		const rules = bot.emojis.cache.find(emoji => emoji.name == "rules").toString();
+		const tickmark = bot.emojis.cache.find(emoji => emoji.name == "tickmark").toString();
         var log = msg.guild.channels.cache.get(bot.config.logChannel);  //logs the stuff
 
 		if (msg.member.hasPermission('MANAGE_MESSAGES') || msg.author.id === require("../config.json").owner) {
@@ -14,10 +14,10 @@ module.exports = {
 					.then(messages => msg.channel.bulkDelete(messages))
 					.catch(msg.channel.bulkDelete);
 
-				msg.channel.send(rules + " | Purged " + num + " messages!\nhttps://i.imgur.com/SSiOqrl.gif")
+				msg.channel.send(tickmark + " | Purged " + num + " messages!\nhttps://i.imgur.com/SSiOqrl.gif")
 
                 var logEmbed = new Discord.MessageEmbed()
-                        .addField('Purge executed:', rules + ` **${msg.author} purged ` + num + ` messages!**`)
+                        .addField('Purge executed:', tickmark + ` **${msg.author} purged ` + num + ` messages!**`)
 						.addField(`Channel:`, `${msg.channel}`)
                         .setFooter(bot.user.username, bot.user.avatarURL())
                         .setTimestamp()

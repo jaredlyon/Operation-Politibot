@@ -20,8 +20,6 @@ module.exports = {
         var sendChannel = msg.guild.channels.cache.get('965271666684985454');
         //ray channel: 775494762216161341
         var rayChannel = msg.guild.channels.cache.get('775494762216161341');
-        //staff channel: 893189722887839797
-        var staffChannel = msg.guild.channels.cache.get('893189722887839797');
 
         let initEmbed = await msg.channel.send({
             embed: {
@@ -52,8 +50,8 @@ module.exports = {
         initCollector.on("collect", async messageReaction => {
             if (messageReaction.emoji.name === 'tickmark') {
                 msg.reply('your suggestion has been submitted for review.')
-                //await staffChannel.send("<@178689418415177729>")
-                let rayEmbed = await staffChannel.send({
+                await rayChannel.send("<@178689418415177729>")
+                let rayEmbed = await rayChannel.send({
                     embed: {
                         color: 0x33cc33,
                         author: {
@@ -71,7 +69,7 @@ module.exports = {
 
                 let nextFilter = (reaction, user) =>
                 (reaction.emoji.name === 'crossmark' || reaction.emoji.name === 'tickmark') &&
-                (user.id === '178689418415177729' || user.id === '233325738013491200' || user.id === '133350262420013056' || user.id === '202165686607282176' || user.id === '213534403459022848');
+                user.id === '178689418415177729';
           
                 let nextCollector = rayEmbed.createReactionCollector(nextFilter, {
                     time: 1000 * 24 * 60 * 60

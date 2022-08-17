@@ -1,0 +1,22 @@
+{
+    "token": "ODk1MDE0MTQ2MTIxMjc3NDUx.G_SxC-.zQko4MumD3GOUUalhhlZJyaEDP-mcfq3xsH0Tc",
+    "clientId": "895014146121277451",
+	"guildId": "760275642150420520",
+    "prefix": "!",
+    "owner": "133350262420013056",
+    "logChannel": "776527984147693589",
+    "messageDeleteLog": "776527984147693589",
+    "generalChannel": "760275642150420523",
+    "welcomeChannel": "911645387931123742",
+    "lastUpdateDate": "since 10/6/21",
+    "opts": {
+        "mentionEveryone": false,
+        "fetchAllMembers": true,
+        "sync": true
+    },
+    "rethink": {
+        "ip": "66.94.124.225",
+        "username": "admin",
+        "password": "jwolf5454"
+    }
+}

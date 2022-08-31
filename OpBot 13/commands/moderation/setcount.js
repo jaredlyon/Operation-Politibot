@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "setcount",
@@ -20,7 +18,7 @@ module.exports = {
         "required": true
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		if (interaction.author.id == 178689418415177729 || interaction.author.id == 133350262420013056) {
             var log = interaction.guild.channels.cache.get(client.config.logChannel);
             var input = interaction.options.get('count');

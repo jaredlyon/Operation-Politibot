@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "demographics",
@@ -55,7 +53,7 @@ module.exports = {
         ]
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		const target = interaction.guild.id;
         const input = interaction.options.getString("option")
         if (input === "general") {

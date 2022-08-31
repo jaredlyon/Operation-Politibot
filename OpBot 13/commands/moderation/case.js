@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "case",
@@ -72,7 +70,7 @@ module.exports = {
         ]
       }
     ],
-	async execute(interaction) {
+    run: async(client, interaction) => {
         if (client.logs[caseNumber]) {
             if (interaction.options.getSubcommand() === 'view') {
 

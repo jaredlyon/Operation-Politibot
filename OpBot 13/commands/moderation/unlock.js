@@ -1,13 +1,11 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
 	name: "unlock",
     description: "Unlocks the current channel",
     options: [],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		//channel to unlock
         let channels = interaction.guild.channels;
         let targetChannelID = interaction.channel.id;

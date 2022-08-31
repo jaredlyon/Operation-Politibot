@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "ban",
@@ -19,7 +17,7 @@ module.exports = {
         "description": "The reason for issue",
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		if (!interaction.guild.members.cache.get(interaction.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
             var log = interaction.guild.channels.cache.get(client.config.logChannel);
             var banee = interaction.options.get('banee');

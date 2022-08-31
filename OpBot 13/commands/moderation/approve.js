@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "approve",
@@ -14,7 +12,7 @@ module.exports = {
         "required": true
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
         const tick = client.emojis.cache.find(emoji => emoji.name == "tickmark").toString();
         var channel = interaction.guild.channels.cache.get(client.config.welcomeChannel); //mod channel
         var log = interaction.guild.channels.cache.get(client.config.logChannel);  //logs the stuff

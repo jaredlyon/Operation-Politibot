@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "warn",
@@ -19,7 +17,7 @@ module.exports = {
         "description": "The reason for issue"
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		var log = interaction.guild.channels.cache.get(bot.config.logChannel);
         var caseCount = bot.caseNum.count;
         var warnee = interaction.options.get('warnee');

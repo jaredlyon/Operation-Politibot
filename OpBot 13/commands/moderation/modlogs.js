@@ -1,13 +1,11 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
 	name: "modlogs",
     description: "Shows then ten most recent moderation logs issued by a moderator",
     options: [],
-	async execute(interaction) {
+	run: async(client, interaction) => {
 		await interaction.reply('This command is still under development.');
 
         /*

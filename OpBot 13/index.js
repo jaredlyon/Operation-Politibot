@@ -1,49 +1,32 @@
-const fs = require('node:fs');
-const path = require('node:path');
 const { Client, Collection, Intents } = require('discord.js');
-const { token } = require('./config.json');
+const handler = require('./handlers/handler');
+const REST = require('@discordjs/rest');
+const fs = require('fs');
 
-const client = new Client({ intents: 32767 });
-
-// commands
-client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-
-for (const file of commandFiles) {
-	const filePath = path.join(commandsPath, file);
-	const command = require(filePath);
-	client.commands.set(command.data.name, command);
-}
-
-client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
-
-	const command = client.commands.get(interaction.commandName);
-
-	if (!command) return;
-
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
+const client = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_BANS,
+		Intents.FLAGS.GUILD_MEMBERS,
+    ],
 });
 
-// events
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+const Discord = require('discord.js');
 
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args));
-	} else {
-		client.on(event.name, (...args) => event.execute(...args));
-	}
-}
+module.exports = client;
+
+//global variables
+client.discord = Discord;
+client.commandslist = new Collection();
+
+//Commands & Events
+handler.loadEvents(client);
+handler.loadCommands(client);
+
+//Login
+const { token } = require('./config.json');
+client.login(token);
 
 // databases
 client.startDatabase = async function () {
@@ -76,7 +59,7 @@ client.syncDatabase = async function () {
 
 //logs
 client.syncLogs = function () {
-	console.logs = require('./logs.json');
+	client.logs = require('./logs.json');
 
 	writeLogs();
 
@@ -87,9 +70,9 @@ client.syncLogs = function () {
 	function writeLogs() {
 		var logsJson = fs.readFileSync("./logs.json"),
 			logsParsed = JSON.parse(logsJson)
-		if (JSON.stringify(logsParsed) == JSON.stringify(console.logs)) return; // Only writes if there's a difference
+		if (JSON.stringify(logsParsed) == JSON.stringify(client.logs)) return; // Only writes if there's a difference
 
-		fs.writeFileSync("./logs.json", JSON.stringify(console.logs, null, 3));
+		fs.writeFileSync("./logs.json", JSON.stringify(client.logs, null, 3));
 		console.log("[LOGS] | Moderation logs successfully saved to file!")
 		return "Moderation logs successfully saved to file!";
 	}

@@ -1,13 +1,11 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
         name: "m",
         description: "sends a neat message somewhere",
         options: [],
-        async execute(interaction) {
+        run: async(client, interaction) => {
                 await interaction.reply('This commands still under development.');
                 /*
                 const args = msg.content.slice(2).trim().split(/ +/g);

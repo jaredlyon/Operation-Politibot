@@ -1,13 +1,11 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
 	name: "dbinit",
     description: "Initializes the client databases",
     options: [],
-	async execute(interaction) {
+	run: async(client, interaction) => {
         const target = interaction.guild.id;
         //bank
         let funcB = async() => {

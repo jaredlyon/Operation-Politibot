@@ -1,7 +1,5 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { user } = require('../..');
-const client = require('../..');
 
 module.exports = {
     name: "report",
@@ -14,7 +12,7 @@ module.exports = {
         "required": true
       }
     ],
-	async execute(interaction) {
+	run: async(client, interaction) => {
         var log = interaction.guild.channels.cache.get(client.config.logChannel);
         var reason = interaction.options.get('reason');
 

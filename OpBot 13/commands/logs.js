@@ -1,16 +1,22 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('logs')
-		.setDescription(`Views a user's moderation log history`)
-        .addUserOption(target =>
-            target.setName('user')
-                .setDescription('The user to be reviewed')
-                .setRequired(true)),
+    name: "logs",
+    description: "Views a user's moderation log history",
+    options: [
+      {
+        "type": 6,
+        "name": "target",
+        "description": "The user to be reviewed",
+        "required": true
+      }
+    ],
 	async execute(interaction) {
-		var caseCount = bot.caseNum.count;
+		var caseCount = client.caseNum.count;
+        var userid = interaction.options.get('target').id;
 
         var log = new MessageEmbed()
             .setTitle('Moderation Log History')
@@ -28,9 +34,9 @@ module.exports = {
             }
 
         for (let i = 0; i < caseCount; i++) {
-            if (bot.logs[i] && bot.logs[i].userid == userid) {
-                var moderator = interaction.guild.members.cache.get(bot.logs[i].moderatorid);
-                log.addField(bot.logs[i].type + ' issued by ' + moderator.user.username, bot.logs[i].date + '\n' + bot.logs[i].reason + '\nCase ID: ' + bot.logs[i].caseNum)
+            if (client.logs[i] && client.logs[i].userid == userid) {
+                var moderator = interaction.guild.members.cache.get(client.logs[i].moderatorid);
+                log.addField(client.logs[i].type + ' issued by ' + moderator.user.username, client.logs[i].date + '\n' + client.logs[i].reason + '\nCase ID: ' + client.logs[i].caseNum)
             }
         }
 

@@ -1,15 +1,22 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('userinfo')
-		.setDescription('View user info')
-        .addUserOption(target =>
-            target.setName('target')
-                .setDescription('The targeted snowflake')
-                .setRequired(true)),
+    name: "userinfo",
+    description: "Views user info",
+    options: [
+      {
+        "type": 6,
+        "name": "target",
+        "description": "The targeted snowflake",
+        "required": true
+      }
+    ],
 	async execute(interaction) {
+        var target = interaction.options.get('target');
+
         var info = new MessageEmbed()
             .setAuthor(target.user.tag, target.user.avatarURL())
             .addField('Nickname:', target.nickname)

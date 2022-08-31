@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('eval')
-		.setDescription('Evaluates code'),
+	name: "eval",
+    description: "Evaluates example code",
+    options: [],
 	async execute(interaction) {
 		await interaction.reply('This command is under development.');
 	},

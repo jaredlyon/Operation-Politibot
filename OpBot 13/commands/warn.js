@@ -1,23 +1,29 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('warn')
-		.setDescription('Warns a user')
-        .addUserOption(warnee =>
-            warnee.setName('user')
-                .setDescription('The user to be warned')
-                .setRequired(true))
-        .addStringOption(reason =>
-            reason.setName('reason')
-                .setDescription('The reason for issue')
-                .setRequired(false)),
+    name: "warn",
+    description: "Warns a user",
+    options: [
+      {
+        "type": 6,
+        "name": "warnee",
+        "description": "The user to be warned",
+        "required": true
+      },
+      {
+        "type": 3,
+        "name": "reason",
+        "description": "The reason for issue"
+      }
+    ],
 	async execute(interaction) {
 		var log = interaction.guild.channels.cache.get(bot.config.logChannel);
-
         var caseCount = bot.caseNum.count;
-        var reason = interaction.content.split(' ').splice(1).join(' ');
+        var warnee = interaction.options.get('warnee');
+        var reason = interaction.options.get('reason');
         if (reason === '') {
             reason = 'No reason was specified.'
         };

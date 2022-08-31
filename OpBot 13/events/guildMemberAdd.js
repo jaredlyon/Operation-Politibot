@@ -1,6 +1,7 @@
+const { MessageEmbed, Message } = require("discord.js");
+
 module.exports = {
 	name: 'guildMemberAdd',
-	once: false,
 	async execute(client, member) {
 		var channel = member.guild.channels.cache.get(client.config.logChannel);
         var join = new Discord.MessageEmbed()

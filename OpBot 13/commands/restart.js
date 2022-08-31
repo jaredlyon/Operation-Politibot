@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('restart')
-		.setDescription('Restarts the bot'),
+	name: "restart",
+    description: "Restarts Politibot...",
+    options: [],
 	async execute(interaction) {
 		interaction.channel.send(":wave: " + bot.user.username + " is restarting...");
 

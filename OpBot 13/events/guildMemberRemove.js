@@ -1,6 +1,7 @@
+const { MessageEmbed, Message } = require("discord.js");
+
 module.exports = {
 	name: 'guildMemberRemove',
-	once: false,
 	execute(client, member) {
         var channel = member.guild.channels.cache.get(client.config.logChannel);
         var leave = new Discord.MessageEmbed()

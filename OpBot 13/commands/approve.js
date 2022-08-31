@@ -1,38 +1,44 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('approve')
-		.setDescription('Approves a user for member status')
-        .addUserOption(target =>
-            target.setName('user')
-                .setDescription('The user to be approved')
-                .setRequired(true)),
+    name: "approve",
+    description: "Approves a user for member status",
+    options: [
+      {
+        "type": 6,
+        "name": "target",
+        "description": "The user to be approved",
+        "required": true
+      }
+    ],
 	async execute(interaction) {
-        const tick = bot.emojis.cache.find(emoji => emoji.name == "tickmark").toString();
-        var channel = interaction.guild.channels.cache.get(bot.config.welcomeChannel); //mod channel
-        var log = interaction.guild.channels.cache.get(bot.config.logChannel);  //logs the stuff
+        const tick = client.emojis.cache.find(emoji => emoji.name == "tickmark").toString();
+        var channel = interaction.guild.channels.cache.get(client.config.welcomeChannel); //mod channel
+        var log = interaction.guild.channels.cache.get(client.config.logChannel);  //logs the stuff
+        var target = interaction.options.get('target');
         
         //member id: 909989200378601472
         //untrusted id: 909988798308433920
 
-        if (interaction.channel.id == bot.config.welcomeChannel) {
+        if (interaction.channel.id == client.config.welcomeChannel) {
             if (target != null) {
                 if (!target.roles.cache.some(role => role.id === '909989200378601472') && target.roles.cache.some(role => role.id === '909988798308433920')) {
                     var logEmbed = new MessageEmbed()
                         .setAuthor(interaction.author.username, interaction.author.avatarURL())
                         .addField('Member approved:', tick + ` **${target} (${target.id}) was approved.**`)
-                        .setFooter(bot.user.username, bot.user.avatarURL())
+                        .setFooter(client.user.username, client.user.avatarURL())
                         .setTimestamp()
                         .setColor("#FFFFFF");
 
-                    let trusted = (await bot.trusted.get(userID)) || {};
+                    let trusted = (await client.trusted.get(userID)) || {};
 
                     await target.roles.add('909989200378601472');
                     await target.roles.remove('909988798308433920');
                     trusted.joinDate = new Date();
-                    await bot.trusted.update(trusted);
+                    await client.trusted.update(trusted);
                     await channel.send({
                         embeds: [logEmbed]
                     })

@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('purge')
-		.setDescription('Purges a string of messages from chat'),
+	name: "purge",
+    description: "Mass deletes a specified number of messages",
+    options: [],
 	async execute(interaction) {
 		await interaction.reply('This message is still under development, but if you need a purge urgently, let Jared know cuz it should be quick to add.');
 

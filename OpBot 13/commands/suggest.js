@@ -1,10 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('suggest')
-		.setDescription('Send a server suggestion to staff'),
+	name: "suggest",
+    description: "Send a suggestion to server staff",
+    options: [],
 	async execute(interaction) {
 		await interaction.reply('This message is still being updated to Discord.js v13, sorry!');
 

@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('lock')
-		.setDescription('Locks the current channel'),
+	name: "lock",
+    description: "Locks the current channel",
+    options: [],
 	async execute(interaction) {
 		//channel to lock down
         let channels = interaction.guild.channels;

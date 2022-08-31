@@ -1,15 +1,18 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('dbinit')
-		.setDescription('Initializes the databases'),
+	name: "dbinit",
+    description: "Initializes the client databases",
+    options: [],
 	async execute(interaction) {
         const target = interaction.guild.id;
         //bank
         let funcB = async() => {
-            bot.guilds.cache.get(target).members.cache.forEach(async member => {
-                await bot.bank.insert({
+            client.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.bank.insert({
                     id: member.user.id,
                     balance: 0,
                     bank: 500,
@@ -21,8 +24,8 @@ module.exports = {
 
         //streaks
         let funcSt = async() => {
-            bot.guilds.cache.get(target).members.cache.forEach(async member => {
-                await bot.streaks.insert({
+            client.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.streaks.insert({
                     id: member.user.id,
                     lastDaily: null,
                     streak: 0
@@ -33,8 +36,8 @@ module.exports = {
         
         //cooldowns
         let funcCd = async() => {
-            bot.guilds.cache.get(target).members.cache.forEach(async member => {
-                await bot.cooldowns.insert({
+            client.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.cooldowns.insert({
                     id: member.user.id,
                     lastBeg: null,
                     lastCrime: null,
@@ -47,8 +50,8 @@ module.exports = {
 
         //trusted member counts
         let funcTd = async() => {
-            bot.guilds.cache.get(target).members.cache.forEach(async member => {
-                await bot.trusted.insert({
+            client.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.trusted.insert({
                     id: member.user.id,
                     joinDate: member.joinedAt
                 })

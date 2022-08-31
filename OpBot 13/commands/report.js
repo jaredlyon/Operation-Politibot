@@ -1,16 +1,22 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed } = require("discord.js");
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('report')
-		.setDescription('Report an issue to staff!')
-        .addStringOption(reason =>
-            reason.setName('reason')
-                .setDescription('The reason for issue')
-                .setRequired(true)),
+    name: "report",
+    description: "Report an issue to staff!",
+    options: [
+      {
+        "type": 3,
+        "name": "reason",
+        "description": "The reason for issue",
+        "required": true
+      }
+    ],
 	async execute(interaction) {
-        var log = interaction.guild.channels.cache.get(bot.config.logChannel);
+        var log = interaction.guild.channels.cache.get(client.config.logChannel);
+        var reason = interaction.options.get('reason');
 
         //#trial-moderators: 893189722887839797
         var modChannel = interaction.guild.channels.cache.get('893189722887839797');
@@ -20,7 +26,7 @@ module.exports = {
             .setTitle("**Complaint Filed**")
             .addField('Reason:', reason)
             .addField('Message Link:', interaction.url)
-            .setFooter(bot.user.username, bot.user.avatarURL())
+            .setFooter(client.user.username, client.user.avatarURL())
             .setTimestamp()
             .setColor("#992D22");
 

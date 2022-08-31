@@ -1,8 +1,6 @@
-const { MessageEmbed } = require("discord.js");
-
+const { MessageEmbed, Message } = require("discord.js");
 module.exports = {
 	name: 'messageCreate',
-	once: false,
 	async execute(client, message) {
 		if (message.channel.type === "dm" && message.author.id == client.user.id) {
 			console.log("[DM] " + client.user.username + " -> " + message.channel.recipient.username + " | " + message.content)

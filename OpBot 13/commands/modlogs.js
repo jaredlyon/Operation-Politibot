@@ -1,9 +1,12 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('modlogs')
-		.setDescription('Check moderator command history'),
+	name: "modlogs",
+    description: "Shows then ten most recent moderation logs issued by a moderator",
+    options: [],
 	async execute(interaction) {
 		await interaction.reply('This command is still under development.');
 

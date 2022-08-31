@@ -1,23 +1,60 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { user } = require('../..');
+const client = require('../..');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('demographics')
-		.setDescription('Views the server demographics')
-        .addStringOption(option =>
-            option.setName('category')
-                .setDescription('The demographic category')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'General', value: 'general' },
-                    { name: 'Religion', value: 'religion' },
-                    { name: 'Foreign Ideology', value: 'foreign' },
-                    { name: 'Economic', value: 'economic' },
-                    { name: 'Political', value: 'political' },
-                    { name: 'Party', value: 'party' },
-                    { name: 'Political Ideology', value: 'political' },
-                    { name: 'Political Ideologies by Region', value: 'regideologies' },
-                )),
+    name: "demographics",
+    description: "Views the server demographics",
+    options: [
+      {
+        "type": 2,
+        "name": "category",
+        "description": "The demographic category",
+        "options": [
+          {
+            "type": 1,
+            "name": "general",
+            "description": "General"
+          },
+          {
+            "type": 1,
+            "name": "religion",
+            "description": "Religion"
+          },
+          {
+            "type": 1,
+            "name": "foreign",
+            "description": "Foreign Ideology"
+          },
+          {
+            "type": 1,
+            "name": "economic",
+            "description": "Economic"
+          },
+          {
+            "type": 1,
+            "name": "political",
+            "description": "Political"
+          },
+          {
+            "type": 1,
+            "name": "party",
+            "description": "Party"
+          },
+          {
+            "type": 1,
+            "name": "other",
+            "description": "Political Ideology"
+          },
+          {
+            "type": 1,
+            "name": "ideology",
+            "description": "Regional Ideology"
+          }
+        ]
+      }
+    ],
 	async execute(interaction) {
 		const target = interaction.guild.id;
         const input = interaction.options.getString("option")
@@ -32,7 +69,7 @@ module.exports = {
 
             //count party members
             let partyCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === '🔵 Democratic Party')) {
                         democrats++;
                     }
@@ -86,7 +123,7 @@ module.exports = {
 
             //count ideologies
             let ideologyCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     //by priority
                     if (member.roles.cache.some(role => role.name === 'Moderate') && !member.roles.cache.some(role => role.name === 'Moderate Conservative') && !member.roles.cache.some(role => role.name === 'Conservative') && !member.roles.cache.some(role => role.name === 'Paleoconservative') && !member.roles.cache.some(role => role.name === 'Libertarian') && !member.roles.cache.some(role => role.name === 'Nationalist-Populist') && !member.roles.cache.some(role => role.name === 'Classical Right') && !member.roles.cache.some(role => role.name === 'Moderate Liberal') && !member.roles.cache.some(role => role.name === 'Liberal') && !member.roles.cache.some(role => role.name === 'Progressive') && !member.roles.cache.some(role => role.name === 'Democratic-Socialist') && !member.roles.cache.some(role => role.name === 'Socialist') && !member.roles.cache.some(role => role.name === 'Communist')) {
                         moderates++;
@@ -187,7 +224,7 @@ module.exports = {
 
             //count members
             let memberCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Trusted Member')) {
                         trustedMembers++;
                     }
@@ -231,7 +268,7 @@ module.exports = {
 
             //count regionals
             let regionalCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'South - South Atlantic')) {
                         southAtlantic++;
                     }
@@ -338,7 +375,7 @@ module.exports = {
             var agnostic = 0;
 
             let religionCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Agnostic')) {
                         agnostic++;
                     }
@@ -407,7 +444,7 @@ module.exports = {
             var realists = 0;
 
             let foreignCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Realism')) {
                         realists++;
                     }
@@ -446,7 +483,7 @@ module.exports = {
             var capitalist = 0;
 
             let economicCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Mixed Economics')) {
                         mixed++;
                     }
@@ -491,7 +528,7 @@ module.exports = {
             var apolitical = 0;
 
             let otherCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Utilitarianism')) {
                         utilitarianism++;
                     }
@@ -554,7 +591,7 @@ module.exports = {
             var proLife = 0;
 
             let poliCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'Anti-Military')) {
                         antiMilitary++;
                     }
@@ -1065,7 +1102,7 @@ module.exports = {
 
             //count ideologies
             let regionalIdeologies = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === 'South - South Atlantic')) {
                         if (member.roles.cache.some(role => role.name === 'Communist')) {
                             southAtlanticCommunist++;
@@ -2470,7 +2507,7 @@ module.exports = {
             var otherClassRight = 0;
 
             let partyIdeoCount = async () => {
-                await bot.guilds.cache.get(target).members.cache.forEach(async member => {
+                await client.guilds.cache.get(target).members.cache.forEach(async member => {
                     if (member.roles.cache.some(role => role.name === '🔵 Democratic Party')) {
                         if (member.roles.cache.some(role => role.name === 'Communist')) {
                             demCommunist++;

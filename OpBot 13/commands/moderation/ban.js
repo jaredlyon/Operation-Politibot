@@ -6,24 +6,26 @@ module.exports = {
     description: "Bans a user",
     options: [
       {
-        "type": 6,
-        "name": "banee",
-        "description": "The user to be banned",
-        "required": true
+        type: 6,
+        name: "banee",
+        description: "The user to be banned",
+        required: true
       },
       {
-        "type": 3,
-        "name": "reason",
-        "description": "The reason for issue",
+        type: 3,
+        name: "reason",
+        description: "The reason for issue",
+        required: true
       }
     ],
 	run: async(client, interaction) => {
-		if (!interaction.guild.members.cache.get(interaction.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
+		if (!interaction.guild.members.cache.get(interaction.user.id).roles.cache.some(role => role.id === '893189360105689139')) {
             var log = interaction.guild.channels.cache.get(client.config.logChannel);
-            var banee = interaction.options.get('banee');
-            var reason = interaction.options.get('reason');
+            var banee = interaction.options.getUser('banee');
+            var reason = interaction.options.getString('reason');
 
             var caseCount = client.caseNum.count;
+
             if (reason === '') {
                 reason = 'No reason was specified.'
             };
@@ -33,7 +35,7 @@ module.exports = {
                     .setAuthor(banee.username, banee.avatarURL())
                     .addField('Member banned:', `**:hammer: ${banee} (${banee.id}) was banned from the server.**`)
                     .addField('Reason:', reason)
-                    .addField('Case ID: ', caseCount)
+                    .addField('Case ID: ', caseCount.toString())
                     .setFooter(client.user.username, client.user.avatarURL())
                     .setTimestamp()
                     .setColor("#992D22");
@@ -42,6 +44,7 @@ module.exports = {
                     .setAuthor(interaction.guild.name, interaction.guild.iconURL())
                     .setTitle(`**A moderator has banned you.**`)
                     .addField('Reason:', reason)
+                    .addField('Case ID: ', caseCount.toString())
                     .setFooter(client.user.username, client.user.avatarURL())
                     .setTimestamp()
                     .setColor("#992D22");
@@ -53,7 +56,9 @@ module.exports = {
                     console.log(err);
                     interaction.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
                 });
+
                 await interaction.guild.members.ban(banee);
+                
                 await interaction.channel.send({
                     embeds: [ban]
                 })
@@ -64,7 +69,7 @@ module.exports = {
                 client.logs[caseCount] = {
                     caseNum: caseCount,
                     userid: banee.id,
-                    moderatorid: interaction.author.id,
+                    moderatorid: interaction.user.id,
                     date: new Date(),
                     type: "Ban",
                     reason: reason
@@ -74,7 +79,7 @@ module.exports = {
             } else {
                 interaction.reply("mention someone!")
             }
-        } else if (interaction.guild.members.cache.get(interaction.author.id).roles.cache.some(role => role.id === '893189360105689139')) {
+        } else if (interaction.guild.members.cache.get(interaction.user.id).roles.cache.some(role => role.id === '893189360105689139')) {
             interaction.reply("Permission denied; go get another mod!");
         }
 	},

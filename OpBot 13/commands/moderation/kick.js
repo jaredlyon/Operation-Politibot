@@ -6,22 +6,24 @@ module.exports = {
     description: "Kicks a user",
     options: [
       {
-        "type": 6,
-        "name": "kickee",
-        "description": "The user to be kicked",
-        "required": true
+        type: 6,
+        name: "kickee",
+        description: "The user to be kicked",
+        required: true
       },
       {
-        "type": 3,
-        "name": "reason",
-        "description": "The reason for issue",
+        type: 3,
+        name: "reason",
+        description: "The reason for issue",
+        required: true
       }
     ],
 	run: async(client, interaction) => {
 		var log = interaction.guild.channels.cache.get(client.config.logChannel);
         var caseCount = client.caseNum.count;
-        var kickee = interaction.options.get('kickee');
-        var reason = interaction.options.get('reason');
+        var kickee = interaction.options.getUser('kickee');
+        var reason = interaction.options.getString('reason');
+
         if (reason === '') {
             reason = 'No reason was specified.'
         };
@@ -31,7 +33,7 @@ module.exports = {
             .setAuthor(kickee.username, kickee.avatarURL())
             .addField('Member kicked:', `**:hiking_boot: ${kickee} (${kickee.id}) was kicked from the server.**`)
             .addField('Reason:', reason)
-            .addField('Case ID: ', caseCount)
+            .addField('Case ID: ', caseCount.toString())
             .setFooter(client.user.username, client.user.avatarURL())
             .setTimestamp()
             .setColor("#992D22");
@@ -40,6 +42,7 @@ module.exports = {
             .setAuthor(interaction.guild.name, interaction.guild.iconURL())
             .setTitle(`**A moderator has kicked you.**`)
             .addField('Reason:', reason)
+            .addField('Case ID: ', caseCount.toString())
             .setFooter(client.user.username, client.user.avatarURL())
             .setTimestamp()
             .setColor("#992D22");
@@ -51,8 +54,10 @@ module.exports = {
             console.log(err);
             interaction.reply("I couldn't DM this user since they do not accept DMs from server bots/members.");
         });
-        const user = interaction.guild.member(kickee);
-        await user.kick();
+
+        const targetUser = await interaction.guild.members.fetch(kickee);
+        await targetUser.kick();
+
         await interaction.channel.send({
             embeds: [kick]
         })
@@ -63,7 +68,7 @@ module.exports = {
         client.logs[caseCount] = {
             caseNum: caseCount,
             userid: kickee.id,
-            moderatorid: interaction.author.id,
+            moderatorid: interaction.user.id,
             date: new Date(),
             type: "Kick",
             reason: reason

@@ -2,7 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 
 module.exports = {
 	name: 'messageUpdate',
-	execute(client, oldMessage, newMessage) {
+	execute(oldMessage, newMessage, client) {
 		//if (new Date() - oldMessage.createdAt <= 2000 && newMessage.embeds.length > 0) return;
         if (oldMessage.content === newMessage.content) return;
 

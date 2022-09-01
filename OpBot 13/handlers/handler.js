@@ -53,17 +53,17 @@ const loadCommands = async function (client) {
 
     client.on("ready", async () => {
         client.config = require('../config.json');
-        console.log("DB catch 1");
+        console.log("Config loaded!");
         client.syncLogs();
-        console.log("DB catch 2");
+        console.log("Moderation logs synced!");
         client.syncCaseNum();
-        console.log("DB catch 3");
+        console.log("Current case number loaded!");
         client.syncAutoMute();
-        console.log("DB catch 4");
+        console.log("Automute timers activated!");
         client.syncMsgCount();
-        console.log("DB catch 5");
+        console.log("Member message counts loaded!");
         await client.startDatabase();
-        console.log("DB catch 6");
+        console.log("RethinkDB tables started!");
 
         client.user.setPresence({ status: 'online', activities: { name: 'politics | !help', type: 0 } });
 

@@ -2,10 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 
 module.exports = {
 	name: 'messageDelete',
-    /**
-     * @param {Message} message 
-     */
-	execute(message) {
+	async execute(message, client) {
 		if (!message.author.client) {
             var msgDelete = new MessageEmbed()
                 .setAuthor(message.author.tag, message.author.avatarURL())

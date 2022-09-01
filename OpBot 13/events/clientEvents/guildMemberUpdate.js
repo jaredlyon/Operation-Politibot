@@ -2,7 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 
 module.exports = {
 	name: 'guildMemberUpdate',
-	execute(client, oldMember, newMember) {
+	async execute(oldMember, newMember, client) {
         if (oldMember.roles.cache.size != newMember.roles.cache.size) {
             //role change
             const roleUpdate = new MessageEmbed()

@@ -1,11 +1,13 @@
 const { Client, Collection, Intents } = require('discord.js');
 const handler = require('./handlers/handler');
+const { token } = require('./config.json');
 const REST = require('@discordjs/rest');
 const fs = require('fs');
 
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_PRESENCES,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_BANS,
 		Intents.FLAGS.GUILD_MEMBERS,
@@ -23,10 +25,6 @@ client.commandslist = new Collection();
 //Commands & Events
 handler.loadEvents(client);
 handler.loadCommands(client);
-
-//Login
-const { token } = require('./config.json');
-client.login(token);
 
 // databases
 client.startDatabase = async function () {
@@ -303,4 +301,5 @@ client.on('messageCreate', async(msg) => {
 })
 */
 
+//Login
 client.login(token);

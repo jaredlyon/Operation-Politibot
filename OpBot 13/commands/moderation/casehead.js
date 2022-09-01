@@ -7,7 +7,6 @@ module.exports = {
     options: [],
     run: async (client, interaction) => {
         var caseCount = client.caseNum.count;
-        console.log(caseCount);
 
         var log = new MessageEmbed()
             .setTitle('Most Recent Moderation Logs (10)')
@@ -16,16 +15,19 @@ module.exports = {
 
         for (let i = caseCount - 10; i < caseCount; i++) {
             if (client.logs[i]) {
-                if (client.users.fetch(client.logs[i].userid)) {
-                    var username = client.users.fetch(client.logs[i].userid);
-                    console.log("Username received: " + username);
+                var targetMember = await interaction.guild.members.fetch(client.logs[i].userid);
+                console.log("Member: " + targetMember);
+
+                if (targetMember) {
+                    var username = await targetMember.username;
                 } else {
                     var username = client.logs[i].userid;
-                    console.log("User ID received: " + username);
                 }
-                var moderator = client.users.fetch(client.logs[i].moderatorid);
-                console.log(moderator);
-                log.addField(username + " | " + client.logs[i].type + ' issued by ' + moderator, client.logs[i].date + '\n' + client.logs[i].reason + '\nCase ID: ' + client.logs[i].caseNum)
+                console.log(username);
+
+                var moderator = await client.users.fetch(client.logs[i].moderatorid);
+
+                log.addField(username + " | " + client.logs[i].type + ' issued by ' + moderator.username, client.logs[i].date + '\n' + client.logs[i].reason + '\nCase ID: ' + client.logs[i].caseNum)
             } else {
                 log.addField("Case " + i, "*This case was deleted.*")
             }

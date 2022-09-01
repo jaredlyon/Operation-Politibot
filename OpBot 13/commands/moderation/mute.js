@@ -62,7 +62,7 @@ module.exports = {
         console.log(targetUser);
         await targetUser.timeout(length * 60 * 1000);
 
-        await interaction.channel.send({
+        await interaction.reply({
             embeds: [mute]
         });
         await log.send({

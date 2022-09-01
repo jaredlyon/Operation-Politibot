@@ -98,7 +98,7 @@ module.exports = {
         }
 
 
-        interaction.channel.send({
+        interaction.reply({
           embeds: [log]
         });
 
@@ -128,7 +128,7 @@ module.exports = {
           log.setFooter('User ID: ' + userid);
         }
 
-        interaction.channel.send({
+        interaction.reply({
           embeds: [log]
         });
 
@@ -158,7 +158,7 @@ module.exports = {
           log.setFooter('User ID: ' + userid);
         }
 
-        interaction.channel.send({
+        interaction.reply({
           embeds: [log]
         });
 

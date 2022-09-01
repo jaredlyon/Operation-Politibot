@@ -58,7 +58,7 @@ module.exports = {
         const targetUser = await interaction.guild.members.fetch(kickee);
         await targetUser.kick();
 
-        await interaction.channel.send({
+        await interaction.reply({
             embeds: [kick]
         })
         await log.send({

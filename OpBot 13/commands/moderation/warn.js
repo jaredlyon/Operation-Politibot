@@ -50,7 +50,7 @@ module.exports = {
             .setTimestamp()
             .setColor("#992D22");
 
-        await interaction.channel.send({
+        await interaction.reply({
             embeds: [warn]
         })
         await log.send({

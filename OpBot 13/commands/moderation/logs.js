@@ -39,7 +39,7 @@ module.exports = {
             }
         }
 
-        interaction.channel.send({
+        interaction.reply({
             embeds: [log]
         })
 	},

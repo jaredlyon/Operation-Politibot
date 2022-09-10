@@ -2,18 +2,32 @@ const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 module.exports = {
-	name: "unlock",
-    description: "Unlocks the current channel",
-    options: [],
-	run: async(client, interaction) => {
-		//channel to unlock
-        let channels = interaction.guild.channels;
-        let targetChannelID = interaction.channel.id;
-        let targetChannel = channels.cache.find(r => r.id === targetChannelID);
+    name: "unlock",
+    category: "Moderation",
+    description: "Unlock a channel and free them from their silent lunch.",
+    options: [
+        {
+            type: 7,
+            name: "channel",
+            description: "The channel you wish to unlock",
+        },
+    ],
 
-        //channel unlockdown
-        await targetChannel.updateOverwrite(interaction.guild.id, { SEND_MESSAGES: true });
+    run: async(client, interaction) => {
 
-        interaction.reply('channel unlocked!')
-	},
-};
+        if (interaction.options.getChannel('channel') == null) {
+            targetChannel = interaction.channel;
+        } else {
+            targetChannel = interaction.options.getChannel('channel');
+        };
+
+        //channel lockdown
+        await targetChannel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: true });
+
+        interaction.reply({
+            content: 'Channel unlocked!',
+            ephemeral: true,
+        })
+        targetChannel.send("This channel has been unlocked. Please behave.")
+    }
+}

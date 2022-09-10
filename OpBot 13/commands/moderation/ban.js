@@ -59,7 +59,7 @@ module.exports = {
 
                 await interaction.guild.members.ban(banee);
                 
-                await interaction.channel.send({
+                await interaction.reply({
                     embeds: [ban]
                 })
                 await log.send({

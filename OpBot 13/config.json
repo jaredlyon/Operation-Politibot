@@ -15,8 +15,8 @@
         "sync": true
     },
     "rethink": {
-        "ip": "66.94.124.225",
-        "username": "admin",
-        "password": "jwolf5454"
+        "ip": "---",
+        "username": "---",
+        "password": "---"
     }
 }

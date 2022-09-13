@@ -67,7 +67,7 @@ module.exports = {
                         name: interaction.guild.name,
                         icon_url: interaction.guild.iconURL(),
                     },
-                    title: '**A moderator has banned you. You may appeal this decision below.**',
+                    title: '**A moderator has banned you. You may appeal this decision by joining our ban appeals server, and then clicking the "Appeal" button below.**',
                     fields: [
                         {
                             name: 'Reason:',
@@ -102,6 +102,24 @@ module.exports = {
                             .setCustomId('appeal')
                             .setLabel('Appeal')
                             .setStyle('PRIMARY'),
+                    );
+
+                const serverLinkBan = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setCustomId('linkban')
+                            .setLabel('Ban Appeal Server')
+                            .setStyle('LINK')
+                            .setURL('https://discord.gg/CFS7yjEhUd')
+                    );
+        
+                const serverLinkmain = new MessageActionRow()
+                    .addComponents(
+                        new MessageButton()
+                            .setCustomId('linkmain')
+                            .setLabel('Operation Politics Server')
+                            .setStyle('LINK')
+                            .setURL('https://discord.gg/operationpolitics')
                     );
         
                 //No longer the button!
@@ -156,7 +174,7 @@ module.exports = {
                 await banee.createDM();
                 const appealMsg = await banee.send({
                     embeds: [dm],
-                    components: [appealButton]
+                    components: [serverLinkBan, appealButton]
                 }).catch(async err => {
                     console.log(err);
                     interaction.channel.send({
@@ -265,6 +283,7 @@ module.exports = {
                                             banee.send({
                                                 content: `A moderator has accepted your appeal for Case ID ${caseIDInputted}. Appropriate action will be made to adjust your record.`,
                                                 embeds: [acceptEmbed],
+                                                components: [serverLinkmain],
                                             });
                                         }
             
@@ -329,6 +348,7 @@ module.exports = {
                                                 banee.send({
                                                     content: `A moderator has accepted your appeal for Case ID ${caseIDInputted}. Appropriate action will be made to adjust your record.`,
                                                     embeds: [acceptreasonEmbed],
+                                                    components: [serverLinkmain],
                                                 });
                                             });
                                         }

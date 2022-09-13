@@ -42,10 +42,10 @@ module.exports = {
 
         var dm = new MessageEmbed()
             .setAuthor(interaction.guild.name, interaction.guild.iconURL())
-            .setTitle(`**A moderator has kicked you.**`)
+            .setTitle(`**A moderator has kicked you. Rejoin the server using the button below in order to appeal or just to rejoin.**`)
             .addField('Reason:', reason)
             .addField('Case ID: ', caseCount.toString())
-            .setFooter(client.user.username + ' - You can rejoin the server at discord.gg/operationpolitics', client.user.avatarURL())
+            .setFooter(client.user.username, client.user.avatarURL())
             .setTimestamp()
             .setColor("#992D22");
 
@@ -65,6 +65,15 @@ module.exports = {
                     .setCustomId('appeal')
                     .setLabel('Appeal')
                     .setStyle('PRIMARY'),
+            );
+
+        const serverLinkmain = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('linkmain')
+                    .setLabel('Operation Politics Server')
+                    .setStyle('LINK')
+                    .setURL('https://discord.gg/operationpolitics')
             );
 
         //No longer the button!
@@ -291,6 +300,7 @@ module.exports = {
                                         warnee.send({
                                             content: `A moderator has accepted your appeal for Case ID ${caseIDInputted}. Appropriate action will be made to adjust your record.`,
                                             embeds: [acceptreasonEmbed],
+                                            components: [serverLinkmain],
                                         });
                                     });
                                 }
@@ -329,6 +339,7 @@ module.exports = {
                                     warnee.send({
                                         content: `A moderator has rejected your appeal for Case ID ${caseIDInputted}.`,
                                         embeds: [rejectEmbed],
+                                        components: [serverLinkmain],
                                     });
                                 }
     

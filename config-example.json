@@ -1,21 +1,22 @@
 {
-    "token": "bot-token",
-    "prefix": "!",
-    "owner": "owner-id",
-    "logChannel": "join-leave-channel-id",
-    "messageDeleteLog": "message-delete-channel-id",
-    "generalChannel": "general-channel-id",
-    "welcomeChannel": "welcome-channel-id",
-    "lastUpdateDate": "since 10/5/21",
+    "token": "--",
+    "clientId": "--",
+	"guildId": "--",
+    "prefix": "--",
+    "owner": "--",
+    "logChannel": "--",
+    "messageDeleteLog": "--",
+    "generalChannel": "--",
+    "welcomeChannel": "--",
+    "lastUpdateDate": "--",
     "opts": {
         "mentionEveryone": false,
         "fetchAllMembers": true,
         "sync": true
     },
     "rethink": {
-        "ip": "rethinkdb-ip-address",
-        "port": "",
-        "username": "",
-        "password": ""
+        "ip": "--",
+        "username": "--",
+        "password": "--"
     }
 }

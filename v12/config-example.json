@@ -1,0 +1,21 @@
+{
+    "token": "bot-token",
+    "prefix": "!",
+    "owner": "owner-id",
+    "logChannel": "join-leave-channel-id",
+    "messageDeleteLog": "message-delete-channel-id",
+    "generalChannel": "general-channel-id",
+    "welcomeChannel": "welcome-channel-id",
+    "lastUpdateDate": "since 10/5/21",
+    "opts": {
+        "mentionEveryone": false,
+        "fetchAllMembers": true,
+        "sync": true
+    },
+    "rethink": {
+        "ip": "rethinkdb-ip-address",
+        "port": "",
+        "username": "",
+        "password": ""
+    }
+}

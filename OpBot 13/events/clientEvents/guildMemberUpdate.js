@@ -15,14 +15,14 @@ module.exports = {
                 //added roles
                 newMember.roles.cache.forEach(role => {
                     if (!oldMember.roles.cache.has(role.id)) {
-                        roleUpdate.addField(`Added:`, role);
+                        roleUpdate.addField(`Added:`, role.name);
                     }
                 });
     
                 //removedroles
                 oldMember.roles.cache.forEach(role => {
                     if (!newMember.roles.cache.has(role.id)) {
-                        roleUpdate.addField(`Removed:`, role);
+                        roleUpdate.addField(`Removed:`, role.name);
                     }
                 });
             
@@ -35,9 +35,11 @@ module.exports = {
             newMember.guild.channels.cache.get(client.config.logChannel).send({
                 embeds: [roleUpdate]
             })
+        } else {
+            console.log(oldMember.displayName + " was updated but kept the same roles.");
         }
         
-        if (oldMember.nickname != newMember.nickname) {
+        if (oldMember.displayName != newMember.displayName) {
             //nickname change
             var nicknameUpdate = new MessageEmbed()
                 .setAuthor(newMember.user.tag, newMember.user.avatarURL())
@@ -45,8 +47,8 @@ module.exports = {
                 .setColor("#FFFF00")
                 .setFooter(`id: ` + newMember.user.id)
                 .setTimestamp()
-                .addField("Old nickname:", oldMember.nickname)
-                .addField("New nickname:", newMember.nickname);
+                .addField("Old nickname:", oldMember.displayName)
+                .addField("New nickname:", newMember.displayName);
     
             newMember.guild.channels.cache.get(client.config.logChannel).send({
                 embeds: [nicknameUpdate]

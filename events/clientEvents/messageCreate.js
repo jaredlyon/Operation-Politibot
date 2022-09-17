@@ -140,8 +140,8 @@ module.exports = {
 		}
 	
 		//role changes
-		var userID = message.author.id;
-		let member = message.guild.members.cache.get(userID);
+		var userID = message.member.id;
+		let member = message.member;
 		let trusted = (await client.trusted.get(message.author.id)) || {};
 	
 		if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && client.msgCount[userID].count > 300) {
@@ -198,11 +198,6 @@ module.exports = {
 			member.roles.remove(presidentialRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a constituional author!");
 			message.reply("you have leveled up to the **Constitutional Author** activity tier!");		
-		}
-	
-		//muted filter
-		if (member.roles.cache.some(role => role.id === '849498583102914581') && message.channel.parentID != 975542186491912202) {
-			message.delete();
 		}
 	},
 };

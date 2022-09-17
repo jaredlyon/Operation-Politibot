@@ -6,7 +6,7 @@ module.exports = {
     description: "Restarts Politibot...",
     options: [],
 	run: async(client, interaction) => {
-		interaction.channel.send(":wave: " + bot.user.username + " is restarting...");
+		interaction.reply(":wave: " + client.user.username + " is restarting...");
 
 		setTimeout(function() {
 			process.exit();

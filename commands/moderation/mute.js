@@ -23,7 +23,7 @@ module.exports = {
             type: 4,
             name: "length",
             description: "Mute length in minutes"
-        },
+        }
     ],
     run: async (client, interaction) => {
         var log = interaction.guild.channels.cache.get(client.config.logChannel);
@@ -109,14 +109,6 @@ module.exports = {
                     .setStyle('PRIMARY'),
             );
 
-        const rulesTestButton = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setLabel('Rules Test')
-                    .setStyle('LINK')
-                    .setURL('https://forms.gle/o2ckvskjgPjC7JfV8'),
-            );
-
         //No longer the button!
         //Now it's the Modal!
 
@@ -171,7 +163,6 @@ module.exports = {
         client.caseNum.count++;
 
         await mutee.createDM();
-
         const appealMsg = await mutee.send({
             embeds: [dm],
             components: [appealButton]
@@ -182,13 +173,6 @@ module.exports = {
             });
             appealMsg = null
         });
-
-        if (length === 40000) {
-            await mutee.send({
-                content: 'You must take a rules test in order to regain access to the server.',
-                components: [rulesTestButton]
-            });
-        };
 
         if (appealMsg != null) {
             appealMsg.awaitMessageComponent( filter ).then(async interaction => {

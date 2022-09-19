@@ -15,21 +15,21 @@ module.exports = {
 
         for (let i = caseCount - 10; i < caseCount; i++) {
             if (client.logs[i]) {
-                var targetMember = await interaction.guild.members.fetch(client.logs[i].userid);
-                console.log("Member: " + targetMember);
+                var targetID = client.logs[i].userid;
+                var targetUser = await client.users.fetch(targetID);
 
-                if (targetMember) {
-                    var username = await targetMember.username;
+                if (targetUser) {
+                    var username = targetUser.username;
                 } else {
-                    var username = client.logs[i].userid;
+                    var username = targetID;
                 }
-                console.log(username);
 
-                var moderator = await client.users.fetch(client.logs[i].moderatorid);
+                var modID = client.logs[i].moderatorid;
+                var moderator = await client.users.fetch(modID);
 
                 log.addField(username + " | " + client.logs[i].type + ' issued by ' + moderator.username, client.logs[i].date + '\n' + client.logs[i].reason + '\nCase ID: ' + client.logs[i].caseNum)
             } else {
-                log.addField("Case " + i, "*This case was deleted.*")
+                log.addField("Case " + i, "*This case was deleted.*");
             }
         }
 

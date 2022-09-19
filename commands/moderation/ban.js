@@ -116,7 +116,6 @@ module.exports = {
                 const serverLinkmain = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
-                            .setCustomId('linkmain')
                             .setLabel('Operation Politics Server')
                             .setStyle('LINK')
                             .setURL('https://discord.gg/operationpolitics')

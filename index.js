@@ -58,6 +58,38 @@ client.syncDatabase = async function () {
 	console.log("[MEMBER TRACKING] OpBot has successfully connected to trusted member database!");
 }
 
+//repData
+client.syncRepData = function () {
+	client.repData = require('./repData.json');
+
+	client.users.cache.forEach(user => {
+		if (!client.repData[user.id] && !user.bot) {
+			client.repData[user.id] = {
+				repScore: 0,
+				repsGiven: 0,
+				lastRepReceived: null,
+				lastRepGiven: null
+			}
+		}
+	})
+
+	writeRepData();
+
+	setInterval(function () {
+		writeRepData();
+	}, 60000);
+
+	function writeRepData() {
+		var repDataJson = fs.readFileSync("./repData.json"),
+			repDataParsed = JSON.parse(repDataJson)
+		if (JSON.stringify(repDataParsed) == JSON.stringify(client.repData)) return; // Only writes if there's a difference
+
+		fs.writeFileSync("./repData.json", JSON.stringify(client.repData, null, 3));
+		console.log("[REP DATA] | Reputation data successfully saved to file!")
+		return "Reputation data successfully saved to file!";
+	}
+}
+
 //logs
 client.syncLogs = function () {
 	client.logs = require('./logs.json');

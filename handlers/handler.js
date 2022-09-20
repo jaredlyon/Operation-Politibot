@@ -54,6 +54,8 @@ const loadCommands = async function (client) {
     client.on("ready", async () => {
         client.config = require('../config.json');
         console.log("Config loaded!");
+        client.syncRepData();
+        console.log("Rep data loaded!");
         client.syncLogs();
         console.log("Moderation logs synced!");
         client.syncCaseNum();

@@ -140,8 +140,8 @@ module.exports = {
 		}
 	
 		//role changes
-		var userID = message.author.id;
-		let member = message.guild.members.cache.get(userID);
+		var userID = message.member.id;
+		let member = message.member;
 		let trusted = (await client.trusted.get(message.author.id)) || {};
 	
 		if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && client.msgCount[userID].count > 300) {
@@ -150,7 +150,7 @@ module.exports = {
 			member.roles.add(trustedRole);
 			member.roles.remove(memberRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a trusted member!");
-			message.reply("you have become a trusted member! You can now send message embeds and files to the server.");
+			message.reply("You have become a trusted member! You can now send message embeds and files to the server.");
 		} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
 			console.log("[MEMBER TRACKING] " + message.author + " sent a message but was ineligible for trusted status.");
 		}
@@ -167,42 +167,37 @@ module.exports = {
 			member.roles.add(internRole);
 			//member.roles.remove(memberRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became an intern!");
-			message.reply("you have leveled up to the **Intern** activity tier!");
+			message.reply("You have leveled up to the **Intern** activity tier!");
 		} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 1875)) {
 			member.roles.add(activistRole);
 			member.roles.remove(internRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became an activist!");
-			message.reply("you have leveled up to the **Activist** activity tier!");		
+			message.reply("You have leveled up to the **Activist** activity tier!");		
 		} else if (!member.roles.cache.some(role => role.id === '950846792315068416') && (1875 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 3750)) {
 			member.roles.add(punditRole);
 			member.roles.remove(activistRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a pundit!");
-			message.reply("you have leveled up to the **Pundit** activity tier!");		
+			message.reply("You have leveled up to the **Pundit** activity tier!");		
 		} else if (!member.roles.cache.some(role => role.id === '950846854545965076') && (3750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 7500)) {
 			member.roles.add(statesmanRole);
 			member.roles.remove(punditRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a statesman!");
-			message.reply("you have leveled up to the **Statesman** activity tier!");		
+			message.reply("You have leveled up to the **Statesman** activity tier!");		
 		} else if (!member.roles.cache.some(role => role.id === '950846886653337641') && (7500 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 15000)) {
 			member.roles.add(ambassadorRole);
 			member.roles.remove(statesmanRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became an ambassador!");
-			message.reply("you have leveled up to the **Ambassador** activity tier!");		
+			message.reply("You have leveled up to the **Ambassador** activity tier!");		
 		} else if (!member.roles.cache.some(role => role.id === '950846892827377694') && (15000 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 30000)) {
 			member.roles.add(presidentialRole);
 			member.roles.remove(ambassadorRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a president!");
-			message.reply("you have leveled up to the **Presidential** activity tier!");		
+			message.reply("You have leveled up to the **Presidential** activity tier!");		
 		} else if (!member.roles.cache.some(role => role.id === '950846899106238505') && client.msgCount[message.author.id].count > 30000) {
 			member.roles.add(constitutionalRole);
 			member.roles.remove(presidentialRole);
 			console.log("[MEMBER TRACKING] " + message.author + " became a constituional author!");
-			message.reply("you have leveled up to the **Constitutional Author** activity tier!");		
-		}
-	
-		//muted filter
-		if (member.roles.cache.some(role => role.id === '849498583102914581') && message.channel.parentID != 975542186491912202) {
-			message.delete();
+			message.reply("You have leveled up to the **Constitutional Author** activity tier!");		
 		}
 	},
 };

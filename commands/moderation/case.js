@@ -107,7 +107,6 @@ module.exports = {
 
         // edit case
         client.logs[caseNumber].reason += "\nEdited on `" + new Date() + "`\n" + reason
-        interaction.reply("Case updated! New case:");
         var userid = client.logs[caseNumber].userid;
         var target = interaction.guild.members.cache.get(userid);
         var moderator = interaction.guild.members.cache.get(client.logs[caseNumber].moderatorid);
@@ -129,6 +128,7 @@ module.exports = {
         }
 
         interaction.reply({
+          content: "Case updated! New case:",
           embeds: [log]
         });
 
@@ -136,8 +136,7 @@ module.exports = {
         const reason = interaction.options.getString("reason");
 
         // rewrite case
-        client.logs[caseNumber].reason = "Edited on `" + new Date() + "`\n" + reason
-        interaction.reply("Case updated! New case:");
+        client.logs[caseNumber].reason = "Rewritten on `" + new Date() + "`\n" + reason
         var userid = client.logs[caseNumber].userid;
         var target = interaction.guild.members.cache.get(userid);
         var moderator = interaction.guild.members.cache.get(client.logs[caseNumber].moderatorid);
@@ -159,6 +158,7 @@ module.exports = {
         }
 
         interaction.reply({
+          content: "Case updated! New case:",
           embeds: [log]
         });
 
@@ -167,9 +167,9 @@ module.exports = {
         // delete case
         if (interaction.user.id == client.config.owner || interaction.guild.members.cache.get(interaction.user.id).roles.cache.some(role => role.id === '775501181212295239') || interaction.guild.members.cache.get(interaction.user.id).roles.cache.some(role => role.id === '927318500614225920')) {
           delete client.logs[caseNumber]
-          interaction.reply("Case deleted!")
+          interaction.reply("Case deleted!");
         } else {
-          interaction.reply('due to database & logging security, data can only be deleted by Senior Moderation Staff.')
+          interaction.reply('due to database & logging security, data can only be deleted by Senior Moderation Staff.');
         }
 
       }

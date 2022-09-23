@@ -108,14 +108,14 @@ module.exports = {
       interaction.reply(targetUser.toString() + " has **" + client.repData[targetID].repScore + "** rep!");
 
     } else if (interaction.options.getSubcommandGroup() === "info" && interaction.options.getSubcommand() === 'leaderboard') {
-      score = [];
+      var repData = [];
 
       for (var val in client.repData) {
         client.repData[val].userID = val;
-        score.push(client.repData[val])
+        repData.push(client.repData[val])
       }
 
-      score.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
+      repData.sort((a, b) => parseFloat(b.repScore) - parseFloat(a.repScore));
 
       var lb = new MessageEmbed()
         .setColor(interaction.guild.me.displayHexColor)
@@ -123,15 +123,15 @@ module.exports = {
         .setFooter(interaction.guild.name, interaction.guild.iconURL());
 
       for (var i = 0; i < 12; i++) {
-        var mem = client.users.cache.get(score[i].userID)
+        var mem = client.users.cache.get(repData[i].userID)
 
         if (mem == null) {
           mem = 'User Left Server'
         } else {
-          mem = client.users.cache.get(score[i].userID).username
+          mem = client.users.cache.get(repData[i].userID).username
         }
 
-        lb.addField(`${i + 1}: ${mem}`, score[i].score + " rep", true);
+        lb.addField(`${i + 1}: ${mem}`, repData[i].repScore + " rep", true);
       }
 
       interaction.reply({ embeds: [lb] });

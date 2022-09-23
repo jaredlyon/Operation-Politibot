@@ -1,4 +1,2 @@
-automute.json
-caseNum.json
-logs.json
-msgCount.json
+.DS_Store
+config.json

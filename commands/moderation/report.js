@@ -6,24 +6,22 @@ module.exports = {
     description: "Report an issue to staff!",
     options: [
       {
-        "type": 3,
-        "name": "reason",
-        "description": "The reason for issue",
-        "required": true
+        type: 3,
+        name: "reason",
+        description: "The reason for issue",
+        required: true
       }
     ],
 	run: async(client, interaction) => {
         var log = interaction.guild.channels.cache.get(client.config.logChannel);
-        var reason = interaction.options.get('reason');
-
-        //#trial-moderators: 893189722887839797
+        var reason = interaction.options.getString('reason');
         var modChannel = interaction.guild.channels.cache.get('893189722887839797');
 
         var logEmbed = new MessageEmbed()
-            .setAuthor(interaction.author.username, interaction.author.avatarURL())
+            .setAuthor(interaction.user.username, interaction.user.avatarURL())
             .setTitle("**Complaint Filed**")
             .addField('Reason:', reason)
-            .addField('Message Link:', interaction.url)
+            .addField('Timestamp:', "In channel " + interaction.channel.toString() + " at: \n`" + interaction.createdAt + "`")
             .setFooter(client.user.username, client.user.avatarURL())
             .setTimestamp()
             .setColor("#992D22");
@@ -32,14 +30,12 @@ module.exports = {
             embeds: [logEmbed]
         })
 
-        //trial mod role: 893189360105689139
-        //mod role: 854841000480079882
-        modChannel.send("<@&893189360105689139> <@&854841000480079882> <@&927318500614225920> <@&895051017828311100> **See below complaint:**");
         modChannel.send({
-            embeds: [logEmbed]
-        })
+          content: "<@&893189360105689139> <@&854841000480079882> <@&927318500614225920> <@&895051017828311100> **See below complaint:**",
+          embeds: [logEmbed]
+        });
 
         //reply
-        interaction.reply("your complaint has been sent! A staff member will be with you shortly.");
+        interaction.reply({ content: "Your complaint has been sent! Thank you for helping keep Operation Politics healthy!", ephemeral: true });
 	},
 };

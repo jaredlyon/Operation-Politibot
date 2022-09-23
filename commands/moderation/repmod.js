@@ -13,7 +13,7 @@ module.exports = {
         {
           type: 6,
           name: "target",
-          description: "",
+          description: "The target user",
           required: true
         }
       ]
@@ -26,7 +26,7 @@ module.exports = {
         {
           type: 6,
           name: "target",
-          description: "",
+          description: "The target user",
           required: true
         }
       ]
@@ -39,7 +39,7 @@ module.exports = {
         {
           type: 6,
           name: "target",
-          description: "",
+          description: "The target user",
           required: true
         }
       ]

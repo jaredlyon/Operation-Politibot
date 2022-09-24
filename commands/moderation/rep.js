@@ -74,7 +74,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 86400000) {
+      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000) {
         client.repData[targetID].repScore++;
         client.repData[interaction.user.id].repsGiven++;
         client.repData[targetID].lastRepReceived = new Date();
@@ -89,7 +89,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 86400000) {
+      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000) {
         client.repData[targetID].repScore--;
         // omit below changes?
         //client.repData[interaction.user.id].repsGiven--;

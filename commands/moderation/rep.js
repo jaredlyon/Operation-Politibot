@@ -70,6 +70,11 @@ module.exports = {
     }
   ],
   run: async (client, interaction) => {
+
+    const filter = i => {
+      return i.user.id === interaction.user.id;
+    };
+
     if (interaction.options.getSubcommandGroup() === "points" && interaction.options.getSubcommand() === 'add') {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
@@ -79,33 +84,174 @@ module.exports = {
         client.repData[interaction.user.id].repsGiven++;
         client.repData[targetID].lastRepReceived = new Date();
         client.repData[interaction.user.id].lastRepGiven = new Date();
-        interaction.reply(targetUser.toString() + " has been repped by " + interaction.user.toString() + "!");
-        console.log("[REP DATA] " + interaction.user.username + " has given rep to " + targetUser.username + ".");
+        const repUpEmbed = {
+          color: '#ffffff',
+          description: `${targetUser.toString()}, somebody gave you a reputation point! Keep it up!`
+        };
+        const repUpConfirm = {
+          color: `#ffffff`,
+          description: `Are you sure you would like to give a rep to ${targetUser.toString()} and upvote them?`,
+          footer: {
+            text: 'Please confirm or cancel below.'
+          }
+        };
+        const repUpSent = {
+          color: `#ffffff`,
+          description: `You have upvoted ${targetUser.toString()}!`
+        };
+        const confirmButtons = new MessageActionRow()
+          .addComponents(
+            new MessageButton()
+              .setCustomId('confirm')
+              .setLabel('Confirm')
+              .setStyle('SUCCESS'),
+            new MessageButton()
+              .setCustomId('cancel')
+              .setLabel('Cancel')
+              .setStyle('DANGER'),
+          );
+
+        const confirmDenyInt = await interaction.reply({ embeds: [repUpConfirm], components: [confirmButtons], ephemeral: true });
+
+        confirmDenyInt.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 10 }).then(async interaction => {
+          confirmDenyValue = interaction.values
+
+          if (confirmDenyValue === 'cancel') {
+            interaction.update({ content: 'Prompt cancelled.', ephemeral: true, embeds: [], components: [] })
+            console.log("[REP DATA] Prompt cancelled.")
+          } else if (confirmDenyValue === 'confirm') {
+            interaction.update({ embeds: [repUpSent], components: [], ephemeral: true })
+            interaction.channel.send({ embeds: [repUpEmbed] })
+            console.log("[REP DATA] " + interaction.user.username + " has given rep to " + targetUser.username + ".");
+          } else {
+            interaction.update({ content: 'Something went wrong!', ephemeral: true })
+            console.log("[REP DATA] Something went wrong!")
+          }
+        })
       } else {
-        interaction.reply("Your rep cooldown has not elapsed yet!")
+        const timeRemaining = 0 // put the algorithm to define timeRemaining for cooldown here
+        const cooldownError = {
+          color: '#ffffff',
+          description: 'Your rep points cooldown has not elapsed yet! Time Remaining:' + '`' + timeRemaining + '`' // 30 mins of sleep brain said this is how you set this up.
+        };
+        interaction.reply({
+          embeds: [cooldownError],
+          ephemeral: true,
+        })
       }
 
     } else if (interaction.options.getSubcommandGroup() === "points" && interaction.options.getSubcommand() === 'sub') {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000) {
+      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 10) {
         client.repData[targetID].repScore--;
         // omit below changes?
         //client.repData[interaction.user.id].repsGiven--;
         //client.repData[targetID].lastRepReceived = new Date();
         client.repData[interaction.user.id].lastRepGiven = new Date();
-        interaction.reply(targetUser.toString() + " has been downvoted by " + interaction.user.toString() + "!");
-        console.log("[REP DATA] " + interaction.user.username + " has taken rep from " + targetUser.username + ".");
+
+        const repDownEmbed = {
+          color: '#ffffff',
+          description: `${targetUser.toString()}, somebody gave you a negative reputation point! Try to do better!`
+        };
+        const repDownConfirm = {
+          color: `#ffffff`,
+          description: `Are you sure you would like to give a negative rep to ${targetUser.toString()} and downvote them?`,
+          footer: {
+            text: 'Please confirm or cancel below.'
+          }
+        };
+        const repDownSent = {
+          color: `#ffffff`,
+          description: `You have downvoted ${targetUser.toString()}!`
+        };
+        const confirmButtons2 = new MessageActionRow()
+          .addComponents(
+            new MessageButton()
+              .setCustomId('confirm')
+              .setLabel('Confirm')
+              .setStyle('SUCCESS'),
+            new MessageButton()
+              .setCustomId('cancel')
+              .setLabel('Cancel')
+              .setStyle('DANGER'),
+          );
+
+        const confirmDenyInt2 = await interaction.reply({ embeds: [repDownConfirm], components: [confirmButtons2], ephemeral: true });
+
+        confirmDenyInt2.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1200000 }).then(async interaction => {
+          confirmDenyValue = interaction.values
+
+          if (confirmDenyValue === 'cancel') {
+            interaction.update({ content: 'Prompt cancelled.', ephemeral: true, embeds: [], components: [] })
+            console.log("[REP DATA] Prompt cancelled.")
+          } else if (confirmDenyValue === 'confirm') {
+            interaction.update({ embeds: [repDownSent], components: [], ephemeral: true })
+            interaction.channel.send({ embeds: [repDownEmbed] })
+            console.log("[REP DATA] " + interaction.user.username + " has given a negative rep to " + targetUser.username + ".");
+          } else {
+            interaction.update({ content: 'Something went wrong!', ephemeral: true })
+            console.log("[REP DATA] Something went wrong!")
+          }
+        })
       } else {
-        interaction.reply("Your rep cooldown has not elapsed yet!")
+        const timeRemaining = 0 // put the algorithm to define timeRemaining for cooldown here
+        const cooldownError = {
+          color: '#ffffff',
+          description: 'Your rep points cooldown has not elapsed yet! Time Remaining:' + '`' + timeRemaining + '`' // 30 mins of sleep brain said this is how you set this up.
+        };
+        interaction.reply({
+          embeds: [cooldownError],
+          ephemeral: true,
+        })
       }
 
     } else if (interaction.options.getSubcommandGroup() === "info" && interaction.options.getSubcommand() === 'profile') {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      interaction.reply(targetUser.toString() + " has **" + client.repData[targetID].repScore + "** rep!");
+      const profileEmbed = {
+        color: '#ffffff',
+        author: {
+          name: targetUser.username + `'s reputation profile`,
+          icon_url: targetUser.avatarURL(),
+        },
+        fields: [
+          {
+            name: `➕ Positive Points`,
+            value: '`' + client.repData[targetID].repsGiven + '`',
+            inline: true,
+          },
+          {
+            name: `Total Points`,
+            value: '`' + client.repData[targetID].repScore + '`',
+            inline: true,
+          },
+          {
+            name: '➖ Negative Points',
+            value: '`' + ((client.repData[targetID].repsGiven) - (client.repData[targetID].repScore)) + '`',
+            inline: true,
+          },
+          {
+            name: 'Last Received:',
+            value: '`' + client.repData[targetID].lastRepReceived + '`'
+          },
+          {
+            name: 'Last Given:',
+            value: '`' + client.repData[targetID].lastRepGiven + '`'
+          }
+        ],
+        timestamp: new Date(),
+        footer: {
+          text: client.user.username,
+          icon_url: client.user.avatarURL(),
+        }
+      };
+
+      interaction.reply({
+        embeds: [profileEmbed]
+      })
 
     } else if (interaction.options.getSubcommandGroup() === "info" && interaction.options.getSubcommand() === 'leaderboard') {
       var repData = [];
@@ -117,10 +263,14 @@ module.exports = {
 
       repData.sort((a, b) => parseFloat(b.repScore) - parseFloat(a.repScore));
 
-      var lb = new MessageEmbed()
-        .setColor(interaction.guild.me.displayHexColor)
-        .setTitle('Operation Politics Rep Leaderboard')
-        .setFooter(interaction.guild.name, interaction.guild.iconURL());
+      var lb = {
+        color: interaction.guild.me.displayHexColor,
+        title: 'Operation Politics Reputation Leaderboard',
+        footer: {
+          text: interaction.guild.name,
+          icon_url: interaction.guild.iconURL(),
+        },
+      };
 
       for (var i = 0; i < 12; i++) {
         var mem = client.users.cache.get(repData[i].userID)

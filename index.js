@@ -65,8 +65,10 @@ client.syncRepData = function () {
 	client.users.cache.forEach(user => {
 		if (!client.repData[user.id] && !user.bot) {
 			client.repData[user.id] = {
-				repScore: 0,
-				repsGiven: 0,
+				upvotes: 0,
+				downvotes: 0,
+				upvotesGiven: 0,
+				downvotesGiven: 0,
 				lastRepReceived: null,
 				lastRepGiven: null
 			}

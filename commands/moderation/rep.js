@@ -80,8 +80,8 @@ module.exports = {
       var targetID = targetUser.id;
 
       if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000) {
-        client.repData[targetID].repScore++;
-        client.repData[interaction.user.id].repsGiven++;
+        client.repData[targetID].upvotes++;
+        client.repData[interaction.user.id].upvotesGiven++;
         client.repData[targetID].lastRepReceived = new Date();
         client.repData[interaction.user.id].lastRepGiven = new Date();
         const repUpEmbed = {
@@ -129,7 +129,7 @@ module.exports = {
           }
         })
       } else {
-        const timeRemaining = 0 // put the algorithm to define timeRemaining for cooldown here
+        const timeRemaining = convert(new Date(), new Date(client.repData[interaction.user.id].lastRepGiven));
         const cooldownError = {
           color: '#ffffff',
           description: 'Your rep points cooldown has not elapsed yet! Time Remaining:' + '`' + timeRemaining + '`' // 30 mins of sleep brain said this is how you set this up.
@@ -145,10 +145,8 @@ module.exports = {
       var targetID = targetUser.id;
 
       if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 10) {
-        client.repData[targetID].repScore--;
-        // omit below changes?
-        //client.repData[interaction.user.id].repsGiven--;
-        //client.repData[targetID].lastRepReceived = new Date();
+        client.repData[targetID].downvotes++;
+        client.repData[interaction.user.id].downvotesGiven++;
         client.repData[interaction.user.id].lastRepGiven = new Date();
 
         const repDownEmbed = {
@@ -196,7 +194,7 @@ module.exports = {
           }
         })
       } else {
-        const timeRemaining = 0 // put the algorithm to define timeRemaining for cooldown here
+        const timeRemaining = convert(new Date(), new Date(client.repData[interaction.user.id].lastRepGiven));
         const cooldownError = {
           color: '#ffffff',
           description: 'Your rep points cooldown has not elapsed yet! Time Remaining:' + '`' + timeRemaining + '`' // 30 mins of sleep brain said this is how you set this up.
@@ -220,21 +218,21 @@ module.exports = {
         fields: [
           {
             name: `➕ Positive Points`,
-            value: '`' + client.repData[targetID].repsGiven + '`',
+            value: '`' + client.repData[targetID].upvotes + '`',
             inline: true,
           },
           {
             name: `Total Points`,
-            value: '`' + client.repData[targetID].repScore + '`',
+            value: '`' + (client.repData[targetID].upvotes - client.repData[targetID].downvotes) + '`',
             inline: true,
           },
           {
             name: '➖ Negative Points',
-            value: '`' + ((client.repData[targetID].repsGiven) - (client.repData[targetID].repScore)) + '`',
+            value: '`' + client.repData[targetID].downvotes + '`',
             inline: true,
           },
           {
-            name: 'Last Received:',
+            name: 'Last +Rep Received:',
             value: '`' + client.repData[targetID].lastRepReceived + '`'
           },
           {
@@ -261,7 +259,7 @@ module.exports = {
         repData.push(client.repData[val])
       }
 
-      repData.sort((a, b) => parseFloat(b.repScore) - parseFloat(a.repScore));
+      repData.sort((a, b) => parseFloat((b.upvotes - b.downvotes)) - parseFloat((a.upvotes - a.downvotes)));
 
       var lb = {
         color: interaction.guild.me.displayHexColor,
@@ -285,6 +283,26 @@ module.exports = {
       }
 
       interaction.reply({ embeds: [lb] });
+    }
+
+    // date conversion function
+    function convert(d1, d2) {
+      // console.log(d1);
+      // console.log(d2);
+      var t1 = d1.getTime();
+      var t2 = d2.getTime();
+      var duration = 86400000 - (t1 - t2);
+
+      var milliseconds = parseInt((duration % 500) / 50),
+        seconds = parseInt((duration / 500) % 60),
+        minutes = parseInt((duration / (500 * 60)) % 60),
+        hours = parseInt((duration / (500 * 60 * 60)) % 24);
+
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
     }
   }
 };

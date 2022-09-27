@@ -63,10 +63,8 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      client.repData[targetID].repScore += 10;
-      //client.repData[interaction.user.id].repsGiven += 10;
+      client.repData[targetID].upvotes += 10;
       client.repData[targetID].lastRepReceived = new Date();
-      //client.repData[interaction.user.id].lastRepGiven = new Date();
       interaction.reply(targetUser.toString() + " has been given 10 rep by " + interaction.user.toString() + "!");
       console.log("[REP DATA] " + interaction.user.username + " has given 10 rep to " + targetUser.username + ".");
 
@@ -74,10 +72,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      client.repData[targetID].repScore -= 10;
-      //client.repData[interaction.user.id].repsGiven += 10;
-      //client.repData[targetID].lastRepReceived = new Date();
-      //client.repData[interaction.user.id].lastRepGiven = new Date();
+      client.repData[targetID].downvotes += 10;
       interaction.reply(targetUser.toString() + " has had 10 rep taken by " + interaction.user.toString() + "!");
       console.log("[REP DATA] " + interaction.user.username + " has taken 10 rep from " + targetUser.username + ".");
 
@@ -85,10 +80,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      client.repData[targetID].repScore--;
-      //client.repData[interaction.user.id].repsGiven += 10;
-      //client.repData[targetID].lastRepReceived = new Date();
-      //client.repData[interaction.user.id].lastRepGiven = new Date();
+      client.repData[targetID].downvotes++;
       interaction.reply(targetUser.toString() + " has had rep stripped from them by " + interaction.user.toString() + "!");
       console.log("[REP DATA] " + interaction.user.username + " has stripped a rep from " + targetUser.username + ".");
 
@@ -96,10 +88,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      client.repData[targetID].repScore++;
-      //client.repData[interaction.user.id].repsGiven += 10;
-      //client.repData[targetID].lastRepReceived = new Date();
-      //client.repData[interaction.user.id].lastRepGiven = new Date();
+      client.repData[targetID].upvotes++;
       interaction.reply(targetUser.toString() + " has been repped by " + interaction.user.toString() + "!");
       console.log("[REP DATA] " + interaction.user.username + " has given rep to " + targetUser.username + ".");
 

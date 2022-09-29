@@ -14,9 +14,7 @@ module.exports = {
     ],
 	run: async(client, interaction) => {
         var targetUser = await interaction.options.getUser('target');
-        console.log(targetUser);
         var targetMember = await interaction.guild.members.fetch(targetUser.id);
-        console.log(targetMember);
 
         if (targetMember.nickname) {
           var nickname = targetMember.nickname;
@@ -34,13 +32,11 @@ module.exports = {
             .setTimestamp()
             .setColor(3447003);
         
-        /*
         let trusted = (await client.trusted.get(targetUser.id)) || {};
         if (targetMember.roles.cache.some(role => role.id === '909989200378601472')) {
             var trustedDate = new Date(trusted.joinDate.getTime() + 1209600000);
-            info.addField('User Will Be Trusted On:', trustedDate)
+            info.addField('User Will Be Trusted On:', trustedDate.toString());
         }
-        */
 
         interaction.reply({
             embeds: [info]

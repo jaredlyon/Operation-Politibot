@@ -6,12 +6,24 @@ module.exports = {
 		//if (new Date() - oldMessage.createdAt <= 2000 && newMessage.embeds.length > 0) return;
         if (oldMessage.content === newMessage.content) return;
 
+        if (oldMessage.content) {
+            var oldMessageContent = oldMessage.content;
+        } else {
+            var oldMessageContent = "`null`"
+        }
+
+        if (newMessage.content) {
+            var newMessageContent = newMessage.content;
+        } else {
+            var newMessageContent = "`null`"
+        }
+
         var msgUpdate = new MessageEmbed()
             .setAuthor(newMessage.author.tag, newMessage.author.avatarURL())
             .setFooter(`id: ` + newMessage.author.id)
             .setTimestamp()
-            .addField('Old message:', `${oldMessage}`)
-            .addField('New message:', `${newMessage}`)
+            .addField('Old message:', `${oldMessageContent}`)
+            .addField('New message:', `${newMessageContent}`)
             .addField(`Channel:`, `${oldMessage.channel}`)
             .setColor("#206694");
     

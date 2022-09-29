@@ -3,60 +3,52 @@ const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 
 module.exports = {
     name: "demographics",
-    description: "Views the server demographics",
+    description: "View the server demographics",
     options: [
       {
-        "type": 2,
-        "name": "category",
-        "description": "The demographic category",
-        "options": [
-          {
-            "type": 1,
-            "name": "general",
-            "description": "General"
-          },
-          {
-            "type": 1,
-            "name": "religion",
-            "description": "Religion"
-          },
-          {
-            "type": 1,
-            "name": "foreign",
-            "description": "Foreign Ideology"
-          },
-          {
-            "type": 1,
-            "name": "economic",
-            "description": "Economic"
-          },
-          {
-            "type": 1,
-            "name": "political",
-            "description": "Political"
-          },
-          {
-            "type": 1,
-            "name": "party",
-            "description": "Party"
-          },
-          {
-            "type": 1,
-            "name": "other",
-            "description": "Political Ideology"
-          },
-          {
-            "type": 1,
-            "name": "ideology",
-            "description": "Regional Ideology"
-          }
-        ]
+        type: 1,
+        name: "general",
+        description: "General demographics"
+      },
+      {
+        type: 1,
+        name: "religion",
+        description: "Religious demographics"
+      },
+      {
+        type: 1,
+        name: "foreign",
+        description: "Foreign ideology demographics"
+      },
+      {
+        type: 1,
+        name: "economic",
+        description: "Economic ideology demographics"
+      },
+      {
+        type: 1,
+        name: "political",
+        description: "Political ideology demographics"
+      },
+      {
+        type: 1,
+        name: "party",
+        description: "Party demographics"
+      },
+      {
+        type: 1,
+        name: "regideology",
+        description: "Political demographics by region"
+      },
+      {
+        type: 1,
+        name: "other",
+        description: "Other ideological demographics"
       }
     ],
 	run: async(client, interaction) => {
 		const target = interaction.guild.id;
-        const input = interaction.options.getString("option")
-        if (input === "general") {
+        if (interaction.options.getSubcommand() === "general") {
             //party counts
             var democrats = 0;
             var republicans = 0;
@@ -354,7 +346,7 @@ module.exports = {
             interaction.channel.send("**Party Demographics:**\nDemocrats: " + democrats + "\nRepublicans: " + republicans + "\nGreens: " + greens + "\nLibertarians: " + pLibertarians + "\nOther: " + others + "\nIndependents: " + independents);
             //ideology
             interaction.channel.send("**Ideology Demographics by Priority (Total):**\nCommunists: " + communists + " (" + communistsTot + ")\nSocialists: " + socialists + " (" + socialistsTot + ")\nDemocratic-Socialists: " + demSocs + " (" + demSocsTot + ")\nProgressives: " + progressives + " (" + progressivesTot + ")\nLiberals: " + liberals + " (" + liberalsTot + ")\nModerate Liberals: " + moderateLiberals + " (" + moderateLiberalsTot + ")\nModerates: " + moderates + " (" + moderatesTot + ")\nModerate Conservatives: " + moderateConservatives + " (" + moderateConservativesTot + ")\nConservatives: " + conservatives + " (" + conservativesTot + ")\nPaleoconservatives: " + paleoconservatives + " (" + paleoconservativesTot + ")\nLibertarians: " + iLibertarians + " (" + iLibertariansTot + ")\nNational-Populists: " + natPops + " (" + natPopsTot + ")\nClassical Right: " + classicalRights + " (" + classicalRightsTot + ")");
-        } else if (input === "religion") {
+        } else if (interaction.options.getSubcommand() === "religion") {
             var other = 0;
             var syncretism = 0;
             var sikh = 0;
@@ -430,9 +422,9 @@ module.exports = {
             religionCount();
 
             //member count
-            interaction.channel.send("**Religious Role Count:**\nAgnostics: " + agnostic + "\nAtheists: " + atheist + "\nBuddhists: " + buddhist + "\nHindus: " + hindu + "\nCatholics: " + catholic + "\nJewish: " + jewish + "\nChristians: " + christian + "\nMuslims: " + muslim + "\nMormons: " + mormon + "\nNon-religious: " + nonreligious + "\nOrthodox: " + orthodox + "\nPagans: " + pagan + "\nProtestants: " + protestant + "\nSikhs: " + sikh + "\nSyncretists: " + syncretism + "\nOther Religious: " + other);
+            interaction.reply("**Religious Role Count:**\nAgnostics: " + agnostic + "\nAtheists: " + atheist + "\nBuddhists: " + buddhist + "\nHindus: " + hindu + "\nCatholics: " + catholic + "\nJewish: " + jewish + "\nChristians: " + christian + "\nMuslims: " + muslim + "\nMormons: " + mormon + "\nNon-religious: " + nonreligious + "\nOrthodox: " + orthodox + "\nPagans: " + pagan + "\nProtestants: " + protestant + "\nSikhs: " + sikh + "\nSyncretists: " + syncretism + "\nOther Religious: " + other);
 
-        } else if (input === "foreign") {
+        } else if (interaction.options.getSubcommand() === "foreign") {
             var regionalists = 0;
             var isolationists = 0;
             var imperialists = 0
@@ -469,9 +461,9 @@ module.exports = {
 
             foreignCount();
 
-            interaction.channel.send("**Foreign Policy Role Count:**\nRegionalists: " + regionalists + "\nIsolationists: " + isolationists + "\nImperialists: " + imperialists + "\nMarxists: " + marxists + "\nConstructivists: " + constructivists + "\nLiberalists: " + liberalists + "\nRealists: " + realists);
+            interaction.reply("**Foreign Policy Role Count:**\nRegionalists: " + regionalists + "\nIsolationists: " + isolationists + "\nImperialists: " + imperialists + "\nMarxists: " + marxists + "\nConstructivists: " + constructivists + "\nLiberalists: " + liberalists + "\nRealists: " + realists);
 
-        } else if (input === "economic") {
+        } else if (interaction.options.getSubcommand() === "economic") {
             var mixed = 0;
             var lazyFair = 0;
             var keynesian = 0;
@@ -508,9 +500,9 @@ module.exports = {
 
             economicCount();
 
-            interaction.channel.send("**Economic Policy Role Count:**\nMixed Economics: " + mixed + "\nLaissez-Faire Economics: " + lazyFair + "\nKeynesian Economics: " + keynesian + "\nCorporatist Economics: " + corporatist + "\nSocialist Economics: " + socialist + "\nMarxist Economics: " + marxist + "\nCapitalist Economics: " + capitalist);
+            interaction.reply("**Economic Policy Role Count:**\nMixed Economics: " + mixed + "\nLaissez-Faire Economics: " + lazyFair + "\nKeynesian Economics: " + keynesian + "\nCorporatist Economics: " + corporatist + "\nSocialist Economics: " + socialist + "\nMarxist Economics: " + marxist + "\nCapitalist Economics: " + capitalist);
 
-        } else if (input === "other") {
+        } else if (interaction.options.getSubcommand() === "other") {
             var utilitarianism = 0;
             var collectivism = 0;
             var individualism = 0;
@@ -571,9 +563,9 @@ module.exports = {
 
             otherCount();
 
-            interaction.channel.send("**Other Ideological Role Count:**\nUtilitarianism: " + utilitarianism + "\nCollectivism: " + collectivism + "\nIndividualism: " + individualism + "\nSkepticism: " + skepticism + "\nTraditionalist: " + traditionalist + "\nReactionariy " + reactionary + "\nEnvironmentalist: " + environmentalist + "\nMonarchist: " + monarchist + "\nAnarchist: " + anarchist + "\nPatriotism: " + patriotism + "\nNationalist: " + nationalist + "\nPopulist: " + populist + "\nApolitical: " + apolitical);
+            interaction.reply("**Other Ideological Role Count:**\nUtilitarianism: " + utilitarianism + "\nCollectivism: " + collectivism + "\nIndividualism: " + individualism + "\nSkepticism: " + skepticism + "\nTraditionalist: " + traditionalist + "\nReactionariy " + reactionary + "\nEnvironmentalist: " + environmentalist + "\nMonarchist: " + monarchist + "\nAnarchist: " + anarchist + "\nPatriotism: " + patriotism + "\nNationalist: " + nationalist + "\nPopulist: " + populist + "\nApolitical: " + apolitical);
 
-        } else if (input === "political") {
+        } else if (interaction.options.getSubcommand() === "political") {
             var antiMilitary = 0;
             var proMilitary = 0;
             var proHealth = 0;
@@ -634,9 +626,9 @@ module.exports = {
 
             poliCount();
 
-            interaction.channel.send(`**__Political Stance Roles:__**\n**Military:**\n${proMilitary} Pro / ${antiMilitary} Anti\n**Healthcare:**\n${proHealth} Pro Healthcare Reform\n**LGBTQ Rights:**\n${lgbtq} Pro LGBTQ Rights\n**Police:**\n${police} Pro Police Reform\n**Immigration:**\n${proImmigrationReform} Pro Immigration Reform\n${proImmigration} Pro / ${antiImmigration} Anti\n**Guns:**\n${proGunReform} Pro Gun Reform\n${proGun} Pro / ${antiGun} Anti\n**Abortion:**\n${proChoice} Pro-Choice / ${proLife} Pro-Life`);
+            interaction.reply(`**__Political Stance Roles:__**\n**Military:**\n${proMilitary} Pro / ${antiMilitary} Anti\n**Healthcare:**\n${proHealth} Pro Healthcare Reform\n**LGBTQ Rights:**\n${lgbtq} Pro LGBTQ Rights\n**Police:**\n${police} Pro Police Reform\n**Immigration:**\n${proImmigrationReform} Pro Immigration Reform\n${proImmigration} Pro / ${antiImmigration} Anti\n**Guns:**\n${proGunReform} Pro Gun Reform\n${proGun} Pro / ${antiGun} Anti\n**Abortion:**\n${proChoice} Pro-Choice / ${proLife} Pro-Life`);
 
-        } else if (input === "regideologies") {
+        } else if (interaction.options.getSubcommand() === "regideology") {
 
             var southAtlanticCommunist = 0;
             var southAtlanticSocialist = 0;
@@ -2419,7 +2411,7 @@ module.exports = {
 
             interaction.channel.send("**Central America:**\n*Democratic Party:* " + centralAmDem + "\n*Republican Party:* " + centralAmRep + "\n*Independents:* " + centralAmInd + "\n*Libertarian Party:* " + centralAmLibertarian + "\n*Green Party:* " + centralAmGreen + "\n*Other Party:* " + centralAmOther + "\n**Caribbean:**\n*Democratic Party:* " + caribbeanDem + "\n*Republican Party:* " + caribbeanRep + "\n*Independents:* " + caribbeanInd + "\n*Libertarian Party:* " + caribbeanLibertarian + "\n*Green Party:* " + caribbeanGreen + "\n*Other Party:* " + caribbeanOther + "\n**South America:**\n*Democratic Party:* " + southAmDem + "\n*Republican Party:* " + southAmRep + "\n*Independents:* " + southAmInd + "\n*Libertarian Party:* " + southAmLibertarian + "\n*Green Party:* " + southAmGreen + "\n*Other Party:* " + southAmOther + "\n**Middle East:**\n*Democratic Party:* " + middleEastDem + "\n*Republican Party:* " + middleEastRep + "\n*Independents:* " + middleEastInd + "\n*Libertarian Party:* " + middleEastLibertarian + "\n*Green Party:* " + middleEastGreen + "\n*Other Party:* " + middleEastOther + "\n**Asia:**\n*Democratic Party:* " + AsiaDem + "\n*Republican Party:* " + AsiaRep + "\n*Independents:* " + AsiaInd + "\n*Libertarian Party:* " + AsiaLibertarian + "\n*Green Party:* " + AsiaGreen + "\n*Other Party:* " + AsiaOther + "\n**Oceania:**\n*Democratic Party:* " + OceaniaDem + "\n*Republican Party:* " + OceaniaRep + "\n*Independents:* " + OceaniaInd + "\n*Libertarian Party:* " + OceaniaLibertarian + "\n*Green Party:* " + OceaniaGreen + "\n*Other Party:* " + OceaniaOther + "\n**Africa:**\n*Democratic Party:* " + AfricaDem + "\n*Republican Party:* " + AfricaRep + "\n*Independents:* " + AfricaInd + "\n*Libertarian Party:* " + AfricaLibertarian + "\n*Green Party:* " + AfricaGreen + "\n*Other Party:* " + AfricaOther)
 
-        } else if (input === "party") {
+        } else if (interaction.options.getSubcommand() === "party") {
             var demCommunist = 0;
             var demSocialist = 0;
             var demDemSoc = 0;

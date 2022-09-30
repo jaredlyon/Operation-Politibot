@@ -75,6 +75,8 @@ module.exports = {
       return i.user.id === interaction.user.id;
     };
 
+    const logChannel = client.channels.cache.get('1025194221134692362')
+
     if (interaction.options.getSubcommandGroup() === "points" && interaction.options.getSubcommand() === 'upvote') {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
@@ -83,7 +85,7 @@ module.exports = {
         const repUpEmbed = {
           color: '#ffffff',
           title: '<:green_plus:1024484662489395292>  Reputation Received',
-          description: `${targetUser.toString()}, somebody gave you a reputation point! Keep it up!`,
+          description: `${targetUser.toString()}, somebody gave you a reputation upvote! Keep it up!`,
           footer: {
             text: client.user.username,
             icon_url: client.user.avatarURL()
@@ -125,7 +127,8 @@ module.exports = {
           } else if (interaction.customId === 'confirm') {
             interaction.update({ embeds: [repUpSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repUpEmbed] })
-            console.log("[REP DATA] " + interaction.user.username + " has given rep to " + targetUser.username + ".");
+            console.log("[REP DATA] " + interaction.user.username + " has given an upvote to " + targetUser.username + ".");
+            logChannel.send('[REP DATA]' + interaction.user + " has given an upvote to " + targetUser.username + " in channel " + interaction.channel)
             client.repData[targetID].upvotes++;
             client.repData[interaction.user.id].upvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();
@@ -158,7 +161,7 @@ module.exports = {
         const repDownEmbed = {
           color: '#ffffff',
           title: '<:red_minus:1024484698971447376>  Reputation Received',
-          description: `${targetUser.toString()}, somebody gave you a negative reputation point! Try to do better!`,
+          description: `${targetUser.toString()}, somebody gave you a reputation downvote! Try to do better!`,
           footer: {
             text: client.user.username,
             icon_url: client.user.avatarURL()
@@ -202,6 +205,7 @@ module.exports = {
             interaction.update({ embeds: [repDownSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repDownEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given a downvote to " + targetUser.username + ".");
+            logChannel.send('[REP DATA]' + interaction.user + " has given a downvote to " + targetUser.username + " in channel " + interaction.channel)
             client.repData[targetID].downvotes++;
             client.repData[interaction.user.id].downvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();

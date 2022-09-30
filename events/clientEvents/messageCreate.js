@@ -140,7 +140,7 @@ module.exports = {
 		}
 	
 		//role changes
-		if (message.member) {
+		if (message.member && !message.client) {
 			var userID = message.member.id;
 			let member = message.member;
 			let trusted = (await client.trusted.get(message.author.id)) || {};

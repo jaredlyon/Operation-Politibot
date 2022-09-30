@@ -75,7 +75,9 @@ module.exports = {
       return i.user.id === interaction.user.id;
     };
 
-    const logChannel = client.channels.cache.get('1025194221134692362')
+    const logChannel = client.channels.cache.get('1025194221134692362');
+    const downvote = client.emojis.cache.find(emoji => emoji.name == "red_minus").toString();
+    const upvote = client.emojis.cache.find(emoji => emoji.name == "green_plus").toString();
 
     if (interaction.options.getSubcommandGroup() === "points" && interaction.options.getSubcommand() === 'upvote') {
       var targetUser = interaction.options.getUser("target");
@@ -128,7 +130,7 @@ module.exports = {
             interaction.update({ embeds: [repUpSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repUpEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given an upvote to " + targetUser.username + ".");
-            logChannel.send('[REP DATA] ' + interaction.user.toString() + " has given an upvote to " + targetUser.toString() + " in channel " + interaction.channel.toString())            
+            logChannel.send(upvote + " | " + interaction.user.toString() + " has upvoted " + targetUser.toString() + "!\nChannel:" + interaction.channel.toString());          
             client.repData[targetID].upvotes++;
             client.repData[interaction.user.id].upvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();
@@ -205,7 +207,7 @@ module.exports = {
             interaction.update({ embeds: [repDownSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repDownEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given a downvote to " + targetUser.username + ".");
-            logChannel.send('[REP DATA] ' + interaction.user.toString() + " has given a downvote to " + targetUser.toString() + " in channel " + interaction.channel.toString())
+            logChannel.send(downvote + " | " + interaction.user.toString() + " has downvoted " + targetUser.toString() + "!\n Channel:" + interaction.channel.toString());    
             client.repData[targetID].downvotes++;
             client.repData[interaction.user.id].downvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();

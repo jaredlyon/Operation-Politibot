@@ -81,7 +81,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000 && interaction.user.id != targetUser.id) {
+      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 10 && interaction.user.id != targetUser.id) {
         const repUpEmbed = {
           color: '#ffffff',
           title: '<:green_plus:1024484662489395292>  Reputation Received',
@@ -119,7 +119,7 @@ module.exports = {
 
         const confirmDenyInt = await interaction.reply({ embeds: [repUpConfirm], components: [confirmButtons], ephemeral: true, fetchReply: true, });
 
-        confirmDenyInt.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1200000 }).then(async interaction => {
+        confirmDenyInt.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1800000 }).then(async interaction => {
 
           if (interaction.customId === 'cancel') {
             interaction.update({ content: 'Prompt cancelled.', ephemeral: true, embeds: [], components: [] })
@@ -128,7 +128,7 @@ module.exports = {
             interaction.update({ embeds: [repUpSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repUpEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given an upvote to " + targetUser.username + ".");
-            logChannel.send('[REP DATA]' + interaction.user + " has given an upvote to " + targetUser.username + " in channel " + interaction.channel)
+            logChannel.send('[REP DATA] ' + interaction.user.toString() + " has given an upvote to " + targetUser.toString() + " in channel " + interaction.channel.toString())            
             client.repData[targetID].upvotes++;
             client.repData[interaction.user.id].upvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();
@@ -205,7 +205,7 @@ module.exports = {
             interaction.update({ embeds: [repDownSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repDownEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given a downvote to " + targetUser.username + ".");
-            logChannel.send('[REP DATA]' + interaction.user + " has given a downvote to " + targetUser.username + " in channel " + interaction.channel)
+            logChannel.send('[REP DATA] ' + interaction.user.toString() + " has given a downvote to " + targetUser.toString() + " in channel " + interaction.channel.toString())
             client.repData[targetID].downvotes++;
             client.repData[interaction.user.id].downvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();

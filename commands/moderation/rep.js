@@ -83,7 +83,7 @@ module.exports = {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
 
-      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 10 && interaction.user.id != targetUser.id) {
+      if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000 && interaction.user.id != targetUser.id) {
         const repUpEmbed = {
           color: '#ffffff',
           title: '<:green_plus:1024484662489395292>  Reputation Received',

@@ -49,16 +49,6 @@ module.exports = {
             .setTimestamp()
             .setColor("#992D22");
 
-        caseNumPlaceholder = caseCount.toString();
-
-        //A filter
-
-        const filter = i => {
-            return i.user.id === interaction.user.id;
-        };
-
-        //The button!
-
         const appealButton = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -67,55 +57,13 @@ module.exports = {
                     .setStyle('PRIMARY'),
             );
 
-        const serverLinkmain = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('linkmain')
-                    .setLabel('Operation Politics Server')
-                    .setStyle('LINK')
-                    .setURL('https://discord.gg/operationpolitics')
-            );
-
-        //No longer the button!
-        //Now it's the Modal!
-
-        const appealModal = new Modal()
-                .setTitle('Appeal Form')
-                .setCustomId('appeal_form');
-
-        const caseIDInputField = new TextInputComponent()
-                .setCustomId('caseID')
-                .setLabel('Please input your Case ID')
-                .setMinLength(2)
-                .setMaxLength(6)
-                .setRequired(true)
-                .setStyle('SHORT')
-                .setPlaceholder(caseNumPlaceholder);
-        
-        const appealInputField = new TextInputComponent()
-                .setCustomId('appealinput')
-                .setLabel('Please justify your appeal.')
-                .setMinLength(20)
-                .setMaxLength(2000)
-                .setRequired(true)
-                .setStyle('PARAGRAPH')
-                .setPlaceholder('Justify your appeal here');
-        
-        appealModal.addComponents(caseIDInputField, appealInputField);
-
-        //No longer the modal!
-
-        const targetGuild = interaction.guild
-
-        var isDMable = true;
         await kickee.createDM();
-        const appealMsg = await kickee.send({
+        await kickee.send({
             embeds: [dm],
             components: [appealButton]
         }).catch(async err => {
             console.log(err);
             interaction.channel.send("I couldn't DM this user since they do not accept DMs from server bots/members.");
-            isDMable = false;
         });
 
         const targetUser = await interaction.guild.members.fetch(kickee);
@@ -138,6 +86,5 @@ module.exports = {
         }
 
         client.caseNum.count++;
-
 	},
 };

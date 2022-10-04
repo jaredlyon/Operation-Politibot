@@ -79,16 +79,6 @@ module.exports = {
             timestamp: new Date()
         };
 
-        caseNumPlaceholder = caseCount.toString();
-
-        //A filter
-
-        const filter = i => {
-            return i.user.id === interaction.user.id;
-        };
-
-        //The button!
-
         const appealButton = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -96,37 +86,6 @@ module.exports = {
                     .setLabel('Appeal')
                     .setStyle('PRIMARY'),
             );
-
-        //No longer the button!
-        //Now it's the Modal!
-
-        const appealModal = new Modal()
-                .setTitle('Appeal Form')
-                .setCustomId('appeal_form');
-
-        const caseIDInputField = new TextInputComponent()
-                .setCustomId('caseID')
-                .setLabel('Please input your Case ID')
-                .setMinLength(2)
-                .setMaxLength(6)
-                .setRequired(true)
-                .setStyle('SHORT')
-                .setPlaceholder(caseNumPlaceholder);
-        
-        const appealInputField = new TextInputComponent()
-                .setCustomId('appealinput')
-                .setLabel('Please justify your appeal.')
-                .setMinLength(20)
-                .setMaxLength(2000)
-                .setRequired(true)
-                .setStyle('PARAGRAPH')
-                .setPlaceholder('Justify your appeal here');
-        
-        appealModal.addComponents(caseIDInputField, appealInputField);
-
-        //No longer the modal!
-
-        const targetGuild = interaction.guild
 
         await interaction.reply({
             embeds: [warn]
@@ -146,9 +105,8 @@ module.exports = {
 
         client.caseNum.count++;
 
-        var isDMable = true;
         await warnee.createDM();
-        const appealMsg = await warnee.send({
+        await warnee.send({
             embeds: [dm],
             components: [appealButton]
         }).catch(async err => {
@@ -156,7 +114,6 @@ module.exports = {
             interaction.channel.send({
                 content: "I couldn't DM this user since they do not accept DMs from server bots/members.",
             });
-            isDMable = false;
         });
 	},
 };

@@ -91,16 +91,6 @@ module.exports = {
             timestamp: new Date(),
         }
 
-        caseNumPlaceholder = caseCount.toString();
-
-        //A filter
-
-        const filter = i => {
-            return i.user.id === interaction.user.id;
-        };
-
-        //The button!
-
         const appealButton = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -116,37 +106,6 @@ module.exports = {
                     .setStyle('LINK')
                     .setURL('https://forms.gle/o2ckvskjgPjC7JfV8'),
             );
-
-        //No longer the button!
-        //Now it's the Modal!
-
-        const appealModal = new Modal()
-                .setTitle('Appeal Form')
-                .setCustomId('appeal_form');
-
-        const caseIDInputField = new TextInputComponent()
-                .setCustomId('caseID')
-                .setLabel('Please input your Case ID')
-                .setMinLength(2)
-                .setMaxLength(6)
-                .setRequired(true)
-                .setStyle('SHORT')
-                .setPlaceholder(caseNumPlaceholder);
-        
-        const appealInputField = new TextInputComponent()
-                .setCustomId('appealinput')
-                .setLabel('Please justify your appeal.')
-                .setMinLength(20)
-                .setMaxLength(2000)
-                .setRequired(true)
-                .setStyle('PARAGRAPH')
-                .setPlaceholder('Justify your appeal here');
-        
-        appealModal.addComponents(caseIDInputField, appealInputField);
-
-        //No longer the modal!
-
-        const targetGuild = interaction.guild
         
         const targetUser = await interaction.guild.members.fetch(mutee);
         console.log(targetUser);
@@ -172,8 +131,7 @@ module.exports = {
 
         await mutee.createDM();
 
-        var isDMable = true;
-        const appealMsg = await mutee.send({
+        await mutee.send({
             embeds: [dm],
             components: [appealButton]
         }).catch(async err => {
@@ -181,13 +139,17 @@ module.exports = {
             interaction.channel.send({
                 content: "I couldn't DM this user since they do not accept DMs from server bots/members.",
             });
-            isDMable = false;
         });
 
         if (length === 40000) {
             await mutee.send({
                 content: 'You must take a rules test in order to regain access to the server.',
                 components: [rulesTestButton]
+            }).catch(async err => {
+                console.log(err);
+                interaction.channel.send({
+                    content: "I was also unable to send them the rules test.",
+                });
             });
         };
     },

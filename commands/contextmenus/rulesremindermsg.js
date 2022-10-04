@@ -253,27 +253,347 @@ module.exports = {
 
             } else if (interaction.customId === 'r1') {
 
+                const r1Embed = {
+                    color: '#ffffff',
+                    title: "1️⃣  Rule One Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nOne of our primary goals in this server is to encourage productive, meaningful, and positive debate and discourse over politics. We understand that you may hold tightly to your convictions, feel strongly in your beliefs, think the other side may be misguided, or you simply don't like someone. However, none of that is an excuse to be disrespectful, and it goes directly against our mission to try to bring people together.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + '`Rule 1 - Be Respectful`' + `, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.`,
+                    fields: [
+                        {
+                            name: "❔ What even is a Rule 1 violation?",
+                            value: "Some common examples of Rule 1 Violations include being insulting towards other users, insulting them for a political viewpoint that they hold, or being generally aggressive/hostile in a debate or casual discussion.",
+                            inline: true,
+                        },
+                        {
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "It's pretty simple — just be respectful! No matter how much you may disagree with a person, treat them with the same respect and dignity you would expect out of anyone else. At the end of the day, we're all people. Be nice!",
+                            inline: true, 
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r1Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r2') {
+
+                const r2Embed = {
+                    color: '#ffffff',
+                    title: "2️⃣  Rule Two Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nOne of our primary goals in this server is to encourage productive, meaningful, and positive debate and discourse over politics. We understand that you may hold tightly to your convictions, feel strongly in your beliefs, think the other side may be misguided, or you simply don't like someone. However, none of that is an excuse to pick fights with the other side just for the purpose of instigating something.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + '`Rule 2 - Do not instigate fights`' + `, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.`,
+                    fields: [
+                        {
+                            name: "❔ What even is a Rule 2 violation?",
+                            value: "Some common examples of Rule 2 Violations include saying intentionally inflammatory/derogatory statements that are charged in a way to start a fight with a particular ideological viewpoint, poking fun at people's opinions, lifestyles, etc in order to start a fight, or other similar examples.",
+                            inline: true,
+                        },
+                        {
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Ultimately, be respectful. Let conversations about political topics arise naturally in some way or another, and if someone doesn't want to engage in what you're trying to talk about, don't prod and poke at them in order to get something out of them for the purpose of argument.",
+                            inline: true,
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r2Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             } else if (interaction.customId === 'r3') {
 
+                const r3Embed = {
+                    color: '#ffffff',
+                    title: "3️⃣  Rule Three Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nOne of our primary goals in this server is to encourage productive, meaningful, and positive debate and discourse over politics. Harassment of any kind — whether it is in a channel in our server, in DMs, or stemming from our community — is a direct barrier to that goal, and it is also against Discord's Terms of Service / Community Guidelines. We take genuine harassment very seriously!\n\n[This message](${targetMsg.url}) was potentially in violation of ` + '`Rule 3 - No general harassment`' + `, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.`,
+                    fields: [
+                        {
+                            name: '❔ What even is a Rule 3 violation?',
+                            value: 'Simply put, Rule 3 covers harassment of any form. Sexual, verbal, emotional, physical, or otherwise that may happen within our server, outside of our server, or stemming from our server (such as real life). Targeting or harassing someone for their political views, opinions, or otherwise is strictly prohibited.',
+                            inline: true,
+                        },
+                        {
+                            name: '✅  How can I avoid violating this rule?',
+                            value: "Avoid harassing people over their views, opinions, or lifestyles. If you engage with this user outside of the community, do not harass them over anything *because of* the community, i.e. learning about their views, opinions, or lifestyles. And, if you are a member of our Student Hubs, don't stalk, harass, assault, or otherwise to other members of our community.",
+                            inline: true,
+                        },
+                        {
+                            name: "🎓  I'm a member of a Student Hub connected to this server, what about me?",
+                            value: "We have methods and systems in place to protect some of our most vulnerable users. We understand that you may run into people you met from our community while on campus, or you may have the desire to meet some friends you've made here and hang out with them. That's fine — but, if the relationship or knowing who the other person is devolves into any form of harassment that we are alerted to, we *will* take appropriate steps in order to ensure the safety of our community members. We have a zero tolerance policy for this kind of harassment, and you can read more about what we are able to do / will do [at this link.](https://docs.google.com/document/d/1piZa-9qhvMvN9x6GEd_umpUfzi8DogfoT-14NwPT0-8/edit?usp=sharing)",
+                            inline: false,
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r3Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r4') {
+
+                const r4Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r4Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             } else if (interaction.customId === 'r5') {
 
+                const r5Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r5Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r6') {
+
+                const r6Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r6Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             } else if (interaction.customId === 'r7') {
 
+                const r7Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r7Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r8') {
+
+                const r8Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r8Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             } else if (interaction.customId === 'r9') {
 
+                const r9Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r9Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r10') {
+
+                const r10Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r10Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             } else if (interaction.customId === 'r11') {
 
+                const r11Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r11Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+
             } else if (interaction.customId === 'r12') {
+
+                const r12Embed = {
+                    color: '#ffffff',
+                    title: "",
+                    description: ``,
+                    fields: [
+                        {
+
+                        },
+                        {
+
+                        },
+                        {
+
+                        },
+                    ],
+                    footer: {
+                        text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
+                    }
+                };
+
+                targetMsg.reply({
+                    embeds: [r12Embed],
+                })
+
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
 
             }
         });

@@ -2,6 +2,8 @@ const { RequestManager } = require("@discordjs/rest")
 const { CommandInteraction } = require("discord.js")
 const { MessageActionRow, Client, Message, MessageEmbed, MessageButton, MessageSelectMenu } = require('discord.js');
 const { Modal, TextInputComponent, showModal, ModalSubmitInteraction } = require('discord-modals');
+const { ContextMenuInteraction } = require('discord.js')
+
 
 module.exports = {
     name: 'interactionCreate',
@@ -12,8 +14,23 @@ module.exports = {
      */
 
     async execute(interaction, client) {
-        if (!interaction.isCommand() && !interaction.isButton()) return;
+        if (!interaction.isCommand() && !interaction.isButton() && !interaction.isContextMenu()) {
+            console.log('This is not a command! Something went wrong in interactionCreate.js probably!')
+        };
 
+        //Context Menu Handler!
+        if (interaction.isContextMenu()) {
+            const command = client.commandslist.get(interaction.commandName);
+            if (!command) return interaction.reply({ content: 'Thats not a command you silly goose!' })
+
+            try {
+                command.run(client, interaction)
+            } catch (e) {
+                interaction.reply({ content: e.message });
+            }
+        }
+
+        //Command Handler!
         if (interaction.isCommand()) {
             const command = client.commandslist.get(interaction.commandName);
             if (!command) return interaction.reply({ content: 'Thats not a command you silly goose!' })

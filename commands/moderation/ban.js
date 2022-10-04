@@ -170,6 +170,7 @@ module.exports = {
 
                 client.caseNum.count++;
 
+                var isDMable = true;
                 await banee.createDM();
                 const appealMsg = await banee.send({
                     embeds: [dm],
@@ -179,12 +180,12 @@ module.exports = {
                     interaction.channel.send({
                         content: "I couldn't DM this user since they do not accept DMs from server bots/members.",
                     });
-                    appealMsg = null
+                    isDMable = false;
                 });
 
                 await interaction.guild.members.ban(banee);
 
-                if (appealMsg != null) {
+                if (isDMable) {
                     appealMsg.awaitMessageComponent( filter ).then(async interaction => {
                         const appealSubmit = interaction.customId
         

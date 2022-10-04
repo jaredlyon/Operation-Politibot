@@ -146,6 +146,7 @@ module.exports = {
 
         client.caseNum.count++;
 
+        var isDMable = true;
         await warnee.createDM();
         const appealMsg = await warnee.send({
             embeds: [dm],
@@ -155,10 +156,10 @@ module.exports = {
             interaction.channel.send({
                 content: "I couldn't DM this user since they do not accept DMs from server bots/members.",
             });
-            appealMsg = null
+            isDMable = false;
         });
 
-        if (appealMsg != null) {
+        if (isDMable) {
             appealMsg.awaitMessageComponent( filter ).then(async interaction => {
                 const appealSubmit = interaction.customId
 

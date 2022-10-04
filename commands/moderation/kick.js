@@ -107,6 +107,7 @@ module.exports = {
 
         const targetGuild = interaction.guild
 
+        var isDMable = true;
         await kickee.createDM();
         const appealMsg = await kickee.send({
             embeds: [dm],
@@ -114,7 +115,7 @@ module.exports = {
         }).catch(async err => {
             console.log(err);
             interaction.channel.send("I couldn't DM this user since they do not accept DMs from server bots/members.");
-            appealMsg = null
+            isDMable = false;
         });
 
         const targetUser = await interaction.guild.members.fetch(kickee);
@@ -138,7 +139,7 @@ module.exports = {
 
         client.caseNum.count++;
 
-        if (appealMsg != null) {
+        if (isDMable) {
             appealMsg.awaitMessageComponent( filter ).then(async interaction => {
                 const appealSubmit = interaction.customId
 

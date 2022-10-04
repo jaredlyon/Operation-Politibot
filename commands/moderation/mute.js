@@ -172,6 +172,7 @@ module.exports = {
 
         await mutee.createDM();
 
+        var isDMable = true;
         const appealMsg = await mutee.send({
             embeds: [dm],
             components: [appealButton]
@@ -180,7 +181,7 @@ module.exports = {
             interaction.channel.send({
                 content: "I couldn't DM this user since they do not accept DMs from server bots/members.",
             });
-            appealMsg = null
+            isDMable = false;
         });
 
         if (length === 40000) {
@@ -190,7 +191,7 @@ module.exports = {
             });
         };
 
-        if (appealMsg != null) {
+        if (isDMable) {
             appealMsg.awaitMessageComponent( filter ).then(async interaction => {
                 const appealSubmit = interaction.customId
 

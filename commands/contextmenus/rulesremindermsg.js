@@ -572,7 +572,7 @@ module.exports = {
                         },
                         {
                             name: "❌  This sounds like liberal politics... who decides what is or is not disinformation?",
-                            value: "Regardless of the politics of the word 'disinformation' in recent years, we have an obligation to abide by Discord's Terms of Service and Community Guidelines which prohibit content that is factually inaccurate and may cause harm to individuals or groups of people. Generally speaking, if we believe you may be violating Rule 11, Moderators may give you a chance to explain yourself or defend what you are saying with reasonable facts and evidence. If you cannot do that and provide serious, reputable sources to back up your claims and your claims have the potential to cause harm to individuals or groups of people or otherwise, then it is a violation of Rule 11.",
+                            value: "Regardless of the politics of the word 'disinformation' in recent years, we have an obligation to abide by Discord's Terms of Service and Community Guidelines which prohibit content that is factually inaccurate and may cause harm to individuals or groups of people. Generally speaking, if we believe you may be violating Rule 12, Moderators may give you a chance to explain yourself or defend what you are saying with reasonable facts and evidence. If you cannot do that and provide serious, reputable sources to back up your claims and your claims have the potential to cause harm to individuals or groups of people or otherwise, then it is a violation of Rule 11.",
                         },
                     ],
                     footer: {

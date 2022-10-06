@@ -347,17 +347,18 @@ module.exports = {
 
                 const r4Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "4️⃣  Rule Four Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nWhile we do support free speech and free exchange of ideas, there are *some* things that we *have* to enforce in order to abide by Discord's Terms of Service / Community Guidelines and also just to generally encourage bipartisan, civil methods of addressing issues we face as a society today. While we do not consider Nazism, Socialism, Fascism, or Communism to be \"Political Extremism\" for the purpose of Rule 4, there are some things that are covered under this rule.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + '`' + 'Rule 4 - No Political Extremism' + '`' + `, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.`,
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 4 violation?",
+                            value: "Rule 4 covers partisan misinformation *(also partly covered by Rule 11)*, supporting violent extremist groups *(such as ANTIFA and the Proud Boys)*, suggesting the exclusion of a group from political participation or society *(such as saying Republicans should not be allowed to be in office)*, advocating for the violent overthrow of government, or other posts similar to these criteria which may be deemed \"Political Extremism\" in an American context.",
+                            inline: true
                         },
-                        {
-
-                        },
-                        {
-
+                        {  
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Try to keep some of your most extreme ideological views out of our server if they are incompatible with this rule. Generally speaking, if you're advocating for any of these things, you've probably already lost the discussion. Focus on making meaningful arguments about our society and our system that can be solved in realistic and pragmatic ways, even if you're speaking from the viewpoint of a Communist, Fascist, or otherwise.",
+                            inline: true
                         },
                     ],
                     footer: {
@@ -375,17 +376,18 @@ module.exports = {
 
                 const r5Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "5️⃣  Rule Five Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nWhile we do support free speech and free exchange of ideas, bigotry is an important part of supporting civil discourse and that free exchange of ideas. We understand you may have harsh opinions about certain people or groups of people in politics, but you should try to avoid holding those obstinate opinions or displaying them in a way that will produce bad faith arguments and cause trouble or harm members of our server.\n\n` + `[This message](${targetMsg.url}) was potentially in violation of ` + '`Rule 5 - No Bigotry`' + ", *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 5 violation?",
+                            value: "Generally speaking, being prejudicial or obstinate towards a person or group of people regarding their political views, political affiliations, lifestyles, or otherwise.",
+                            inline: true
                         },
                         {
-
-                        },
-                        {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Don't senselessly hate on people for being different and not seeing things the same way you do. We're all people at the end of the day, and *all* of our voices matter.",
+                            inline: true
                         },
                     ],
                     footer: {
@@ -403,17 +405,18 @@ module.exports = {
 
                 const r6Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "6️⃣  Rule Six Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nRule 6 is a very important rule to abide by. Not only is racist, sexist, and other similar kinds of remarks against our rules because it is nothing less than a barrier to civil discussion, it is also against Discord's Terms of Service and Community Guidelines.` + `\n\n[This message](${targetMsg.url}) ` + "was potentially in violation of `Rule 6 - No Racism, Sexism, etc`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 6 violation?",
+                            value: "Racist or Sexist comments, racial slurs (of any kind and to any degree), or other offensive content that discriminates or prejudices against people based on their skin color, ethnicity, sex, sexual orientation, or other unchangeable factors about their personhood.",
+                            inline: true
                         },
                         {
-
-                        },
-                        {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Simply be nice to people. You don't need to use slurs, and you should generally treat people as equals regardless of their physical or genetic makeups. Don't be discriminatory or predjudicial, basically.",
+                            inline: true
                         },
                     ],
                     footer: {
@@ -431,17 +434,22 @@ module.exports = {
 
                 const r7Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "7️⃣  Rule 7 Reminder",
+                    description: `Hey therem ${targetUser.toString()}!\n\nWe have a lot of channels in this server that serve a lot of purposes. Therefore, we try to keep people and conversations organized and used in the proper places. It's important to avoid shitposting or memeing in the wrong channel, or talking about politics in the wrong channel, too! We're trying to build a community as much as we are building a place for civil discourse and debate.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + "`Rule 7 - No spam, NSFW, or misusing channels`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 7 violation?",
+                            value: "Shitposting in the middle of a serious conversation, spamming memes or images in inappropriate channels, discussing politics in <#760275642150420523> or off topic discussion in a political channel, posting NSFW, etc.",
+                            inline: true
                         },
                         {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Don't do any of the stuff listed to the left. Channels have purposes in their title and description - pay attention to them.",
+                            inline: true
                         },
                         {
-
+                            name: "❌  Why no NSFW??? Why can't I post memes wherever I want? Where is the memes channel?",
+                            value: "As a public server on Server Discovery, we cannot have NSFW content of any kind. Memes and picture spam can be annoying, so we try to keep it all in <#775867278016118794>, which is our dedicated meme channel. We don't have a #meme channel because in the past a channel with that title attracted a lot of degenerates who we ended up having to immediately ban.",
                         },
                     ],
                     footer: {
@@ -459,19 +467,8 @@ module.exports = {
 
                 const r8Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
-                    fields: [
-                        {
-
-                        },
-                        {
-
-                        },
-                        {
-
-                        },
-                    ],
+                    title: "8️⃣  Rule 8 Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nDon't post invite links, advertise, or send users unwanted content without their consent in our channels or through DMs.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + "`Rule 8 - Unsolicited Content is prohibited`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     footer: {
                         text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
                     }
@@ -487,19 +484,8 @@ module.exports = {
 
                 const r9Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
-                    fields: [
-                        {
-
-                        },
-                        {
-
-                        },
-                        {
-
-                        },
-                    ],
+                    title: "9️⃣  Rule 9 Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nWe know that Discord's Terms and Service and Community Guidelines are a lot to read and hard to understand, but it's very important to try your best. While our rules typically cover all bases with the ToS/CG, there may be some instances where they do not.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + "`Rule 9 - All Discord TOS and Community Guidelines must be followed`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     footer: {
                         text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
                     }
@@ -515,17 +501,12 @@ module.exports = {
 
                 const r10Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "🔟  Rule 10 Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nMainly in order to stay in line with Discord's ToS, we require our users to ensure that their profile on this server does not include any rule-violating content. This means anything that violates our rules, or Discord's ToS/CG. Please check over your profile and make sure there are no issues!`,
                     fields: [
                         {
-
-                        },
-                        {
-
-                        },
-                        {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Check and make sure your profile does not have any allusions to Hitler, Stalin, the Proud Boys, ANTIFA, or other extremist individuals/groups, including links to documents or webpages. No slurs, offensive content, or otherwise is allowed in your name, status, profile, banner, about me, or otherwise. This also includes porn, gore, and general NSFW content. **Please be aware that we will report your account to Discord if any issues are not fixed.**",
                         },
                     ],
                     footer: {
@@ -543,17 +524,22 @@ module.exports = {
 
                 const r11Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "1️⃣1️⃣  Rule 11 Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nDisinformation is a touchy subject, but we take it very seriously here. As we strive to have productive, civil, and meaningful debates, the spreading of misinformation (on any topic) is dangerous to that mission. This isn't a political thing, it's just a matter of whether or not you are actively attempting to spread blatantly false information in our server that may cause harm to people or institutions in any way. We have even completely banned some topics from being discussed because of their tendency to devolve into incivility and disinformation.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + "`Rule 11 - Do not deliberately disseminate disinformation`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 11 violation?",
+                            value: "Discussing prohibited topics *(Election Fraud in 2020 or 2016, QAnon Conspiracy Theories, COVID-19 Hoax Conspiracy Theories, and Genocide Denial)*, or posting blatantly infactual information with the purpose to intentionally deceive or promote a political agenda with no factual basis.",
+                            inline: true
                         },
                         {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Check your sources, double-check your facts, and avoid banned topics.",
+                            inline: true
                         },
                         {
-
+                            name: "❌  This sounds like liberal politics... who decides what is or is not disinformation?",
+                            value: "Regardless of the politics of the word 'disinformation' in recent years, we have an obligation to abide by Discord's Terms of Service and Community Guidelines which prohibit content that is factually inaccurate and may cause harm to individuals or groups of people. Generally speaking, if we believe you may be violating Rule 11, Moderators may give you a chance to explain yourself or defend what you are saying with reasonable facts and evidence. If you cannot do that and provide serious, reputable sources to back up your claims and your claims have the potential to cause harm to individuals or groups of people or otherwise, then it is a violation of Rule 11.",
                         },
                     ],
                     footer: {
@@ -571,17 +557,22 @@ module.exports = {
 
                 const r12Embed = {
                     color: '#ffffff',
-                    title: "",
-                    description: ``,
+                    title: "1️⃣2️⃣  Rule 12 Reminder",
+                    description: `Hey there, ${targetUser.toString()}!\n\nAs we strive to provide a platform that everyone of all political perspectives can communicate, debate, and discuss in, we recognize that malicious intent in your messaging is a big part in whether or not you're acting in good faith. Whether intended directly or indirectly, content meant to harass, demean, invalidate, or cause harm to people because of their beliefs, personhoods, or otherwise for political or personal reasons is prohibited. As such, we've even put a list of topics which will be **heavily** moderated for malicious intent whenever they are seen by Moderators.\n\n[This message](${targetMsg.url}) was potentially in violation of ` + "`Rule 12. Heavily Moderated Topics & Malicious Intent`, *(or this message was sent just as a general reminder!)* so we encourage you to revisit the rule in <#775838975755681842> and make sure you're not stepping out of boundaries.",
                     fields: [
                         {
-
+                            name: "❔ What even is a Rule 12 violation?",
+                            value: "General bad faith behavior, incivility, and passive-aggressive behavior includes Rule 12 violations. An additional example of this would be invalidating the existence of transgender people in a discussion with or surrounding transgender people, or otherwise trying to invalidate or demean them for existing. Another would include trying to invalidate, demean, or harass individuals on either side of the political aisle for politically-charged riots, such as the 2020 BLM riots or the January 6th Capitol riot.",
+                            inline: true
                         },
                         {
-
+                            name: "✅  How can I avoid violating this rule?",
+                            value: "Avoid those touchy, sensitive topics listed under Rule 11 entirely, if you cannot be civil about it. It's possible to have disagreements, morally, ethically, and politically, without having to resort to bad faith behavior and passive aggressive comments to harass and demean people.",
+                            inline: true
                         },
                         {
-
+                            name: "❌  This sounds like liberal politics... who decides what is or is not disinformation?",
+                            value: "Regardless of the politics of the word 'disinformation' in recent years, we have an obligation to abide by Discord's Terms of Service and Community Guidelines which prohibit content that is factually inaccurate and may cause harm to individuals or groups of people. Generally speaking, if we believe you may be violating Rule 11, Moderators may give you a chance to explain yourself or defend what you are saying with reasonable facts and evidence. If you cannot do that and provide serious, reputable sources to back up your claims and your claims have the potential to cause harm to individuals or groups of people or otherwise, then it is a violation of Rule 11.",
                         },
                     ],
                     footer: {

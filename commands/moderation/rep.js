@@ -271,11 +271,11 @@ module.exports = {
         repData.push(client.repData[val])
       }
 
-      repData.sort((a, b) => parseFloat(b.upvotes - b.downvotes) - parseFloat(a.upvotes - b.downvotes));
+      repData.sort((a, b) => parseFloat((b.upvotes)) - parseFloat((a.upvotes)));
 
       var lb = new MessageEmbed()
         .setColor(interaction.guild.me.displayHexColor)
-        .setTitle('Operation Politics Rep Leaderboard')
+        .setTitle(upvote + '  Operation Politics Upvote Leaderboard  ' + upvote)
         .setFooter(interaction.guild.name, interaction.guild.iconURL());
 
       for (var i = 0; i < 12; i++) {
@@ -287,7 +287,7 @@ module.exports = {
           mem = client.users.cache.get(repData[i].userID).username
         }
 
-        lb.addField(`${i + 1}: ${mem}`, (repData[i].upvotes - repData[i].downvotes) + " rep", true);
+        lb.addField(`${i + 1}: ${mem}`, repData[i].upvotes + " rep", true);
       }
 
       interaction.reply({ embeds: [lb] });

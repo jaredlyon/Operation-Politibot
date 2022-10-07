@@ -93,7 +93,6 @@ module.exports = {
             const serverLinkBan = new MessageActionRow()
                 .addComponents(
                     new MessageButton()
-                        .setCustomId('linkban')
                         .setLabel('Ban Appeal Server')
                         .setStyle('LINK')
                         .setURL('https://discord.gg/CFS7yjEhUd')

@@ -4,7 +4,7 @@ const { MessageActionRow, MessageSelectMenu } = require('discord.js');
 module.exports = {
   name: "setrep",
   description: "Moderation commands for rep!",
-  options: [,
+  options: [
     {
       type: 1,
       name: "downvote",
@@ -46,7 +46,15 @@ module.exports = {
     {
       type: 1,
       name: "reset",
-      description: "Resets a user's upvotes"
+      description: "Resets a user's upvotes",
+      options: [
+        {
+          type: 6,
+          name: "target",
+          description: "The target user",
+          required: true
+        }
+      ]
     }
   ],
   run: async (client, interaction) => {

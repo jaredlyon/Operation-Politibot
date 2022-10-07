@@ -42,6 +42,11 @@ module.exports = {
           required: true
         }
       ]
+    },
+    {
+      type: 1,
+      name: "reset",
+      description: "Resets a user's upvotes"
     }
   ],
   run: async (client, interaction) => {
@@ -67,6 +72,15 @@ module.exports = {
       interaction.reply(targetUser.toString() + " has had their downvote rep set to " + input + " by " + interaction.user.toString() + "!");
       logChannel.send(downvote + " | " + interaction.user.toString() + " has set " + targetUser.toString() + "'s downvotes to " + input + "!\nChannel:" + interaction.channel.toString());          
       console.log("[REP DATA] " + interaction.user.username + " has set " + targetUser.username + "'s downvote rep to " + input + ".");
+    } else if (interaction.options.getSubcommand() === "reset") {
+      var targetUser = interaction.options.getUser("target");
+      var targetID = targetUser.id;
+      
+      client.repData[targetID].upvotes = 0;
+      client.repData[targetID].downvotes = 0;
+      interaction.reply(targetUser.toString() + " has had their rep reset by " + interaction.user.toString() + "!");
+      logChannel.send(downvote + " | " + interaction.user.toString() + " has reset " + targetUser.toString() + "'s rep!\nChannel:" + interaction.channel.toString());          
+      console.log("[REP DATA] " + interaction.user.username + " has reset " + targetUser.username + "'s rep.");
     }
   }
 };

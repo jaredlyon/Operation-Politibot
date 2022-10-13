@@ -18,9 +18,9 @@ module.exports = {
         // const targetChannel = interaction.options.getChannel('channel');
 
         if (interaction.options.getChannel('channel') == null) {
-            targetChannel = interaction.channel;
+            var targetChannel = interaction.channel;
         } else {
-            targetChannel = interaction.options.getChannel('channel');
+            var targetChannel = interaction.options.getChannel('channel');
         };
 
         //channel lockdown

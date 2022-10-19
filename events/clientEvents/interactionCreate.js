@@ -400,13 +400,5 @@ module.exports = {
             }
 
         }
-
-        // if (interaction.isSelectMenu()) {
-        //     if (interaction.customId === 'menu1') {
-        //         await interaction.update() {
-        //             if (interaction.values === 'first_option')
-        //         }
-        //     }
-        // }
     }
 };

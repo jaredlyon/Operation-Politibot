@@ -167,7 +167,9 @@ module.exports = {
                         embeds: [appealinputtedEmbed],
                         components: [appealResponseMenu],
                     });
-                })
+                }).catch(async err => {
+                    console.log('A modal submission was rejected due to duplication.');
+                });
             }
 
             if (interaction.customId === 'accept' || interaction.customId === 'reject') {

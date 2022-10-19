@@ -72,7 +72,7 @@ module.exports = {
 
                 const appealModal = new Modal()
                     .setTitle('Appeal Form')
-                    .setCustomId('appeal_form');
+                    .setCustomId(interaction.id);
 
                 const caseIDInputField = new TextInputComponent()
                     .setCustomId('caseID')
@@ -101,7 +101,12 @@ module.exports = {
 
                 // Let's add Modal functionality...
 
-                await interaction.awaitModalSubmit({ time: 120000, }).then(async interaction => {
+                const filter = i => {
+                    i.deferUpdate();
+                    return i.customId === interaction.id;
+                };
+
+                await interaction.awaitModalSubmit({ time: 120000, filter }).then(async interaction => {
                     caseIDInputted = interaction.fields.getTextInputValue('caseID');
                     appealInputted = interaction.fields.getTextInputValue('appealinput');
 

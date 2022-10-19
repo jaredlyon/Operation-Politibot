@@ -65,105 +65,105 @@ module.exports = {
                 },
             };
 
-            if (interaction.customId === 'appeal') {
-                const appealee = interaction.user;
+            // if (interaction.customId === 'appeal') {
+            //     const appealee = interaction.user;
 
-                //First, set up the Modal for the Appeal.
+            //     //First, set up the Modal for the Appeal.
 
-                const appealModal = new Modal()
-                    .setTitle('Appeal Form')
-                    .setCustomId('appeal_form');
+            //     const appealModal = new Modal()
+            //         .setTitle('Appeal Form')
+            //         .setCustomId('appeal_form');
 
-                const caseIDInputField = new TextInputComponent()
-                    .setCustomId('caseID')
-                    .setLabel('Please input your Case ID')
-                    .setMinLength(2)
-                    .setMaxLength(6)
-                    .setRequired(true)
-                    .setStyle('SHORT')
-                    .setPlaceholder('Put your Case ID here (ex: 650)');
+            //     const caseIDInputField = new TextInputComponent()
+            //         .setCustomId('caseID')
+            //         .setLabel('Please input your Case ID')
+            //         .setMinLength(2)
+            //         .setMaxLength(6)
+            //         .setRequired(true)
+            //         .setStyle('SHORT')
+            //         .setPlaceholder('Put your Case ID here (ex: 650)');
 
-                const appealInputField = new TextInputComponent()
-                    .setCustomId('appealinput')
-                    .setLabel('Please justify your appeal.')
-                    .setMinLength(20)
-                    .setMaxLength(2000)
-                    .setRequired(true)
-                    .setStyle('PARAGRAPH')
-                    .setPlaceholder('Justify your appeal here');
+            //     const appealInputField = new TextInputComponent()
+            //         .setCustomId('appealinput')
+            //         .setLabel('Please justify your appeal.')
+            //         .setMinLength(20)
+            //         .setMaxLength(2000)
+            //         .setRequired(true)
+            //         .setStyle('PARAGRAPH')
+            //         .setPlaceholder('Justify your appeal here');
 
-                appealModal.addComponents(caseIDInputField, appealInputField);
+            //     appealModal.addComponents(caseIDInputField, appealInputField);
 
-                // All done!
-                // Now, let's display the thing!
+            //     // All done!
+            //     // Now, let's display the thing!
 
-                await interaction.showModal(appealModal)
+            //     await interaction.showModal(appealModal)
 
-                // Let's add Modal functionality...
+            //     // Let's add Modal functionality...
 
-                await interaction.awaitModalSubmit({ time: 120000, }).then(async interaction => {
-                    caseIDInputted = interaction.fields.getTextInputValue('caseID');
-                    appealInputted = interaction.fields.getTextInputValue('appealinput');
+            //     await interaction.awaitModalSubmit({ time: 120000, }).then(async interaction => {
+            //         caseIDInputted = interaction.fields.getTextInputValue('caseID');
+            //         appealInputted = interaction.fields.getTextInputValue('appealinput');
 
-                    appealinputtedEmbed = {
-                        color: '#ffffff',
-                        author: {
-                            name: `${appealee.username} (${appealee.id})`,
-                            icon_url: appealee.avatarURL(),
-                        },
-                        title: `${appealee.username} has submitted an appeal for a moderation action.`,
-                        fields: [
-                            {
-                                name: `**User ID:**`,
-                                value: `${appealee.id}`
-                            },
-                            {
-                                name: '**Case ID:** ',
-                                value: caseIDInputted
-                            },
-                            {
-                                name: `**Appeal:** `,
-                                value: appealInputted
-                            },
-                        ],
-                        footer: `Click one of the buttons below to choose whether or not to respond to the appeal.`,
-                        timestamp: new Date(),
-                    };
+            //         appealinputtedEmbed = {
+            //             color: '#ffffff',
+            //             author: {
+            //                 name: `${appealee.username} (${appealee.id})`,
+            //                 icon_url: appealee.avatarURL(),
+            //             },
+            //             title: `${appealee.username} has submitted an appeal for a moderation action.`,
+            //             fields: [
+            //                 {
+            //                     name: `**User ID:**`,
+            //                     value: `${appealee.id}`
+            //                 },
+            //                 {
+            //                     name: '**Case ID:** ',
+            //                     value: caseIDInputted
+            //                 },
+            //                 {
+            //                     name: `**Appeal:** `,
+            //                     value: appealInputted
+            //                 },
+            //             ],
+            //             footer: `Click one of the buttons below to choose whether or not to respond to the appeal.`,
+            //             timestamp: new Date(),
+            //         };
 
-                    // Set up the stuff that mods will see...
+            //         // Set up the stuff that mods will see...
 
-                    const appealResponseMenu = new MessageActionRow()
-                        .addComponents(
-                            new MessageButton()
-                                .setCustomId('accept')
-                                .setLabel('Accept')
-                                .setStyle('SUCCESS'),
-                            new MessageButton()
-                                .setCustomId('acceptreason')
-                                .setLabel('Accept w/ Reason')
-                                .setStyle('SUCCESS'),
-                            new MessageButton()
-                                .setCustomId('reject')
-                                .setLabel('Reject')
-                                .setStyle('DANGER'),
-                            new MessageButton()
-                                .setCustomId('rejectreason')
-                                .setLabel('Reject w/ Reason')
-                                .setStyle('DANGER'),
-                        );
+            //         const appealResponseMenu = new MessageActionRow()
+            //             .addComponents(
+            //                 new MessageButton()
+            //                     .setCustomId('accept')
+            //                     .setLabel('Accept')
+            //                     .setStyle('SUCCESS'),
+            //                 new MessageButton()
+            //                     .setCustomId('acceptreason')
+            //                     .setLabel('Accept w/ Reason')
+            //                     .setStyle('SUCCESS'),
+            //                 new MessageButton()
+            //                     .setCustomId('reject')
+            //                     .setLabel('Reject')
+            //                     .setStyle('DANGER'),
+            //                 new MessageButton()
+            //                     .setCustomId('rejectreason')
+            //                     .setLabel('Reject w/ Reason')
+            //                     .setStyle('DANGER'),
+            //             );
 
-                    // Alright, now let's send a notification to the senior mods...
+            //         // Alright, now let's send a notification to the senior mods...
 
-                    var sendAppealChannel = targetGuild.channels.cache.get('893189759474757693');
+            //         var sendAppealChannel = targetGuild.channels.cache.get('893189759474757693');
 
-                    interaction.reply('Thank you for submitting an appeal. A Senior Moderator+ will review your appeal, and you will receive a response shortly.')
-                    await sendAppealChannel.send({
-                        content: `<@&927318500614225920> / <@178689418415177729>, someone has submitted an appeal!`,
-                        embeds: [appealinputtedEmbed],
-                        components: [appealResponseMenu],
-                    });
-                })
-            }
+            //         interaction.reply('Thank you for submitting an appeal. A Senior Moderator+ will review your appeal, and you will receive a response shortly.')
+            //         await sendAppealChannel.send({
+            //             content: `<@&927318500614225920> / <@178689418415177729>, someone has submitted an appeal!`,
+            //             embeds: [appealinputtedEmbed],
+            //             components: [appealResponseMenu],
+            //         });
+            //     })
+            // }
 
             if (interaction.customId === 'accept' || interaction.customId === 'reject') {
                 intmessage = interaction.message

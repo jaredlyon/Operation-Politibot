@@ -15,6 +15,12 @@ module.exports = {
           name: "target",
           description: "Target a user who will receive a rep point.",
           required: true
+        },
+        {
+          type: 3,
+          name: "reason",
+          description: "Provide a valid reason why you are upvoting this user.",
+          required: true
         }
       ]
     },
@@ -27,6 +33,12 @@ module.exports = {
           type: 6,
           name: "target",
           description: "Target a user who will receive a rep point.",
+          required: true
+        },
+        {
+          type: 3,
+          name: "reason",
+          description: "Provide a valid reason why you are downvoting this user.",
           required: true
         }
       ]
@@ -68,6 +80,7 @@ module.exports = {
     if (interaction.options.getSubcommand() === 'upvote') {
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
+      const providedReason = interaction.options.getString("reason");
 
       if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000 && interaction.user.id != targetUser.id) {
         const repUpEmbed = {
@@ -116,7 +129,7 @@ module.exports = {
             interaction.update({ embeds: [repUpSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repUpEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given an upvote to " + targetUser.username + ".");
-            logChannel.send(upvote + " | " + interaction.user.toString() + " has upvoted " + targetUser.toString() + "!\nChannel:" + interaction.channel.toString());          
+            logChannel.send(upvote + " | " + interaction.user.toString() + " has upvoted " + targetUser.toString() + "!\n**Reason:** " + providedReason + "\nChannel:" + interaction.channel.toString());          
             client.repData[targetID].upvotes++;
             client.repData[interaction.user.id].upvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();
@@ -141,8 +154,10 @@ module.exports = {
       }
 
     } else if (interaction.options.getSubcommand() === 'downvote') {
+
       var targetUser = interaction.options.getUser("target");
       var targetID = targetUser.id;
+      const providedReason = interaction.options.getString("reason");
 
       if (new Date() - new Date(client.repData[interaction.user.id].lastRepGiven) >= 1800000 && interaction.user.id != targetUser.id) {
 
@@ -193,7 +208,7 @@ module.exports = {
             interaction.update({ embeds: [repDownSent], components: [], ephemeral: true })
             interaction.channel.send({ embeds: [repDownEmbed] })
             console.log("[REP DATA] " + interaction.user.username + " has given a downvote to " + targetUser.username + ".");
-            logChannel.send(downvote + " | " + interaction.user.toString() + " has downvoted " + targetUser.toString() + "!\n Channel:" + interaction.channel.toString());    
+            logChannel.send(downvote + " | " + interaction.user.toString() + " has downvoted " + targetUser.toString() + "!\n**Reason:** " + providedReason + "\n Channel:" + interaction.channel.toString());    
             client.repData[targetID].downvotes++;
             client.repData[interaction.user.id].downvotesGiven++;
             client.repData[targetID].lastRepReceived = new Date();

@@ -1,19 +1,19 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { ContextMenuInteraction } = require('discord.js')
+const { ContextMenuInteraction } = require('discord.js');
 
 module.exports = {
     name: 'How to Cite',
     type: 'MESSAGE',
     /**
-     * 
      * @param {ContextMenuInteraction} interaction 
      */
     run: async (client, interaction) => {
-
+        // fetch constants
         const targetMsg = await interaction.channel.messages.fetch(interaction.targetId);
-        const targetUser = await targetMsg.author
+        const targetUser = await targetMsg.author;
 
+        // generate embed
         const reminderEmbed = {
             color: '#ffffff',
             title: '🔬  Citing Sources and Avoiding Misinformation',
@@ -40,16 +40,19 @@ module.exports = {
             }
         };
 
-        const moreinfoButton = new MessageActionRow()
-        .addComponents(
-            new MessageButton()
-                .setCustomId('moreinfopls')
-                .setLabel('Tips & Tricks')
-                .setStyle('SUCCESS'),
-        );
+        // add more info button
+        const moreInfoButton = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                    .setCustomId('moreinfopls')
+                    .setLabel('Tips & Tricks')
+                    .setStyle('SUCCESS'),
+            );
 
-        targetMsg.reply({ content: `${targetUser.toString()}`, embeds: [reminderEmbed], components: [moreinfoButton] })
-        interaction.reply({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [], ephemeral: true })
-
+        // send embed + button
+        targetMsg.reply({ content: `${targetUser.toString()}`, embeds: [reminderEmbed], components: [moreInfoButton] });
+        
+        // replies to user
+        interaction.reply({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [], ephemeral: true });
     }
 }

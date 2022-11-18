@@ -3,8 +3,9 @@ const { MessageEmbed, Message } = require("discord.js");
 module.exports = {
 	name: 'guildMemberUpdate',
 	async execute(oldMember, newMember, client) {
+        // checks if roles differ
         if (oldMember.roles.cache.size != newMember.roles.cache.size) {
-            //role change
+            // generate embed
             const roleUpdate = new MessageEmbed()
                 .setAuthor(newMember.user.tag, newMember.user.avatarURL())
                 .setTimestamp()
@@ -19,7 +20,7 @@ module.exports = {
                     }
                 });
     
-                //removedroles
+                //removed roles
                 oldMember.roles.cache.forEach(role => {
                     if (!newMember.roles.cache.has(role.id)) {
                         roleUpdate.addField(`Removed:`, role.name);
@@ -32,16 +33,18 @@ module.exports = {
                     newMember.guild.channels.cache.get('910017492590686329').send('Welcome in, ' + newMember.toString() + '! Check out <#909995632293449799> and <#775838975755681842>, then use /verify to gain access to the server! This client is in early alpha, so if you encounter bugs, such as "Interaction has failed", please try again! If you cannot find any success, reach out to us by opening a ticket using the <#999439440273473657> channel.');
                 }
     
+            // sends embed
             newMember.guild.channels.cache.get(client.config.logChannel).send({
                 embeds: [roleUpdate]
-            })
+            });
         } else {
             console.log(oldMember.displayName + " was updated but kept the same roles.");
         }
         
+        // checks for nickname change
         if (oldMember.displayName != newMember.displayName) {
-            //nickname change
-            var nicknameUpdate = new MessageEmbed()
+            // generate embed
+            const nicknameUpdate = new MessageEmbed()
                 .setAuthor(newMember.user.tag, newMember.user.avatarURL())
                 .setTimestamp()
                 .setColor("#FFFF00")
@@ -50,9 +53,10 @@ module.exports = {
                 .addField("Old nickname:", oldMember.displayName)
                 .addField("New nickname:", newMember.displayName);
     
+            // sends embed
             newMember.guild.channels.cache.get(client.config.logChannel).send({
                 embeds: [nicknameUpdate]
-            })
+            });
         }
-	},
+	}
 };

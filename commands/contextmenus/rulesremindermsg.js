@@ -1,23 +1,24 @@
 const { Client, Message, MessageEmbed, MessageButton } = require('discord.js');
 const { MessageActionRow, MessageSelectMenu } = require('discord.js');
-const { ContextMenuInteraction } = require('discord.js')
+const { ContextMenuInteraction } = require('discord.js');
 
 module.exports = {
     name: 'Rules Reminder',
     type: 'MESSAGE',
     /**
-     * 
      * @param {ContextMenuInteraction} interaction 
      */
     run: async (client, interaction) => {
-
+        // fetch constants
         const targetMsg = await interaction.channel.messages.fetch(interaction.targetId);
-        const targetUser = await targetMsg.author
+        const targetUser = await targetMsg.author;
 
+        // generates filter
         const filter = i => {
             return i.user.id === interaction.user.id;
         };
 
+        // generates pickRule embed
         const pickaRule = {
             color: '#ffffff',
             title: '📕  Rules Reminder',
@@ -33,6 +34,7 @@ module.exports = {
             },
         };
 
+        // generates cancel button
         const cancelButton = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -41,6 +43,7 @@ module.exports = {
                     .setStyle('DANGER'),
             );
 
+        // generates rules list
         const rulesList1 = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -65,6 +68,7 @@ module.exports = {
                     .setStyle('SECONDARY'),
             );
 
+        // generates secondary rules list
         const rulesList2 = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -89,6 +93,7 @@ module.exports = {
                     .setStyle('SECONDARY'),
             );
 
+        // generates tertiary rules list
         const rulesList3 = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -101,6 +106,7 @@ module.exports = {
                     .setStyle('SECONDARY'),
             );
 
+        // generates quaternary rules list
         const rulesList4 = new MessageActionRow()
             .addComponents(
                 new MessageButton()
@@ -113,13 +119,16 @@ module.exports = {
                     .setStyle('PRIMARY'),
             );
 
+        // assembles above lists and awaits reply
         const sentMsg = await interaction.reply({ embeds: [pickaRule], components: [cancelButton, rulesList4, rulesList1, rulesList2, rulesList3], ephemeral: true, fetchReply: true })
 
+        // awaits user submission
         sentMsg.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1200000 }).then(async interaction => {
             if (interaction.customId === 'cancelrulesreminder') {
+                // for cancel button
                 interaction.update({ content: 'Rules Reminder Prompt Cancelled.', ephemeral: true, embeds: [], components: [] })
             } else if (interaction.customId === 'generalreminder') {
-
+                // advances embed
                 const generalRules = {
                     color: '#ffffff',
                     title: '📕  General Rules Reminder',
@@ -128,16 +137,21 @@ module.exports = {
                         text: `Moderators have the final say-so on what is or is not a rule violation. This is not a warning, this is just a reminder.`
                     }
                 };
+
+                // sends embed
                 sentMsg.channel.send({ content: `${targetUser.toString()}`, embeds: [generalRules] })
+
+                // replies to user
                 interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [], ephemeral: true })
 
             } else if (interaction.customId === 'channelrules') {
-
+                // advances embed
                 const updatedEmbed = {
                     color: '#ffffff',
                     description: 'Which channel are you trying to remind people the rules for?',
                 };
 
+                // generate channel picking button row
                 const pickaChannel = new MessageActionRow()
                     .addComponents(
                         new MessageButton()
@@ -154,12 +168,12 @@ module.exports = {
                             .setStyle('SECONDARY'),
                     );
 
+                // updates interaction for picking a channel
                 interaction.update({ embeds: [updatedEmbed], components: [pickaChannel] })
 
                 sentMsg.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 1200000 }).then(async interaction => {
-
                     if (interaction.customId === 'seriousdiscussion') {
-
+                        // generates seriousdiscush embed
                         const seriousEmbed = {
                             color: '#ffffff',
                             title: '📕  Serious Discussion Rules Reminder',
@@ -191,28 +205,30 @@ module.exports = {
                             },
                         };
 
+                        // sends embed
                         targetMsg.reply({
                             embeds: [seriousEmbed],
-                        })
+                        });
 
                     } else if (interaction.customId === 'hottakes') {
-
-                        const hottakesEmbed = {
+                        // generates hotTakes embed
+                        const hotTakesEmbed = {
                             color: '#ffffff',
                             title: "📕  Hot Takes Rules Reminder",
                             description: `Hey there, ${targetUser.toString()}!\n\n<#1007831196874575902> is a channel for making unpopular (but not rule-violating) opinions and debating with folks about it. These posts can be related to politics, food, games, or generally anything. However, shitposting and derailing conversations isn't allowed. Also, do your best to be respectful, no matter how down and dirty you think someone's takes are.\n\nEverything posted in this channel is all in good faith and good fun, keep it that way!\n\n[This message](${targetMsg.url}) was potentially in violation of the server rules, channel rules, or thread topic. Be careful!`,
                             footer: {
                                 text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
                             },
-                        }
+                        };
 
+                        // sends embed
                         targetMsg.reply({
-                            embeds: [hottakesEmbed],
-                        })
+                            embeds: [hotTakesEmbed],
+                        });
 
                     } else if (interaction.customId === 'otherchannelpicked') {
-                        
-                        const otherChanEmbed = {
+                        // generate other embed
+                        const otherChannelEmbed = {
                             color: '#ffffff',
                             title: '📕  Channel Rules Reminder',
                             description: `Hey there, ${targetUser.toString()}!\n\nWe generally pride ourselves on having a neatly organized server structure, with each channel having it's own designated purpose. You can find specific rules for every channel usually at the top of your screen by clicking on the channel name. Usually, it will just be a designated purpose for the channel, but that's what you need to pay attention to.\n\n[This message](${targetMsg.url}) was potentially in disregard of a channel's specific purpose. **This isn't a warning,** but just some advice! Some common Rule 7 / Misusing Channels violations include:`,
@@ -240,19 +256,17 @@ module.exports = {
                                 text: "This isn't a warning, it's a user-generated reminder about the rules! Take it in good faith and don't argue about it in public chats.",
                             },
                         };
-
+                        // replies to target msg
                         targetMsg.reply({
-                            embeds: [otherChanEmbed],
-                        })
-
+                            embeds: [otherChannelEmbed],
+                        });
                     }
-
-                    interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
-
+                    // updates reply
+                    interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
                 })
 
             } else if (interaction.customId === 'r1') {
-
+                // generates r1 embed
                 const r1Embed = {
                     color: '#ffffff',
                     title: "1️⃣  Rule One Reminder",
@@ -274,14 +288,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r1Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r2') {
-
+                // generates r2 embed
                 const r2Embed = {
                     color: '#ffffff',
                     title: "2️⃣  Rule Two Reminder",
@@ -303,14 +319,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r2Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r3') {
-
+                // generates r3 embed
                 const r3Embed = {
                     color: '#ffffff',
                     title: "3️⃣  Rule Three Reminder",
@@ -337,14 +355,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r3Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r4') {
-
+                // generates r4 embed
                 const r4Embed = {
                     color: '#ffffff',
                     title: "4️⃣  Rule Four Reminder",
@@ -366,14 +386,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r4Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r5') {
-
+                // generates r5 embed
                 const r5Embed = {
                     color: '#ffffff',
                     title: "5️⃣  Rule Five Reminder",
@@ -395,14 +417,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r5Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r6') {
-
+                // generates r6 embed
                 const r6Embed = {
                     color: '#ffffff',
                     title: "6️⃣  Rule Six Reminder",
@@ -424,14 +448,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r6Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r7') {
-
+                // generates r7 embed
                 const r7Embed = {
                     color: '#ffffff',
                     title: "7️⃣  Rule 7 Reminder",
@@ -457,14 +483,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r7Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r8') {
-
+                //generates r8 embed
                 const r8Embed = {
                     color: '#ffffff',
                     title: "8️⃣  Rule 8 Reminder",
@@ -474,14 +502,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r8Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r9') {
-
+                // generates r9 embed
                 const r9Embed = {
                     color: '#ffffff',
                     title: "9️⃣  Rule 9 Reminder",
@@ -491,14 +521,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r9Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r10') {
-
+                // generated r10 embed
                 const r10Embed = {
                     color: '#ffffff',
                     title: "🔟  Rule 10 Reminder",
@@ -514,14 +546,16 @@ module.exports = {
                     }
                 };
 
+                // sends embed
                 targetMsg.reply({
                     embeds: [r10Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r11') {
-
+                // generate r11 embed
                 const r11Embed = {
                     color: '#ffffff',
                     title: "1️⃣1️⃣  Rule 11 Reminder",
@@ -547,14 +581,16 @@ module.exports = {
                     }
                 };
 
+                // replies to the target msg
                 targetMsg.reply({
                     embeds: [r11Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
 
             } else if (interaction.customId === 'r12') {
-
+                // generate r12 embed
                 const r12Embed = {
                     color: '#ffffff',
                     title: "1️⃣2️⃣  Rule 12 Reminder",
@@ -580,14 +616,14 @@ module.exports = {
                     }
                 };
 
+                // replies to the target message with appropriate embed
                 targetMsg.reply({
                     embeds: [r12Embed],
-                })
+                });
 
-                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] })
-
+                // replies to user
+                interaction.update({ content: 'Reminder Sent! Thank you for doing your part to keep the server tidy.', embeds: [], components: [] });
             }
         });
-
     }
 }

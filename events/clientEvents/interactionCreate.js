@@ -1,18 +1,16 @@
-const { RequestManager } = require("@discordjs/rest")
-const { CommandInteraction } = require("discord.js")
+const { RequestManager } = require("@discordjs/rest");
+const { CommandInteraction } = require("discord.js");
 const { MessageActionRow, Client, Message, MessageEmbed, MessageButton, MessageSelectMenu } = require('discord.js');
 const { Modal, TextInputComponent, showModal, ModalSubmitInteraction } = require('discord-modals');
-const { ContextMenuInteraction } = require('discord.js')
+const { ContextMenuInteraction } = require('discord.js');
 
 
 module.exports = {
     name: 'interactionCreate',
-
     /**
      * @param {CommandInteraction} interaction 
      * @param {Client} client 
      */
-
     async execute(interaction, client) {
         //Context Menu Handler!
         if (interaction.isContextMenu()) {
@@ -312,6 +310,7 @@ module.exports = {
                 });
             }
 
+            // connects to context menu button
             if (interaction.customId === 'moreinfopls') {
                 const moreinfoembed = {
                     color: '#ffffff',

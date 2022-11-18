@@ -2,75 +2,7 @@ const { MessageEmbed, Message } = require("discord.js");
 
 module.exports = {
 	name: 'messageCreate',
-	async execute(message, client) {
-		/*
-		if (message.channel.type === "dm" && message.author.id == client.user.id) {
-			console.log("[DM] " + client.user.username + " -> " + message.channel.recipient.username + " | " + message.content)
-		} else if (message.channel.type === "dm" && message.author.id != client.user.id) {
-			console.log("[DM] " + message.channel.recipient.username + " -> " + client.user.username + " | " + message.content)
-		}
-	
-		if (!message.channel.type === "text" || !message.guild || message.author.client) return;
-	
-		client.processMessage(message);
-	
-		//reply array shenanigans
-		const responseObject = {
-			"go bells": "go bells!"
-		};
-		if (responseObject[message.content.toLowerCase()]) {
-			message.channel.send(responseObject[message.content.toLowerCase()]);
-		}
-	
-		if (message1.includes("input")) {
-			message.channel.send("output");
-		}
-		
-		
-		//mass ping
-		var massPingUserID = message.author.id;
-		let massPingMember = message.guild.members.cache.get(massPingUserID);
-		if (message.mentions.users.size >= 4 && !(massPingMember.roles.cache.some(role => role.id === '854841000480079882') || massPingMember.roles.cache.some(role => role.id === '927318500614225920') || massPingMember.roles.cache.some(role => role.id === '775501181212295239') || massPingMember.roles.cache.some(role => role.id === '893189360105689139'))) {
-			message.delete();
-			message.reply("do not mass ping!")
-		}
-		
-		//for banned words
-		if (message1.includes("darky") || message1.includes("darkey") || message1.includes("darkie") || message1.includes("tranny") || message1.includes("nibba") || message1.includes("nigg") || message1.includes("nigger") || message1.includes("n1gg") || message1.includes("chink") || message1.includes("ch1nk") || message1.includes("ch1nc") || message1.includes("chinc") || message1.includes("sp1c") || message1.includes("sp1k") || message1.includes("nigga") || message1.includes("n1gga") || message1.includes("negro") || message1.includes("n3g") || message1.includes("n3gr0") || message1.includes("retard") || message1.includes("r3t4rd") || message1.includes("re tard") || message1.includes("re tarded") || message1.includes("r etard") || message1.includes("ret ard") || message1.includes("reta rd") || message1.includes("retar d") || message1.includes("spic ") || message1 == "spic" || message1.includes("fag") || message1.includes("fagot") ||message1.includes("faggot") || message1.includes("f4g0t") || message1.includes("f4g") || message1.includes("f4gg0t") || message1.includes("lourigan") || message1.includes("pushing p") || message1.includes("lurigan") || message1.includes("pushin p") || message1.includes("lorigan") || message1.includes("l0r1gan") || message1.includes("l0urigan") || message1.includes("lour1gan")) {
-			message.reply("word filter triggered!");
-			message.delete();
-	
-			client.autoMute[message.author.id].filterCount++;
-	
-			if (client.autoMute[message.author.id].filterCount == 3) {
-				client.autoMute[message.author.id].filterCount = 0;
-	
-				var log = message.guild.channels.cache.get(client.config.logChannel);
-				let role = message.guild.roles.cache.get("849498583102914581");
-				var userID = message.author.id;
-				let member = message.guild.members.cache.get(userID);
-
-				member.timeout(10*60*1000, "Filter")
-	
-				var mute = new MessageEmbed()
-					.setAuthor(member.user.username, member.user.avatarURL())
-					.addField('Member auto-muted (10 mins):', `**:mute: ${member} (${member.id}).**`)
-					.addField('Reason:', 'Triggered word filter excessively.')
-					.setFooter(client.user.username, client.user.avatarURL())
-					.setTimestamp()
-					.setColor("#992D22");
-				
-				message.channel.send({
-					embeds: [mute]
-				});
-				log.send({
-					embeds: [mute]
-				});
-				log.send("<@&893189360105689139> <@&854841000480079882> <@&927318500614225920> <@&895051017828311100> **Auto-Mute triggered!!**");
-			}
-		}
-		*/
-	
+	async execute(message, client) {	
 		//reply array
 		const message1 = message.content.toLowerCase();
 		if (message1.includes("lets go brandon")) {
@@ -116,14 +48,6 @@ module.exports = {
 			}
 		}
 	
-		//spam table update writes
-		if (!client.autoMute[message.author.id]) {
-			client.autoMute[message.author.id] = {
-				spamCount: 0,
-				filterCount: 0
-			}
-		}
-	
 		//score writes
 		if (!client.msgCount[message.author.id]) {
 			client.msgCount[message.author.id] = {
@@ -166,7 +90,6 @@ module.exports = {
 			let constitutionalRole = message.guild.roles.cache.get("950846899106238505");
 			if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 750)) {
 				member.roles.add(internRole);
-				//member.roles.remove(memberRole);
 				console.log("[MEMBER TRACKING] " + message.author + " became an intern!");
 				message.reply("You have leveled up to the **Intern** activity tier!");
 			} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 1875)) {
@@ -201,5 +124,5 @@ module.exports = {
 				message.reply("You have leveled up to the **Constitutional Author** activity tier!");		
 			}
 		}
-	},
+	}
 };

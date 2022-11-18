@@ -124,5 +124,5 @@ module.exports = {
 				message.reply("You have leveled up to the **Constitutional Author** activity tier!");		
 			}
 		}
-	},
+	}
 };

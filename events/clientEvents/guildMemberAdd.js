@@ -3,7 +3,10 @@ const { MessageEmbed, Message } = require("discord.js");
 module.exports = {
     name: 'guildMemberAdd',
     async execute(member, client) {
-        var channel = member.guild.channels.cache.get(client.config.logChannel);
+        // fetch consts
+        const channel = member.guild.channels.cache.get(client.config.logChannel);
+
+        // generate join embed
         var join = new MessageEmbed()
             .setAuthor(member.user.username, member.user.avatarURL())
             .addField('Member Count:', member.guild.memberCount.toString())
@@ -12,10 +15,12 @@ module.exports = {
             .setTitle('Member joined!')
             .setColor("#FFFFFF");
 
+        // send join embed
         channel.send({
             embeds: [join]
-        })
+        });
 
+        // generate info embed for user
         var joinEmbed = new MessageEmbed()
             .setColor("#FFFFFF")
             .setTitle('Welcome to Operation Politics!')
@@ -29,23 +34,26 @@ module.exports = {
             )
             .setFooter(`If you have any questions about our server, do not be afraid to reach out to 𝓻𝓪𝔂#4390 for help, or any Moderator or Server Staff.`);
 
+        // send info embed to user
         member.createDM();
         member.send({ embeds: [joinEmbed] }).catch(async err => {
             console.log(member.user.username + " joined but I could not send them a welcome embed.")
         });
 
+        // rethink db insertions
+        // some tables are currently stale
         await client.bank.insert({
             id: member.user.id,
             balance: 0,
             bank: 500,
             lastMessage: null,
-        })
+        });
 
         await client.streaks.insert({
             id: member.user.id,
             lastDaily: null,
             streak: 0,
-        })
+        });
 
         await client.cooldowns.insert({
             id: member.user.id,
@@ -53,13 +61,13 @@ module.exports = {
             lastCrime: null,
             lastSlut: null,
             lastWork: null
-        })
+        });
 
         await client.trusted.insert({
             id: member.user.id,
             joinDate: new Date()
-        })
+        });
 
         console.log("[LOGGING] | Created new accounts for " + member.user.username + "!")
-    },
+    }
 };

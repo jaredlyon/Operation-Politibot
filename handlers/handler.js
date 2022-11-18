@@ -67,7 +67,7 @@ const loadCommands = async function (client) {
         await client.startDatabase();
         console.log("RethinkDB tables started!");
 
-        client.user.setPresence({ status: 'online', activities: { name: 'politics | !help', type: 0 } });
+        client.user.setPresence({ activities: [{ name: 'politics | /help' }], status: 'idle' });
 
         console.log(`${client.user.username} is online and ready to serve in ${client.channels.cache.size} channels on ${client.guilds.cache.size} servers!`);
 

@@ -37,6 +37,11 @@ module.exports = {
                     value: "Retrieve information about yourself or a fellow server member!",
                     inline: false, 
                 },
+                {
+                    name: "~ Context Menus ~",
+                    value: "Right click a message, then go to **Apps**, where you'll find two customized Politibot context menus:\n`Report Citation` - Reports a message for containing a poor citation\n`Report Message` - Similar to `/report`, this will send a message directly to staff",
+                    inline: false, 
+                },
             ]
         };
 

@@ -22,11 +22,10 @@ module.exports = {
 			message.channel.send(responseObject[message.content.toLowerCase()]);
 		}
 	
-		const message1 = message.content.toLowerCase();
 		if (message1.includes("input")) {
 			message.channel.send("output");
 		}
-		*/
+		
 		
 		//mass ping
 		var massPingUserID = message.author.id;
@@ -37,7 +36,6 @@ module.exports = {
 		}
 		
 		//for banned words
-		const message1 = message.content.toLowerCase();
 		if (message1.includes("darky") || message1.includes("darkey") || message1.includes("darkie") || message1.includes("tranny") || message1.includes("nibba") || message1.includes("nigg") || message1.includes("nigger") || message1.includes("n1gg") || message1.includes("chink") || message1.includes("ch1nk") || message1.includes("ch1nc") || message1.includes("chinc") || message1.includes("sp1c") || message1.includes("sp1k") || message1.includes("nigga") || message1.includes("n1gga") || message1.includes("negro") || message1.includes("n3g") || message1.includes("n3gr0") || message1.includes("retard") || message1.includes("r3t4rd") || message1.includes("re tard") || message1.includes("re tarded") || message1.includes("r etard") || message1.includes("ret ard") || message1.includes("reta rd") || message1.includes("retar d") || message1.includes("spic ") || message1 == "spic" || message1.includes("fag") || message1.includes("fagot") ||message1.includes("faggot") || message1.includes("f4g0t") || message1.includes("f4g") || message1.includes("f4gg0t") || message1.includes("lourigan") || message1.includes("pushing p") || message1.includes("lurigan") || message1.includes("pushin p") || message1.includes("lorigan") || message1.includes("l0r1gan") || message1.includes("l0urigan") || message1.includes("lour1gan")) {
 			message.reply("word filter triggered!");
 			message.delete();
@@ -71,8 +69,10 @@ module.exports = {
 				log.send("<@&893189360105689139> <@&854841000480079882> <@&927318500614225920> <@&895051017828311100> **Auto-Mute triggered!!**");
 			}
 		}
+		*/
 	
 		//reply array
+		const message1 = message.content.toLowerCase();
 		if (message1.includes("lets go brandon")) {
 			message.channel.send(":clown:");
 		}
@@ -140,64 +140,66 @@ module.exports = {
 		}
 	
 		//role changes
-		var userID = message.member.id;
-		let member = message.member;
-		let trusted = (await client.trusted.get(message.author.id)) || {};
-	
-		if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && client.msgCount[userID].count > 300) {
-			let memberRole = message.guild.roles.cache.get("909989200378601472");
-			let trustedRole = message.guild.roles.cache.get("775838439538425866");
-			member.roles.add(trustedRole);
-			member.roles.remove(memberRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became a trusted member!");
-			message.reply("You have become a trusted member! You can now send message embeds and files to the server.");
-		} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
-			console.log("[MEMBER TRACKING] " + message.author + " sent a message but was ineligible for trusted status.");
-		}
+		if (!message.author.bot) {
+			var userID = message.member.id;
+			let member = message.member;
+			let trusted = (await client.trusted.get(message.author.id)) || {};
 		
-		//grab activity roles
-		let internRole = message.guild.roles.cache.get("950846711209816094");
-		let activistRole = message.guild.roles.cache.get("950846744562905108");
-		let punditRole = message.guild.roles.cache.get("950846792315068416");
-		let statesmanRole = message.guild.roles.cache.get("950846854545965076");
-		let ambassadorRole = message.guild.roles.cache.get("950846886653337641");
-		let presidentialRole = message.guild.roles.cache.get("950846892827377694");
-		let constitutionalRole = message.guild.roles.cache.get("950846899106238505");
-		if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 750)) {
-			member.roles.add(internRole);
-			//member.roles.remove(memberRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became an intern!");
-			message.reply("You have leveled up to the **Intern** activity tier!");
-		} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 1875)) {
-			member.roles.add(activistRole);
-			member.roles.remove(internRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became an activist!");
-			message.reply("You have leveled up to the **Activist** activity tier!");		
-		} else if (!member.roles.cache.some(role => role.id === '950846792315068416') && (1875 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 3750)) {
-			member.roles.add(punditRole);
-			member.roles.remove(activistRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became a pundit!");
-			message.reply("You have leveled up to the **Pundit** activity tier!");		
-		} else if (!member.roles.cache.some(role => role.id === '950846854545965076') && (3750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 7500)) {
-			member.roles.add(statesmanRole);
-			member.roles.remove(punditRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became a statesman!");
-			message.reply("You have leveled up to the **Statesman** activity tier!");		
-		} else if (!member.roles.cache.some(role => role.id === '950846886653337641') && (7500 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 15000)) {
-			member.roles.add(ambassadorRole);
-			member.roles.remove(statesmanRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became an ambassador!");
-			message.reply("You have leveled up to the **Ambassador** activity tier!");		
-		} else if (!member.roles.cache.some(role => role.id === '950846892827377694') && (15000 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 30000)) {
-			member.roles.add(presidentialRole);
-			member.roles.remove(ambassadorRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became a president!");
-			message.reply("You have leveled up to the **Presidential** activity tier!");		
-		} else if (!member.roles.cache.some(role => role.id === '950846899106238505') && client.msgCount[message.author.id].count > 30000) {
-			member.roles.add(constitutionalRole);
-			member.roles.remove(presidentialRole);
-			console.log("[MEMBER TRACKING] " + message.author + " became a constituional author!");
-			message.reply("You have leveled up to the **Constitutional Author** activity tier!");		
+			if (member.roles.cache.some(role => role.id === '909989200378601472') && new Date() - trusted.joinDate >= 1209600000 && client.msgCount[userID].count > 300) {
+				let memberRole = message.guild.roles.cache.get("909989200378601472");
+				let trustedRole = message.guild.roles.cache.get("775838439538425866");
+				member.roles.add(trustedRole);
+				member.roles.remove(memberRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became a trusted member!");
+				message.reply("You have become a trusted member! You can now send message embeds and files to the server.");
+			} else if (member.roles.cache.some(role => role.id === '909989200378601472')) {
+				console.log("[MEMBER TRACKING] " + message.author + " sent a message but was ineligible for trusted status.");
+			}
+			
+			//grab activity roles
+			let internRole = message.guild.roles.cache.get("950846711209816094");
+			let activistRole = message.guild.roles.cache.get("950846744562905108");
+			let punditRole = message.guild.roles.cache.get("950846792315068416");
+			let statesmanRole = message.guild.roles.cache.get("950846854545965076");
+			let ambassadorRole = message.guild.roles.cache.get("950846886653337641");
+			let presidentialRole = message.guild.roles.cache.get("950846892827377694");
+			let constitutionalRole = message.guild.roles.cache.get("950846899106238505");
+			if (!member.roles.cache.some(role => role.id === '950846711209816094') && (300 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 750)) {
+				member.roles.add(internRole);
+				//member.roles.remove(memberRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became an intern!");
+				message.reply("You have leveled up to the **Intern** activity tier!");
+			} else if (!member.roles.cache.some(role => role.id === '950846744562905108') && (750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 1875)) {
+				member.roles.add(activistRole);
+				member.roles.remove(internRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became an activist!");
+				message.reply("You have leveled up to the **Activist** activity tier!");		
+			} else if (!member.roles.cache.some(role => role.id === '950846792315068416') && (1875 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 3750)) {
+				member.roles.add(punditRole);
+				member.roles.remove(activistRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became a pundit!");
+				message.reply("You have leveled up to the **Pundit** activity tier!");		
+			} else if (!member.roles.cache.some(role => role.id === '950846854545965076') && (3750 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 7500)) {
+				member.roles.add(statesmanRole);
+				member.roles.remove(punditRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became a statesman!");
+				message.reply("You have leveled up to the **Statesman** activity tier!");		
+			} else if (!member.roles.cache.some(role => role.id === '950846886653337641') && (7500 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 15000)) {
+				member.roles.add(ambassadorRole);
+				member.roles.remove(statesmanRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became an ambassador!");
+				message.reply("You have leveled up to the **Ambassador** activity tier!");		
+			} else if (!member.roles.cache.some(role => role.id === '950846892827377694') && (15000 < client.msgCount[message.author.id].count && client.msgCount[message.author.id].count < 30000)) {
+				member.roles.add(presidentialRole);
+				member.roles.remove(ambassadorRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became a president!");
+				message.reply("You have leveled up to the **Presidential** activity tier!");		
+			} else if (!member.roles.cache.some(role => role.id === '950846899106238505') && client.msgCount[message.author.id].count > 30000) {
+				member.roles.add(constitutionalRole);
+				member.roles.remove(presidentialRole);
+				console.log("[MEMBER TRACKING] " + message.author + " became a constituional author!");
+				message.reply("You have leveled up to the **Constitutional Author** activity tier!");		
+			}
 		}
 	},
 };
